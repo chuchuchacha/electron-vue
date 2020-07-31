@@ -1,23 +1,57 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import mainpaged from '../views/mainpage.vue'
+import scrapped from '../views/scrapped.vue'
+import suppliers from '../views/supplier.vue'
+import products from '../views/product.vue'
+import memberships from '../views/membership.vue'
+import transactions from '../views/transaction.vue'
+import practiced from '../views/practice.vue'
+import statements from '../views/statement.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'mainhome',
+    component: mainpaged
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/membershipview',
+    name: 'membership',
+    component: memberships
+  },
+  {
+    path: '/productview',
+    name: 'product',
+    component: products
+  },
+  {
+    path: '/supplierview',
+    name: 'supplier',
+    component: suppliers
+  },
+  {
+    path: '/scrappview',
+    name: 'scrapp',
+    component: scrapped
+  },
+  {
+    path: '/transactionview',
+    name: 'transaction',
+    component: transactions
+  },
+  {
+    path: '/practiceview',
+    name: 'practices',
+    component: practiced
+  },
+  {
+    path: '/statementview',
+    name: 'statements',
+    component: statements
+  },
 ]
 
 const router = new VueRouter({

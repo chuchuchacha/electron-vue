@@ -1,0 +1,77 @@
+div {
+  font-size: 30px;
+}
+
+button{
+  font-size: 30px;
+  outline:none;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+}
+
+.statement {
+  position: absolute;
+  top: 15vh;
+  width: 32vw;
+  height: 12vh;
+  left: 1vw;
+  background-color: beige;
+}
+
+.button_grid {
+  position: absolute;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 10vh);
+  grid-template-columns: repeat(auto-fit, 7vw);
+  grid-column-gap: 1vw;
+  grid-row-gap: 1vh;
+  width: 31vw;
+  height: 10vh;
+  left: 0.5vw;
+  top: 1vh;
+}
+
+.button_grid button {
+  top: 1vh;
+  height: 10vh;
+  width: 7vw;
+  font-size: 20px;
+  background-color: khaki;
+}
+
+.chart {
+  position: absolute;
+  top: 15vh;
+  right: 1vw;
+  width: 64vw;
+  height: 80vh;
+  background-color: lightpink;
+}
+
+.statement_detail {
+  position: absolute;
+  top: 29vh;
+  left: 1vw;
+  width: 32vw;
+  height: 66vh;
+}
+
+.date_button {
+  position: absolute;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 10vh);
+  grid-template-columns: repeat(auto-fit, 11vw);
+  grid-column-gap: 1vw;
+  grid-row-gap: 1vh;
+  top: 5vh;
+  left: 4.5vw;
+  width: 23vw;
+  height: 10vh;
+}
+
+.date_button button {
+  background-color: cornflowerblue;
+  font-size: 25px;
+  cursor: pointer;
+}

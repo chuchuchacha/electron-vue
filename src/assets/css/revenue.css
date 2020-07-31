@@ -1,0 +1,13 @@
+
+.date_input {
+  position: absolute;
+  left: 2vw;
+  top: 21vh;
+  width: 30vw;
+  height: 40vh;
+  font-size: 20px;
+}
+
+.el-input {
+  width: 17.4vw;
+}

@@ -1,0 +1,75 @@
+.main_blue {
+  position: relative;
+  background-color: gainsboro;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  border: 0;
+}
+.top_title {
+  position: absolute;
+  top: 0;
+  height: 13vh;
+  width: 100vw;
+  background-color: lightseagreen;
+}
+
+.top_title button {
+  position: absolute;
+  top: 2.5vh;
+  height: 8vh;
+  width: 12.5vw;
+  cursor: pointer;
+}
+
+.top_backbutton {
+  right: 2vw;
+}
+
+.title {
+  position: absolute;
+  font-size: 2.5rem;
+  color: snow;
+  top: 0.8vh;
+  height: 9vh;
+  left: 3vw;
+}
+
+div {
+  font-size: 30px;
+}
+
+button{
+  font-size: 30px;
+  outline:none;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+}
+
+.statement {
+  position: absolute;
+  top: 15vh;
+  left: 2vw;
+  height: 83vh;
+  width: 37vw;
+  background-color: indianred;
+}
+
+.measureboard {
+  position: absolute;
+  top: 15vh;
+  left: 41vw;
+  height: 83vh;
+  width: 35vw;
+  background-color: indianred;
+}
+
+.result {
+  position: absolute;
+  right: 2vw;
+  top: 15vh;
+  width: 20vw;
+  height: 83vh;
+  background-color: indianred;
+}

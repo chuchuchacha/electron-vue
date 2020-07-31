@@ -1,0 +1,203 @@
+.BackGround {
+    position: relative;
+    background-color: gainsboro;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    border: 0;
+    top: 0;
+}
+
+.TopColumn {
+    position: absolute;
+    background-color: lightseagreen;
+    height: 13vh;
+    width: 100vw;
+    top: 0;
+}
+
+.title {
+    position: absolute;
+    color: snow;
+    top: 1vh;
+    height: 9vh;
+    left: 3vw;
+}
+
+.fieldOne {
+    font-size: 1.5rem;
+    color: lightseagreen;
+    position: absolute;
+    height: 8vh;
+    left: 2vw;
+    top: 17vh;
+    width: 96vw;
+}
+
+.fieldTwo {
+    font-size: 1.5rem;
+    color: lightseagreen;
+    position: absolute;
+    left: 6.6vw;
+    top: 25vh;
+    width: 91.4vw;
+    height: 8vh;
+}
+
+.fieldThree {
+    font-size: 1.5rem;
+    color: lightseagreen;
+    position: absolute;
+    left: 6.6vw;
+    top: 33vh;
+    width: 91.4vw;
+    height: 8vh;
+}
+
+.inputbut {
+    position: absolute;
+    font-size: 20px;
+    left: 67.6vw;
+    height: 5.8vh;
+    width: 21vw;
+    margin: 0;
+    border: 0;
+    background-color: gainsboro;
+    box-shadow: inset 0 0 0 2px lightseagreen;;
+    color: lightseagreen;
+    cursor: pointer;
+}
+
+.inputsup {
+    position: absolute;
+    font-size: 20px;
+    left: 67.6vw;
+    height: 5.8vh;
+    width: 21vw;
+    margin: 0;
+    border: 0;
+    background-color: gainsboro;
+    box-shadow: inset 0 0 0 2px lightseagreen;;
+    color: lightseagreen;
+    cursor: pointer;
+}
+
+.tableback {
+    position: absolute;
+    background-color: lightseagreen;
+    height: 52vh;
+    top: 43vh;
+    left: 2vw;
+    width: 96vw;
+}
+
+.inputaddress {
+    width: 58.2vw;
+}
+
+.supaddress {
+    position: absolute;
+    right: 0;
+    width: 48vw;
+}
+
+.protype {
+    position: absolute;
+    right: 0;
+    width: 15vw;
+}
+
+.supdisc {
+    width: 58.2vw;
+}
+
+.inputbalance {
+    position: absolute;
+    margin-left: 0.2vw;
+    right: 0;
+    width: 20vw;
+}
+
+input {
+    font-size: 1.5rem;
+    margin-left: 1vw;
+    margin-right: 3vw;
+    margin-bottom: 0;
+    height: 5vh;
+    width: 24.35vw;
+}
+select {
+    font-size: 1.5rem;
+    margin-left: 1vw;
+    margin-right: 3vw;
+    margin-bottom: 100px;
+    height: 5vh;
+    width: 25.2vw;
+}
+
+.pageselect {
+    position: relative;
+    left: 2vw;
+    top: 25vh;
+    width: 96vw;
+}
+.pageselect button{
+    position: relative;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0.25rem;
+    /**角的弧度**/
+    box-shadow: inset 0 0 0 2px rgba(72, 190, 155, 0.582);
+    color: rgba(61, 163, 150, 0.875) !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 4rem;
+    letter-spacing: 0.15rem;
+    line-height: 2.75rem;
+    padding: 0 1.5rem 0 1.65rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: 5vh;
+    margin-left: 5vw;
+}
+
+.button {
+    position: relative;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0.25rem;
+    /**角的弧度**/
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.875) !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    height: 3.8rem;
+    letter-spacing: 0.15rem;
+    line-height: 2.75rem;
+    padding: 0 1.5rem 0 1.65rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    left: 800px;
+    top: 25px;
+    margin-right: 10px;
+}
+
+.protable {
+    top: 35vh;
+    height: 60vh;
+}
+
