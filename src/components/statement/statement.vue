@@ -9,7 +9,6 @@
     </div>
 
     <div class="chart">
-
     </div>
 
     <div class="statement_detail">
