@@ -1,26 +1,26 @@
 <template>
   <div>
     <div class="fieldOne">
-      <label>產品編號</label>
-      <input type="text" v-model="products.pid" readonly="readonly"/>
+      產品編號
+      <el-input v-model="products.pid" readonly="readonly"></el-input>
 
-      <label>名稱</label>
-      <input type="text" v-model="products.pname" />
+      名稱
+      <el-input v-model="products.pname" readonly="readonly"></el-input>
 
-      <label>種類</label>
-      <select v-model="typeselect" class="protype">
-        <option v-for="type in types" :key="type.value">
-          {{ type.text }}
-        </option>
-      </select>
+      種類
+      <el-select v-model="typeselect" placeholder="種類">
+          <el-option v-for="typeselect in types" :key="typeselect.value" :label="typeselect.text"
+          :value="typeselect.value">
+          </el-option>
+      </el-select>
     </div>
 
     <div class="fieldTwo">
-      <label>單價</label>
-      <input type="text" v-model="products.punitprice" />
+      單價
+      <el-input v-model="products.punitprice" readonly="readonly"></el-input>
 
-      <label>存貨</label>
-      <input type="text" v-model="products.pinventory" readonly="readonly"/>
+      存貨
+      <el-input v-model="products.pinventory" readonly="readonly"></el-input>
 
       <button class="inputsup" @click="upORcredata()">修改/輸入</button>
     </div>
@@ -45,19 +45,18 @@ export default {
       products: {
         pid: null,
         pname: null,
-        ptype: null,
         punitprice: null,
         pinventory: null,
       },
 
-      createproducts: {
+      createproducts: {  //為了寫進SQL的語法
         product_id: "P00018",
         product_category_id: "C0004",
         publish_status_id: "CD1",
-        product_name: "青江菜",
+        product_name: "none",
         product_unit: "包",
         product_unit_price: 40,
-        product_inventory: 20,
+        product_inventory: 0,
         product_description: "122",
         product_growth_period: 20.5,
         product_exp: 14.5,
@@ -69,75 +68,67 @@ export default {
         product_online_inventory_limit: 10
       },
 
-      typeselect: null,
+      typeselect: null,  //種類select的v-model，C000X
 
-      childata: null,
+      childata: null,  //分割P後的純數字
 
-      uporch: null,
+      uporch: null,  //判斷新增或修改，TRUE為新增
 
-      types: [
-        { text: '蔬菜', value: '1' },
-        { text: '水果', value: '2' }
+      types: [  //種類的物件
+        { text: '蔬菜', value: 'C0005' },
+        { text: '水果', value: 'C0004' }
       ],
     };
   },
 
   methods: {
+    //Table點選後將資料傳上來
     pushdatas(val) {
       this.products.pid = val.product_id
       this.products.pname = val.product_name
-      this.products.ptype = val.product_category_id
       this.products.punitprice = val.product_unit_price
       this.products.pinventory = val.product_inventory
-
-      if(this.products.ptype == 'C0005'){
-        this.typeselect = '蔬菜'
-      }
-      if(this.products.ptype == 'C0004'){
-        this.typeselect = '水果'
-      }
-
-      this.uporch == false;
+      this.typeselect = val.product_category_id
+      this.uporch = false;
     },
 
+    //將資料轉進SQL的名稱
     pushdatatocreate(){
       this.createproducts.product_id = this.products.pid;
       this.createproducts.product_name = this.products.pname;
-      if(this.typeselect == '蔬菜'){
-        this.products.ptype = 'C0005'
-      }
-      if(this.typeselect == '水果'){
-        this.products.ptype = 'C0004'
-      }
-      this.createproducts.product_category_id = this.products.ptype;
+      this.createproducts.product_category_id = this.typeselect;
       this.createproducts.product_unit_price = this.products.punitprice;
-      this.createproducts.product_inventory = 0; //應急用
+      this.createproducts.product_inventory = this.products.pinventory;
     },
 
+    refresh() {  //重整table
+      this.$root.$emit('refresh')
+      this.$root.$emit('refresh')
+    },
+
+    //點選修改/輸入的按鈕處裡，如果uporch == true 表示要新增資料，反之為修改資料
     upORcredata() {
-      if(this.uporch == true){
+      if(this.uporch == true){ //新增
         this.pushdatatocreate()
-        Productdataservice.create(this.createproducts);
-        this.$root.$emit('refresh')
-        this.$root.$emit('refresh')
-        this.childata = null
-        this.uporch == false;
+        Productdataservice.create(this.createproducts); //SQL
+
+        this.refresh() //重整table
       }
-      else{
+      else{ //修改
         this.pushdatatocreate()
         Productdataservice.update(this.createproducts.product_id , this.createproducts);
-        this.$root.$emit('refresh')
-        this.$root.$emit('refresh')
+
+        this.refresh() //重整table
       }
       this.initdata()
     },
 
-    created() {
+    created() {  //點擊新增案鈕，自動寫入ID
       this.initdata()
-      let templength = String(Number(this.childata[1]) + 1);
-      let tempop = null
+      let templength = String(Number(this.childata[1]) + 1);  //000X轉成數字後會變成X，取X，+1，傳成STRING
+      let tempop = null  //將P與0補齊的變數
       
-      switch(templength.length){
+      switch(templength.length){  //判斷數字的長度，並補齊P與0
         case 1:
           tempop = 'P0000';
           break;
@@ -155,22 +146,25 @@ export default {
           break;
       }
 
-      this.products.pid = tempop + templength;
+      this.products.pid = tempop + templength; //將+1後的ID寫進INPUT裡
 
-      this.uporch = true;
+      this.uporch = true;  //將新增判斷設為TRUE
     },
-
+    
+    //Table種整後會將最後一項資料的id傳上來
     getdatas(val2) {
-      this.childata = val2.split('P');
+      this.childata = val2.split('P'); //將P分割出來剩下純數字
     },
 
+
+    //重整5個資料以及新增/修改判斷
     initdata() {
       this.products.pid = null
       this.products.pname = null
-      this.products.ptype = null
       this.typeselect = null
       this.products.punitprice = null
       this.products.pinventory = null
+      this.uporch = false;  //init新增/修改判斷
     },
   }
 };

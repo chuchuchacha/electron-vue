@@ -1,5 +1,4 @@
-
-.date_input {
+.detail_div {
   position: absolute;
   left: 2vw;
   top: 21vh;
@@ -10,4 +9,23 @@
 
 .el-input {
   width: 17.4vw;
+}
+
+.date_button {
+  position: absolute;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 10vh);
+  grid-template-columns: repeat(auto-fit, 11vw);
+  grid-column-gap: 1vw;
+  grid-row-gap: 1vh;
+  top: 5vh;
+  left: 4.5vw;
+  width: 23vw;
+  height: 10vh;
+}
+
+.date_button button {
+  background-color: cornflowerblue;
+  font-size: 25px;
+  cursor: pointer;
 }

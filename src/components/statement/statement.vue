@@ -2,7 +2,7 @@
   <div>
     <div class="statement">
       <div class="button_grid">
-        <button v-for="StateType in StateTypes" :key="StateType.value">
+        <button v-for="StateType in StateTypes" :key="StateType.value" @click="StateTypeChange(StateType.value)">
           {{ StateType.text }}
         </button>
       </div>
@@ -12,22 +12,22 @@
     </div>
 
     <div class="statement_detail">
-      <div class="date_button">
-        <button v-for="RevenueDate in RevenueDates" :key="RevenueDate.value" @click="dateclick(RevenueDate.value)">
-          {{ RevenueDate.text }}
-        </button>
-      </div>
-      <revenue :Datetext='datetext' />
+      <component v-bind:is="Component"></component>
     </div>
   </div>
 </template>
 
 <script>
 import revenue from "@/components/statement/detail/revenue.vue"
+import harvest from "@/components/statement/detail/harvest.vue"
+import sales from "@/components/statement/detail/sales.vue"
+import vip from "@/components/statement/detail/vip.vue"
 
 export default {
   components: {
-    revenue
+    'revenue': revenue,
+    'harvest': harvest,
+    'sales': sales,
   },
 
   data() {
@@ -38,25 +38,27 @@ export default {
         { text: '累計銷售', value: 'c'},
         { text: '十大客戶', value: 'd'}
        ],
-      RevenueDates: [
-        { text: '月收' , value: 'month'},
-        { text: '日收' , value: 'day'},
-      ],
-      datetext:'',
+      Component: 'revenue',
     };
   },
 
   methods: {
-    dateclick(target) {
-      if(target == 'month'){
-        this.datetext = '當年';
+    StateTypeChange(Type) {
+      switch(Type){
+        case 'a':
+          this.Component = revenue
+          break;
+        case 'b':
+          this.Component = harvest
+          break;
+        case 'c':
+          this.Component = sales
+          break;
+        case 'd':
+          this.Component = vip
+          break;
       }
-        
-      if(target == 'day'){
-        this.datetext = '當日'
-      }
-        
-    }
+    },
   },
 }
 </script>

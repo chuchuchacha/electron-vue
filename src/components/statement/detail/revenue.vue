@@ -1,47 +1,42 @@
 <template>
-  <div class="date_input">
-    年份
-    <el-select v-model="year" placeholder="請選擇年分">
-      <el-option v-for="year in years" :key="year.value" :label="year.text"
-    :value="year.value">
-      </el-option>
-    </el-select>
-    年<br><br>
-    月份
-    <el-select v-model="day" placeholder="請選擇年分">
-      <el-option v-for="day in days" :key="day.value" :label="day.text"
-    :value="day.value">
-      </el-option>
-    </el-select>
-    月<br><br>
-    {{ Datetext }}營收
-    <el-input readonly="readonly"></el-input>
+  <div>
+    <div class="date_button">
+      <button v-for="RevenueDate in RevenueDates" :key="RevenueDate.value" @click="dateclick(RevenueDate.value)">
+        {{ RevenueDate.text }}
+      </button>
+    </div>
+    <keep-alive>
+      <component v-bind:is="Component"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
+import month from "@/components/statement/detail/revenue-month.vue"
+import day from "@/components/statement/detail/revenue-day.vue"
+
 export default {
-  props: {
-    Datetext:{
-      type: String,
-      required: false
-    }
+  components: {
+    'month': month,
+    'day': day,
   },
 
   data() {
     return {
-      years: [
-        { text:'2020' , value:'2020' },
-        { text:'2019' , value:'2019' },
+      RevenueDates: [
+        { text: '月收' , value: 'month'},
+        { text: '日收' , value: 'day'},
       ],
-      days: [
-        { text:'31' , value:'31' },
-        { text:'30' , value:'30' },
-      ],
-      year:'',
-      day:'',
+      datetext:'',
+      Component: 'month',
     }
-  },  
+  },
+  
+  methods: {
+    dateclick(target) {
+      this.Component = target
+    },
+  }
 }
 </script>
 

@@ -3,7 +3,7 @@
   top: 29vh;
   left: 2vw;
   height: 60vh;
-  width: 35vw;
+  width: 44vw;
 }
 input {
   width: 8vw;
@@ -22,36 +22,36 @@ select {
 .measure_show {
   position: absolute;
   font-size: 25px;
-  height: 5vh;
+  height: 7vh;
   top: 2vh;
-  width: 35vw;
+  width: 100%;
   color: lightseagreen;
 }
 .typeselect {
   font-size: 25px;
 }
 .measure_grid button {
-  width: 11vw;
+  width: 14vw;
   height: 11.75vh;
   background-color: darkseagreen;
 }
 .measure_grid {
   position: absolute;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 11vw);
+  grid-template-columns: repeat(auto-fit, 14vw);
   grid-template-rows: repeat(auto-fit, 11.75vh);
   grid-column-gap: 1vw;
   grid-row-gap: 1vh;
   height: 50vh;
   top: 10vh;
-  width: 35vw;
+  width: 100%;
 }
 .show_form{
   position: absolute;
   top: 15vh;
   right: 2vw;
   height: 83vh;
-  width: 59vw;
+  width: 50vw;
   background-color: floralwhite;
 }
 .confirm_but {
@@ -59,12 +59,12 @@ select {
   top: 91vh;
   left: 2vw;
   height: 8vh;
-  width: 35vw;
+  width: 44vw;
 }
 .confirm_can {
   position: absolute;
   top: 0vh;
-  left: 2vw;
+  left: 6.5vw;
   height: 8vh;
   width: 14.5vw;
   background-color: crimson;
@@ -72,7 +72,7 @@ select {
 .confirm_sure {
   position: absolute;
   top: 0vh;
-  right: 2vw;
+  right: 6.5vw;
   height: 8vh;
   width: 14.5vw;
   background-color: crimson;
@@ -118,7 +118,7 @@ select {
   top: 15vh;
   left: 2vw;
   height: 12vh;
-  width: 35vw;
+  width: 44vw;
   font-size: 15px;
 }
 
@@ -126,7 +126,7 @@ select {
   position: absolute;
   top: 1vh;
   height: 12vh;
-  width: 8vw;
+  width: 10.25vw;
   box-shadow: inset 0 0 0 2px rgba(72, 190, 155, 0.582);
   color: lightseagreen;
   background-color: transparent;
@@ -135,10 +135,10 @@ select {
   left: 0vw;
 }
 .func_har {
-  left: 9vw;
+  left: 11.25vw;
 }
 .func_adj {
-  left: 18vw;
+  left: 22.5vw;
 }
 .func_scr {
   right: 0vw;
@@ -162,4 +162,15 @@ div {
   top: 0.8vh;
   height: 9vh;
   left: 3vw;
+}
+
+.el-input {
+  width: 12.5vw;
+  top: 0.5vh;
+  font-size: 20px;
+}
+
+.el-select {
+  width: 12.5vw;
+  font-size: 20px;
 }

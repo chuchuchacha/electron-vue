@@ -1,0 +1,31 @@
+.detail_div {
+  position: absolute;
+  left: 0;
+  top: 5vh;
+  width: 32vw;
+  height: 61vh;
+  font-size: 20px;
+}
+.ProType {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32vw;
+  height: 5.5vh;
+}
+
+.el-select {
+  width: 10.6vw;
+}
+
+.ProTable {
+  position: absolute;
+  top: 7.5vh;
+  height: 55.5vh;
+}
+
+.el-table {
+  width: 32vw;
+  font-size: 20px;
+  overflow-y: scroll;
+}

@@ -1,0 +1,21 @@
+.detail_div {
+  position: absolute;
+  left: 0;
+  top: 5vh;
+  width: 32vw;
+  height: 61vh;
+  font-size: 20px;
+}
+
+.el-select {
+  width: 13.5vw;
+}
+
+.salesbutton {
+  position: absolute;
+  background-color: lightseagreen;
+  top: 35vh;
+  width: 20vw;
+  height: 10vh;
+  left: 6vw;
+}
