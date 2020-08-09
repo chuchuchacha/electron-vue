@@ -25,10 +25,10 @@
 
 <script>
 import Productdataservice from "@/services/Productdataservice.js"
-import Adjustdataservice from "@/services/Adjustdataservice.js"
-import Harvestdataservice from "@/services/Harvestdataservice.js"
-import Scrapdataservice from "@/services/Scrapdataservice.js"
-import Purchasedataservice from "@/services/Purchasedataservice.js"
+// import Adjustdataservice from "@/services/Adjustdataservice.js"
+// import Harvestdataservice from "@/services/Harvestdataservice.js"
+// import Scrapdataservice from "@/services/Scrapdataservice.js"
+// import Purchasedataservice from "@/services/Purchasedataservice.js"
 
 export default {
 	name: "product-table",
@@ -115,6 +115,7 @@ export default {
 			Productdataservice.getAll()
 				.then(response => {
 					this.products = response.data;
+					console.log(response.data);
 					this.TransformType();
 				})
 				.catch(e => {
@@ -185,50 +186,50 @@ export default {
 			}
 		},
 
-		GetBiggestID() {
-			let lastid = null
-			let act = null
+		// GetBiggestID() {
+		// 	let lastid = null
+		// 	let act = null
 
-			Adjustdataservice.getID()
-				.then(response => {
-					act = 'AD';
-					lastid = String(Number(response.data[0].adjust_id.split(act)[1]) + 1)
-					this.changeidtitle(lastid.length, act, lastid)
-				})
-				.catch(e => {
-					console.log(e);
-				});
+		// 	Adjustdataservice.getID()
+		// 		.then(response => {
+		// 			act = 'AD';
+		// 			lastid = String(Number(response.data[0].adjust_id.split(act)[1]) + 1)
+		// 			this.changeidtitle(lastid.length, act, lastid)
+		// 		})
+		// 		.catch(e => {
+		// 			console.log(e);
+		// 		});
 
-			Scrapdataservice.getID()
-				.then(response => {
-					act = 'SC';
-					lastid = String(Number(response.data[0].scrap_id.split(act)[1]) + 1)
-					this.changeidtitle(lastid.length, act, lastid)
-				})
-				.catch(e => {
-					console.log(e);
-				});
+		// 	Scrapdataservice.getID()
+		// 		.then(response => {
+		// 			act = 'SC';
+		// 			lastid = String(Number(response.data[0].scrap_id.split(act)[1]) + 1)
+		// 			this.changeidtitle(lastid.length, act, lastid)
+		// 		})
+		// 		.catch(e => {
+		// 			console.log(e);
+		// 		});
 
-			Harvestdataservice.getID()
-				.then(response => {
-					act = 'HV';
-					lastid = String(Number(response.data[0].harvest_id.split(act)[1]) + 1)
-					this.changeidtitle(lastid.length, act, lastid)
-				})
-				.catch(e => {
-					console.log(e);
-				});
+		// 	Harvestdataservice.getID()
+		// 		.then(response => {
+		// 			act = 'HV';
+		// 			lastid = String(Number(response.data[0].harvest_id.split(act)[1]) + 1)
+		// 			this.changeidtitle(lastid.length, act, lastid)
+		// 		})
+		// 		.catch(e => {
+		// 			console.log(e);
+		// 		});
 
-			Purchasedataservice.getID()
-				.then(response => {
-					act = 'PC';
-					lastid = String(Number(response.data[0].purchase_id.split(act)[1]) + 1)
-					this.changeidtitle(lastid.length, act, lastid)
-				})
-				.catch(e => {
-					console.log(e);
-				});
-		},
+		// 	Purchasedataservice.getID()
+		// 		.then(response => {
+		// 			act = 'PC';
+		// 			lastid = String(Number(response.data[0].purchase_id.split(act)[1]) + 1)
+		// 			this.changeidtitle(lastid.length, act, lastid)
+		// 		})
+		// 		.catch(e => {
+		// 			console.log(e);
+		// 		});
+		// },
 
 		TransformType() {  //將c0005轉成蔬菜
 			let i = 0;
@@ -256,87 +257,87 @@ export default {
 				});
 		},
 
-		InventoryChange(InventoryNum) {  //更新存貨
-			this.inventory = null
-			let getdate = new Date();
-			this.InventoryData = getdate.getFullYear() + '-' + (getdate.getMonth()+1) + '-' + getdate.getDate() + ' ' + getdate.getHours() + ':' + getdate.getMinutes() + ":" + getdate.getSeconds()
+		// InventoryChange(InventoryNum) {  //更新存貨
+		// 	this.inventory = null
+		// 	let getdate = new Date();
+		// 	this.InventoryData = getdate.getFullYear() + '-' + (getdate.getMonth()+1) + '-' + getdate.getDate() + ' ' + getdate.getHours() + ':' + getdate.getMinutes() + ":" + getdate.getSeconds()
 
-			if(this.FuncSelects == '進貨'){  //進貨增加存貨 還沒寫紀錄
-				this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
+		// 	if(this.FuncSelects == '進貨'){  //進貨增加存貨 還沒寫紀錄
+		// 		this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
 				
-				this.purchase.purchase_date = this.InventoryData
-				this.purchase.purchase_id = this.PCid
-				this.purchase.product_id = this.currentTutorial.product_id
-				this.purchase.purchase_amount = Number(InventoryNum)
-				this.purchase.purchase_subtotal = 40
-				this.purchase.purchase_total = 40
+		// 		this.purchase.purchase_date = this.InventoryData
+		// 		this.purchase.purchase_id = this.PCid
+		// 		this.purchase.product_id = this.currentTutorial.product_id
+		// 		this.purchase.purchase_amount = Number(InventoryNum)
+		// 		this.purchase.purchase_subtotal = 40
+		// 		this.purchase.purchase_total = 40
 
-				Purchasedataservice.create(this.purchase);
-			}
+		// 		Purchasedataservice.create(this.purchase);
+		// 	}
 
-			if(this.FuncSelects == '採收'){  //採收增加存貨
-				this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
+		// 	if(this.FuncSelects == '採收'){  //採收增加存貨
+		// 		this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
 				
-				this.harvest.harvest_date = this.InventoryData
-				this.harvest.harvest_id = this.SCid
-				this.harvest.product_id = this.currentTutorial.product_id
-				this.harvest.harvest_amount = Number(InventoryNum)
+		// 		this.harvest.harvest_date = this.InventoryData
+		// 		this.harvest.harvest_id = this.SCid
+		// 		this.harvest.product_id = this.currentTutorial.product_id
+		// 		this.harvest.harvest_amount = Number(InventoryNum)
 
-				Scrapdataservice.create(this.scrap);
-			}
+		// 		Scrapdataservice.create(this.scrap);
+		// 	}
 
-			if(this.FuncSelects == '調整'  && this.AdjustMinuss == false){  //調整增加存貨
-				this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
+		// 	if(this.FuncSelects == '調整'  && this.AdjustMinuss == false){  //調整增加存貨
+		// 		this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
 
-				this.adjust.adjust_date = this.InventoryData
-				this.adjust.adjust_id = this.ADid
-				this.adjust.product_id = this.currentTutorial.product_id
-				this.adjust.adjust_amount = Number(InventoryNum)
+		// 		this.adjust.adjust_date = this.InventoryData
+		// 		this.adjust.adjust_id = this.ADid
+		// 		this.adjust.product_id = this.currentTutorial.product_id
+		// 		this.adjust.adjust_amount = Number(InventoryNum)
 				
-				// Adjustdataservice.create(this.adjust);
-				Adjustdataservice.create(this.adjust);
-			}
+		// 		// Adjustdataservice.create(this.adjust);
+		// 		Adjustdataservice.create(this.adjust);
+		// 	}
 
-			if(this.FuncSelects == '調整'  && this.AdjustMinuss != false){  //調整減少存貨 還沒辦法辨識增加或減少
-				this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
+		// 	if(this.FuncSelects == '調整'  && this.AdjustMinuss != false){  //調整減少存貨 還沒辦法辨識增加或減少
+		// 		this.inventory = Number(this.currentTutorial.product_inventory) + Number(InventoryNum);
 				
-				this.adjust.adjust_date = this.InventoryData
-				this.adjust.adjust_id = this.ADid
-				this.adjust.product_id = this.currentTutorial.product_id
-				this.adjust.adjust_amount = Number(InventoryNum)
+		// 		this.adjust.adjust_date = this.InventoryData
+		// 		this.adjust.adjust_id = this.ADid
+		// 		this.adjust.product_id = this.currentTutorial.product_id
+		// 		this.adjust.adjust_amount = Number(InventoryNum)
 
-				Adjustdataservice.create(this.adjust);
-			}
+		// 		Adjustdataservice.create(this.adjust);
+		// 	}
 
-			if(this.FuncSelects == '報廢'){  //報廢減少存貨
-				this.inventory = Number(this.currentTutorial.product_inventory) - Number(InventoryNum);
+		// 	if(this.FuncSelects == '報廢'){  //報廢減少存貨
+		// 		this.inventory = Number(this.currentTutorial.product_inventory) - Number(InventoryNum);
 
-				this.scrap.scrap_date = this.InventoryData
-				this.scrap.scrap_id = this.SCid
-				this.scrap.product_id = this.currentTutorial.product_id
-				this.scrap.scrap_amount = Number(InventoryNum)
+		// 		this.scrap.scrap_date = this.InventoryData
+		// 		this.scrap.scrap_id = this.SCid
+		// 		this.scrap.product_id = this.currentTutorial.product_id
+		// 		this.scrap.scrap_amount = Number(InventoryNum)
 
-				Scrapdataservice.create(this.scrap);
-			}
+		// 		Scrapdataservice.create(this.scrap);
+		// 	}
 
-			this.InventoryData = {
-				product_inventory: this.inventory
-			};
+		// 	this.InventoryData = {
+		// 		product_inventory: this.inventory
+		// 	};
 
-			Productdataservice.update(this.ProductChoosen, this.InventoryData); //更新存貨 傳入id以及.json
+		// 	Productdataservice.update(this.ProductChoosen, this.InventoryData); //更新存貨 傳入id以及.json
 
-			if(this.ProductTypes == ''){  //更新後保持種類顯示
-				this.Retrieveproducts();
-				this.Retrieveproducts();
-			}
-			else{
-				this.TypeChange(this.ProductTypes)
-				this.TypeChange(this.ProductTypes)
-			}
-			this.$emit('InitialData');
-			this.initdata();
-			this.GetBiggestID();
-		},
+		// 	if(this.ProductTypes == ''){  //更新後保持種類顯示
+		// 		this.Retrieveproducts();
+		// 		this.Retrieveproducts();
+		// 	}
+		// 	else{
+		// 		this.TypeChange(this.ProductTypes)
+		// 		this.TypeChange(this.ProductTypes)
+		// 	}
+		// 	this.$emit('InitialData');
+		// 	this.initdata();
+		// 	this.GetBiggestID();
+		// },
 
 		choosenone(product, index) {  //紀錄選取的行
 			this.choosen = index;
@@ -357,7 +358,7 @@ export default {
     
     mounted() {
 			this.Retrieveproducts();
-			this.GetBiggestID();
+			// this.GetBiggestID();
 
 			this.$root.$on('ChangeType', (Type) => {
 					if(Type == ''){  //更新後保持種類顯示
@@ -370,7 +371,8 @@ export default {
 
 			this.$root.$on('ChangeInventory', (InventoryNum) => {
 					if(this.ProductChoosen != null){  //防止沒有選取行就按確認
-							this.InventoryChange(InventoryNum);
+						console.log(InventoryNum)
+							// this.InventoryChange(InventoryNum);
 					}
 					// else
 					//     console.log('!!');  //要做toast警告沒有選取行 還沒做

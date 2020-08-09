@@ -31,7 +31,7 @@ export default {
 
   data() {
     return {
-      Component: 'PurchaseBoard',
+      Component: 'MeasureBoard',
       FuncText: '進貨',
     };
   },
