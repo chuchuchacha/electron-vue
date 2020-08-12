@@ -19,19 +19,23 @@
 
 <script>
 import tableprod from '@/components/table/Table_inventory.vue'
-import MeasureBoard from '@/components/scrapped/Measure_Board.vue'
 import PurchaseBoard from '@/components/scrapped/Purchase_Board.vue'
+import HarvestBoard from '@/components/scrapped/Harvest_Board.vue'
+import AdjustBoard from '@/components/scrapped/Adjust_Board.vue'
+import DisposeBoard from '@/components/scrapped/Dispose_Board.vue'
 
 export default {
   components: {
     'tableprod': tableprod,
-    'MeasureBoard': MeasureBoard,
     'PurchaseBoard': PurchaseBoard,
+    'HarvestBoard': HarvestBoard,
+    'AdjustBoard': AdjustBoard,
+    'DisposeBoard': DisposeBoard,
   },
 
   data() {
     return {
-      Component: 'MeasureBoard',
+      Component: 'PurchaseBoard',
       FuncText: '進貨',
     };
   },
@@ -55,13 +59,15 @@ export default {
           this.$refs.PurchaseClick.style.backgroundColor = "#F0FFFF"
           break;
         case '採收':
+          this.Component = HarvestBoard;
           this.$refs.HarvestClick.style.backgroundColor = "#F0FFFF"
           break;
         case '調整':
+          this.Component = AdjustBoard;
           this.$refs.AdjustClick.style.backgroundColor = "#F0FFFF"
-          this.AdjustBoolean = true;
           break;
         case '報廢':
+          this.Component = DisposeBoard;
           this.$refs.ScrappedClick.style.backgroundColor = "#F0FFFF"
           break;
       }

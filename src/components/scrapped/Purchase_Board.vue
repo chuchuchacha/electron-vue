@@ -1,7 +1,7 @@
 <template>
   <div class="scrap_pur">
     <div class="purchase_board">
-
+      
       <div class="pbo1">
         <font>產品:</font>
         <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
@@ -103,7 +103,8 @@ export default {
       SQLpurchase_p_products: [],
 
       GetDate: new Date(), //日期函數
-      Datenow: null //儲存現在日期
+      Datenow: null, //儲存現在日期
+      DateID: null
     }
   },
 
@@ -111,6 +112,7 @@ export default {
   methods: {
     
     DeletTable() {
+      Purchase_p_productdataservice.deleteAll()
       Purchasedataservice.deleteAll()
     },
 
@@ -118,46 +120,16 @@ export default {
     IDMakeUP() {
       switch(this.LastIDNumber.length) {
         case 1 :
-          this.IDMakeUp = 'PU0000000000000'
+          this.IDMakeUp = 'PURR' + '' + this.DateID + '000'
           break;
         case 2 :
-          this.IDMakeUp = 'PU000000000000'
+          this.IDMakeUp = 'PURR' + '' + this.DateID + '00'
           break;
         case 3 :
-          this.IDMakeUp = 'PU00000000000'
+          this.IDMakeUp = 'PURR' + '' + this.DateID + '0'
           break;
         case 4 :
-          this.IDMakeUp = 'PU0000000000'
-          break;
-        case 5 :
-          this.IDMakeUp = 'PU000000000'
-          break;
-        case 6 :
-          this.IDMakeUp = 'PU00000000'
-          break;
-        case 7 :
-          this.IDMakeUp = 'PU0000000'
-          break;
-        case 8 :
-          this.IDMakeUp = 'PU000000'
-          break;
-        case 9 :
-          this.IDMakeUp = 'PU00000'
-          break;
-        case 10 :
-          this.IDMakeUp = 'PU0000'
-          break;
-        case 11 :
-          this.IDMakeUp = 'PU000'
-          break;
-        case 12 :
-          this.IDMakeUp = 'PU00'
-          break;
-        case 13 :
-          this.IDMakeUp = 'PU0'
-          break;
-        case 14 :
-          this.IDMakeUp = 'PU'
+          this.IDMakeUp = 'PURR' + '' + this.DateID
           break;
       }
       this.LastIDNumber = this.IDMakeUp + this.LastIDNumber
@@ -223,7 +195,8 @@ export default {
 
     //取得最新日期
     getDate() {
-      this.Datenow = this.GetDate.getFullYear() + '-' + (this.GetDate.getMonth()+1) + '-' + this.GetDate.getDate() + ' ' + this.GetDate.getHours() + ':' + this.GetDate.getMinutes() + ":" + this.GetDate.getSeconds()
+      this.Datenow = this.GetDate.getFullYear() + '-' + ('0'+ (this.GetDate.getMonth()+1)).substr(-2) + '-' + ('0'+ this.GetDate.getDate()).substr(-2) + ' ' + this.GetDate.getHours() + ':' + this.GetDate.getMinutes() + ":" + this.GetDate.getSeconds()
+      this.DateID = this.GetDate.getFullYear()+ '' +('0'+ (this.GetDate.getMonth()+1)).substr(-2)+('0'+ this.GetDate.getDate()).substr(-2)
     },
 
     //InventoryTable點擊後的動作 1.取得product_id
@@ -246,7 +219,7 @@ export default {
     this.$root.$on('currentproduct', (CurrentProduct) => {
       this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id);
     });
-
+    this.getDate()
     this.GetBiggestID()
   }
 }

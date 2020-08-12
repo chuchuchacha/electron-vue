@@ -2,7 +2,6 @@
     <div class="main_blue">
       <div class="top_title">
         <h1 class="title">{{this.TitleName}}</h1>
-        <el-button class="top_createbutton">新增</el-button>
         <router-link to="/"><button class="top_backbutton" @click="TitleText()">返回</button></router-link>
       </div>
       <router-view @ChangeTitle="InitialData"/>
@@ -63,9 +62,6 @@ body {
   right: 2vw;
 }
 
-.top_createbutton {
-  right: 16.5vw;
-}
 
 .title {
   position: absolute;

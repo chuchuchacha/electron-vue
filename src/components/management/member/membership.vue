@@ -1,53 +1,22 @@
 <template>
-  <div>
-    <div class="fieldOne">
-      <label>會員編號</label>
-      <input type="text" v-model="members.mid" readonly="readonly"/>  <!--readonly 設定input只能讀取-->
-
-      <label>姓名</label>
-      <input type="text" v-model="members.mname" />
-
-      <label>餘額</label>
-    </div>
-
-    <div class="fieldTwo">
-      <label>性別</label>
-      <select v-model="selectgender">
-        <option v-for="type in types" :key="type.value">
-          {{ type.text }}
-        </option>
-      </select>
-
-      <label>電話</label>
-      <input type="text" v-model="members.mphone" />
-
-      <input type="text" readonly="readonly" class="inputbalance"  v-model="members.mbalance" />
-    </div>
-
-    <div class="fieldThree">
-      <label>地址</label>
-      <input class="inputaddress" type="text"  v-model="members.maddress" />
-
-      <button class="inputbut" @click="writeclick()">修改/輸入</button>
-    </div>
-
-    <div class="tableback">
-        <tablemember @showdata="showdatas" @passlastid="getlastid"/>
-    </div>
-  </div>
+  <component v-bind:is="Component" @ChangeFunction="ChangeFunction"></component>
 </template>
 
 <script>
-import tablemember from "@/components/table/Table_membe.vue";
 import Memberdataservice from "@/services/Memberdataservice.js"
+import Createmember from '@/components/management/member/createmember.vue'
+import Mainmember from '@/components/management/member/mainmember.vue'
 
 export default {
   components: {
-    tablemember
+    'Createmember': Createmember,
+    'Mainmember': Mainmember,
   },
 
   data() {
     return {
+      Component: 'Mainmember',
+
       members: {
         mid: null,
         mname: null,
@@ -81,6 +50,10 @@ export default {
   },
 
   methods: {
+    ChangeFunction(ProductFunction) {
+      console.log(ProductFunction)
+      this.Component = ProductFunction
+    },
     showdatas(val) {  //從子組件將點擊的該資料的資料放進input
       this.members.mid = val.member_id
       this.members.mname = val.member_name

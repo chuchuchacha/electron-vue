@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import suppliers from '@/components/management/supplier.vue'
+import suppliers from '@/components/management/supplier/supplier.vue'
 
 export default {
   name: 'scrapp1',

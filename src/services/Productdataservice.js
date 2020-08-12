@@ -6,6 +6,10 @@ class Productdataservice {
     return http.get("/products");
   }
 
+  getBigID() {
+    return http.get("/products/BigID/BigID")
+  }
+
   get(id) {
     return http.get(`/products/${id}`);
   }
@@ -15,6 +19,7 @@ class Productdataservice {
   }
 
   create(data) {
+    console.log('create')
     return http.post("/products", data);
   }
 

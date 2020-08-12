@@ -118,6 +118,7 @@ font {
   left: 0;
   bottom: 0;
   font-size: 30px;
+  color: black;
 }
 .pb_delet {
   position: absolute;
@@ -127,6 +128,7 @@ font {
   bottom: 0;
   font-size: 30px;
   background-color: orangered;
+  color: black;
 }
 .pb_confirm {
   position: absolute;
@@ -135,4 +137,5 @@ font {
   right: 0;
   bottom: 0;
   font-size: 30px;
+  color: black;
 }

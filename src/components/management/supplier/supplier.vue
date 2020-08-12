@@ -1,45 +1,22 @@
 <template>
-  <div>
-    <div class="fieldOne">
-      <label>供應編號</label>
-      <input type="text" readonly="readonly" v-model="suppliers.sid" />
-
-      <label>名稱</label>
-      <input type="text" v-model="suppliers.sname" />
-    </div>
-
-    <div class="fieldTwo">
-      <label>電話</label>
-      <input type="text" v-model="suppliers.sphone" />
-
-      <label>地址</label>
-      <input class="supaddress" type="text" v-model="suppliers.saddress" />
-    </div>
-
-    <div class="fieldThree">
-      <label>說明</label>
-      <input class="supdisc" type="text" v-model="suppliers.sdisc" />
-
-      <button class="inputsup" @click="upORcredata()">修改/輸入</button>
-    </div>
-
-    <div class="tableback">
-      <tablesupplier @pushdata="pushdatas" @passdata="getdatas"/>
-    </div>
-  </div>
+  <component v-bind:is="Component" @ChangeFunction="ChangeFunction"></component>
 </template>
 
 <script>
-import tablesupplier from "@/components/table/Table_supplier.vue";
 import Supplierdataservice from "@/services/Supplierdataservice.js"
+import Createsupplier from '@/components/management/supplier/createsupplier.vue'
+import Mainsupplier from '@/components/management/supplier/mainsupplier.vue'
 
 export default {
   components: {
-    tablesupplier,
+    'Createsupplier': Createsupplier,
+    'Mainsupplier': Mainsupplier,
   },
 
   data() {
     return {
+      Component: 'Mainsupplier',
+
       suppliers: {
         sid: null,
         sname: null,
@@ -61,6 +38,10 @@ export default {
   },
 
   methods: {
+    ChangeFunction(ProductFunction) {
+      console.log(ProductFunction)
+      this.Component = ProductFunction
+    },
     pushdatas(val) {
       this.suppliers.sid = val.supplier_id
       this.suppliers.sname = val.supplier_name

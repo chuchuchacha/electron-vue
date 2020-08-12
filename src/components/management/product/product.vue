@@ -1,71 +1,53 @@
 <template>
-  <div>
-    <div class="fieldOne">
-      產品編號
-      <el-input v-model="products.pid" readonly="readonly"></el-input>
-
-      名稱
-      <el-input v-model="products.pname" readonly="readonly"></el-input>
-
-      種類
-      <el-select v-model="typeselect" placeholder="種類">
-          <el-option v-for="typeselect in types" :key="typeselect.value" :label="typeselect.text"
-          :value="typeselect.value">
-          </el-option>
-      </el-select>
-    </div>
-
-    <div class="fieldTwo">
-      單價
-      <el-input v-model="products.punitprice" readonly="readonly"></el-input>
-
-      存貨
-      <el-input v-model="products.pinventory" readonly="readonly"></el-input>
-
-      <button class="inputsup" @click="upORcredata()">修改/輸入</button>
-    </div>
-
-    <div class="tableback protable">
-      <tableprod  @pushdata="pushdatas" @passdata="getdatas" />
-    </div>
-  </div>
+  <component v-bind:is="Component" @ChangeFunction="ChangeFunction"></component>
 </template>
 
 <script>
-import tableprod from "@/components/table/Table_prod.vue";
 import Productdataservice from "@/services/Productdataservice.js"
+import Createproduct from '@/components/management/product/createproduct.vue'
+import Mainproduct from '@/components/management/product/mainproduct.vue'
 
 export default {
   components: {
-    tableprod,
+    'Createproduct': Createproduct,
+    'Mainproduct': Mainproduct,
   },
 
   data() {
     return {
+      Component: 'Mainproduct',
+      LastIDNumber: null,
+      IDMakeUp: null,
+
       products: {
-        pid: null,
-        pname: null,
-        punitprice: null,
-        pinventory: null,
+        id: null,
+        name: null,
+        category_id: null,
+        unit: null,
+        unit_price: null,
+        growth_period: null,
+        expire: null,
+        default_save_amount: null,
+        desc: null,
       },
 
       createproducts: {  //為了寫進SQL的語法
-        product_id: "P00018",
-        product_category_id: "C0004",
-        publish_status_id: "CD1",
-        product_name: "none",
-        product_unit: "包",
-        product_unit_price: 40,
+        product_id: null,
+        product_category_id: null,
+        published_status_id: "S01",
+        product_name: null,
+        product_unit: null,
+        product_unit_price: null,
         product_inventory: 0,
-        product_description: "122",
-        product_growth_period: 20.5,
-        product_exp: 14.5,
-        product_default_reserve_amount: 10,
-        product_actual_reserve_amount: 10,
-        product_online_unit: "包",
-        product_online_unit_price: 40,
-        product_online_inventory: 10,
-        product_online_inventory_limit: 10
+        product_desc: null,
+        product_growth_period: null,
+        product_expire: null,
+        product_default_save_amount: null,
+        product_actual_save_amount: 0,
+        product_online_unit: null,
+        product_online_unit_price: 0,
+        product_online_inventory: 0,
+        product_online_max_inventory: 0
       },
 
       typeselect: null,  //種類select的v-model，C000X
@@ -75,13 +57,23 @@ export default {
       uporch: null,  //判斷新增或修改，TRUE為新增
 
       types: [  //種類的物件
-        { text: '蔬菜', value: 'C0005' },
+        { text: '蔬菜', value: 'C0001' },
         { text: '水果', value: 'C0004' }
+      ],
+
+      units: [  //單位的物件
+        { text: '包', value: '包' },
+        { text: '斤', value: '斤' },
+        { text: '公斤', value: '公斤' }
       ],
     };
   },
 
   methods: {
+    ChangeFunction(ProductFunction) {
+      console.log(ProductFunction)
+      this.Component = ProductFunction
+    },
     //Table點選後將資料傳上來
     pushdatas(val) {
       this.products.pid = val.product_id
@@ -122,34 +114,6 @@ export default {
       }
       this.initdata()
     },
-
-    created() {  //點擊新增案鈕，自動寫入ID
-      this.initdata()
-      let templength = String(Number(this.childata[1]) + 1);  //000X轉成數字後會變成X，取X，+1，傳成STRING
-      let tempop = null  //將P與0補齊的變數
-      
-      switch(templength.length){  //判斷數字的長度，並補齊P與0
-        case 1:
-          tempop = 'P0000';
-          break;
-        case 2:
-          tempop = 'P000';
-          break;
-        case 3:
-          tempop = 'P00';
-          break;
-        case 4:
-          tempop = 'P0';
-          break;
-        case 5:
-          tempop = 'P';
-          break;
-      }
-
-      this.products.pid = tempop + templength; //將+1後的ID寫進INPUT裡
-
-      this.uporch = true;  //將新增判斷設為TRUE
-    },
     
     //Table種整後會將最後一項資料的id傳上來
     getdatas(val2) {
@@ -166,7 +130,7 @@ export default {
       this.products.pinventory = null
       this.uporch = false;  //init新增/修改判斷
     },
-  }
+  },
 };
 </script>
 
