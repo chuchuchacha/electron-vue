@@ -45,6 +45,7 @@
 <script>
 import Harvestdataservice from "@/services/Harvestdataservice.js"
 import Harvest_p_productdataservice from "@/services/Harvest_p_productdataservice.js"
+import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
   data() {
@@ -54,6 +55,7 @@ export default {
 
       LastIDNumber: null,
       IDMakeUp: null,
+      ProInventory:null,
       
       HarvestData: [], //供el-table使用的資料
 
@@ -61,11 +63,13 @@ export default {
 
       SQLharvest: { //資料庫的harvest
         harvest_id: null,
-        user_id: 'U00001',
+        user_id: 'ADM001',
         harvest_date: null,
       },
 
       SQLharvest_p_products: [],
+
+      SQLchangeproduct: [],
 
       GetDate: new Date(), //日期函數
       Datenow: null //儲存現在日期
@@ -105,7 +109,7 @@ export default {
       Harvestdataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.harvest_id.split('HA')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.harvest_id.substr(12)) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -123,6 +127,7 @@ export default {
       this.HarvestData.push({product: this.Input_product, amount: this.Input_amount})
       //將資料寫進SQLharvest_p_products陣列 == raw的數量
       this.SQLharvest_p_products.push({harvest_id: this.LastIDNumber,product_id: this.ProductData_ID,harvest_participate_product_amount: this.Input_amount,})
+      this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
       //Input清空，除了總計
       this.InitalInput();
     },
@@ -137,18 +142,21 @@ export default {
         this.SQLharvest.harvest_date = this.Datenow
         //送出SQLharvest
         Harvestdataservice.create(this.SQLharvest)
-        //console.log(this.SQLharvest)
         //送出每個SQLharvest_p_products
         for(let i = 0;i < this.SQLharvest_p_products.length;i++) {
           Harvest_p_productdataservice.create(this.SQLharvest_p_products[i])
-          //console.log(this.SQLharvest_p_products[i])
+          Productdataservice.update(this.SQLharvest_p_products[i].product_id, this.SQLchangeproduct[i])
         }
         
         //將table清空
         this.HarvestData = null
         //將進貨編號重啟
         this.GetBiggestID()
+        this.$root.$emit('refresh');
       }
+      this.HarvestData = []
+      this.SQLharvest_p_products = []
+      this.SQLchangeproduct = []
     },
 
     //取得最新日期
@@ -158,9 +166,10 @@ export default {
     },
 
     //InventoryTable點擊後的動作 1.取得product_id
-    getcurrentID(ProName, ProID) {  //從InventoryTable取得選取的Product_ID
+    getcurrentID(ProName, ProID, ProInventory) {  //從InventoryTable取得選取的Product_ID
       this.Input_product = ProID + ':' + ProName;
       this.ProductData_ID = ProID
+      this.ProInventory = ProInventory
     },
 
     //重製Input除了總計
@@ -172,7 +181,7 @@ export default {
 
   mounted() {
     this.$root.$on('currentproduct', (CurrentProduct) => {
-      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id);
+      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id, CurrentProduct.product_inventory);
     });
     this.getDate()
     this.GetBiggestID()

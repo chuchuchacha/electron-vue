@@ -103,19 +103,16 @@ export default {
     IDMakeUP() {
       switch(this.LastIDNumber.length) {
         case 1:
-          this.IDMakeUp = 'P0000';
+          this.IDMakeUp = 'PD000';
           break;
         case 2:
-          this.IDMakeUp = 'P000';
+          this.IDMakeUp = 'PD00';
           break;
         case 3:
-          this.IDMakeUp = 'P00';
+          this.IDMakeUp = 'PD0';
           break;
         case 4:
-          this.IDMakeUp = 'P0';
-          break;
-        case 5:
-          this.IDMakeUp = 'P';
+          this.IDMakeUp = 'PD';
           break;
       }
       this.LastIDNumber = this.IDMakeUp + this.LastIDNumber
@@ -126,7 +123,7 @@ export default {
       Productdataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.product_id.split('P')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.product_id.split('PD')[1]) + 1);
           }
           else{
             this.LastIDNumber = '1'

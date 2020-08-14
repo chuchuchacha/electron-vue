@@ -68,6 +68,7 @@
 <script>
 import Purchasedataservice from "@/services/Purchasedataservice.js"
 import Purchase_p_productdataservice from "@/services/Purchase_p_productdataservice.js"
+import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
   data() {
@@ -81,6 +82,8 @@ export default {
 
       LastIDNumber: null,
       IDMakeUp: null,
+
+      ProInventory:null,
       
       PurchaseData: [], //供el-table使用的資料
 
@@ -93,7 +96,7 @@ export default {
 
       SQLpurchase: { //資料庫的purchase
         purchase_id: null,
-        user_id: 'U00001',
+        user_id: 'ADM001',
         purchase_date: null,
         purchase_subtotal: null,
         purchase_discount: null,
@@ -101,6 +104,8 @@ export default {
       },
 
       SQLpurchase_p_products: [],
+
+      SQLchangeproduct: [],
 
       GetDate: new Date(), //日期函數
       Datenow: null, //儲存現在日期
@@ -114,6 +119,7 @@ export default {
     DeletTable() {
       Purchase_p_productdataservice.deleteAll()
       Purchasedataservice.deleteAll()
+      this.$root.$emit('refresh');
     },
 
     //將最大ID+1的前面補齊
@@ -141,7 +147,7 @@ export default {
       Purchasedataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.purchase_id.split('PU')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.purchase_id.substr(12)) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -159,6 +165,7 @@ export default {
       this.PurchaseData.push({product: this.Input_product, unit: this.Input_units, amount: this.Input_amount, price: this.Input_price, discount: this.Input_discount})
       //將資料寫進SQLpurchase_p_products陣列 == raw的數量
       this.SQLpurchase_p_products.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,purchase_participate_product_unit: this.Input_units,purchase_participate_product_amount: this.Input_amount,purchase_participate_product_unit_price: this.Input_price})
+      this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
       //將資料寫進SQLpurchase.purchase_subtotal物件 只有1個
       this.SQLpurchase.purchase_subtotal = this.SQLpurchase.purchase_subtotal + this.Input_price * this.Input_amount
       this.SQLpurchase.purchase_discount = this.SQLpurchase.purchase_discount + this.Input_discount
@@ -182,6 +189,7 @@ export default {
         //送出每個SQLpurchase_p_products
         for(let i = 0;i < this.SQLpurchase_p_products.length;i++) {
           Purchase_p_productdataservice.create(this.SQLpurchase_p_products[i])
+          Productdataservice.update(this.SQLpurchase_p_products[i].product_id, this.SQLchangeproduct[i])
         }
         
         //將table清空
@@ -190,7 +198,11 @@ export default {
         this.Input_total = null
         //將進貨編號重啟
         this.GetBiggestID()
+        this.$root.$emit('refresh');
       }
+      this.PurchaseData = []
+      this.SQLpurchase_p_products = []
+      this.SQLchangeproduct = []
     },
 
     //取得最新日期
@@ -200,9 +212,10 @@ export default {
     },
 
     //InventoryTable點擊後的動作 1.取得product_id
-    getcurrentID(ProName, ProID) {  //從InventoryTable取得選取的Product_ID
+    getcurrentID(ProName, ProID, ProInventory) {  //從InventoryTable取得選取的Product_ID
       this.Input_product = ProID + ':' + ProName;
       this.ProductData_ID = ProID
+      this.ProInventory = ProInventory
     },
 
     //重製Input除了總計
@@ -217,7 +230,7 @@ export default {
 
   mounted() {
     this.$root.$on('currentproduct', (CurrentProduct) => {
-      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id);
+      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id, CurrentProduct.product_inventory);
     });
     this.getDate()
     this.GetBiggestID()

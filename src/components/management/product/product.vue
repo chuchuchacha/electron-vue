@@ -71,7 +71,6 @@ export default {
 
   methods: {
     ChangeFunction(ProductFunction) {
-      console.log(ProductFunction)
       this.Component = ProductFunction
     },
     //Table點選後將資料傳上來

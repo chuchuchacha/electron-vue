@@ -19,11 +19,11 @@ class Productdataservice {
   }
 
   create(data) {
-    console.log('create')
     return http.post("/products", data);
   }
 
   update(id, data) {
+    console.log(id,data)
     return http.put(`/products/${id}`, data);
   }
 

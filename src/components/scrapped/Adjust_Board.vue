@@ -10,6 +10,10 @@
       </div>
 
       <div class="pbo2">
+        <el-select v-model="AdjustSelect" placeholder="增加/減少" class="adjustselect">
+          <el-option v-for="AdjustSelect in Select_Adjust" :key="AdjustSelect.value" :label="AdjustSelect.text"
+          :value="AdjustSelect.value"></el-option>
+        </el-select>
         <el-button class="insertbut" @click="InsertTable()">輸入</el-button>
       </div>
     
@@ -22,6 +26,10 @@
         <el-table-column
           prop="product"
           label="產品">
+        </el-table-column>
+        <el-table-column
+          prop="adjust"
+          label="調整">
         </el-table-column>
         <el-table-column
           prop="amount"
@@ -45,6 +53,7 @@
 <script>
 import Adjustdataservice from "@/services/Adjustdataservice.js"
 import Adjust_p_productdataservice from "@/services/Adjust_p_productdataservice.js"
+import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
   data() {
@@ -54,18 +63,28 @@ export default {
 
       LastIDNumber: null,
       IDMakeUp: null,
+      ProInventory:null,
       
       AdjustData: [], //供el-table使用的資料
+
+      AdjustSelect:null,
+
+      Select_Adjust: [  //供el-select使用的資料
+        { text: '增加', value: '增加' },
+        { text: '減少', value: '減少' },
+      ],
 
       ProductData_ID: null,
 
       SQLadjust: { //資料庫的adjust
         adjust_id: null,
-        user_id: 'U00001',
+        user_id: 'ADM001',
         adjust_date: null,
       },
 
       SQLadjust_p_products: [],
+
+      SQLchangeproduct: [],
 
       GetDate: new Date(), //日期函數
       Datenow: null //儲存現在日期
@@ -105,7 +124,7 @@ export default {
       Adjustdataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.adjust_id.split('AD')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.adjust_id.substr(12)) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -120,9 +139,16 @@ export default {
     //點擊輸入的按鈕
     InsertTable() {
       //將資料推到table裡
-      this.AdjustData.push({product: this.Input_product, amount: this.Input_amount})
+      this.AdjustData.push({product: this.Input_product, adjust: this.AdjustSelect, amount: this.Input_amount})
       //將資料寫進SQLadjust_p_products陣列 == raw的數量
       this.SQLadjust_p_products.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,adjust_participate_product_amount: this.Input_amount,})
+      if(this.AdjustSelect == '增加') {
+        this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
+      }
+      if(this.AdjustSelect == '減少') {
+        this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
+      }
+      
       //Input清空，除了總計
       this.InitalInput();
     },
@@ -137,18 +163,21 @@ export default {
         this.SQLadjust.adjust_date = this.Datenow
         //送出SQLadjust
         Adjustdataservice.create(this.SQLadjust)
-        //console.log(this.SQLadjust)
         //送出每個SQLadjust_p_products
         for(let i = 0;i < this.SQLadjust_p_products.length;i++) {
           Adjust_p_productdataservice.create(this.SQLadjust_p_products[i])
-          //console.log(this.SQLadjust_p_products[i])
+          Productdataservice.update(this.SQLadjust_p_products[i].product_id, this.SQLchangeproduct[i])
         }
         
         //將table清空
         this.AdjustData = null
         //將進貨編號重啟
         this.GetBiggestID()
+        this.$root.$emit('refresh');
       }
+      this.AdjustData = []
+      this.SQLadjust_p_products = []
+      this.SQLchangeproduct = []
     },
 
     //取得最新日期
@@ -158,9 +187,10 @@ export default {
     },
 
     //InventoryTable點擊後的動作 1.取得product_id
-    getcurrentID(ProName, ProID) {  //從InventoryTable取得選取的Product_ID
+    getcurrentID(ProName, ProID, ProInventory) {  //從InventoryTable取得選取的Product_ID
       this.Input_product = ProID + ':' + ProName;
       this.ProductData_ID = ProID
+      this.ProInventory = ProInventory
     },
 
     //重製Input除了總計
@@ -172,7 +202,7 @@ export default {
 
   mounted() {
     this.$root.$on('currentproduct', (CurrentProduct) => {
-      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id);
+      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id, CurrentProduct.product_inventory);
     });
     this.getDate()
     this.GetBiggestID()
