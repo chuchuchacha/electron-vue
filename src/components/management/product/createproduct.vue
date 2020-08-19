@@ -31,9 +31,6 @@
 
       <font>保存期(天):</font>
       <el-input v-model="products.expire"></el-input>
-
-      <font>保留數量:</font>
-      <el-input v-model="products.default_save_amount"></el-input>
     </div>
 
     <div class="fieldThree">
@@ -41,6 +38,45 @@
       <el-input v-model="products.desc" type="textarea"></el-input>
 
       <button @click="CreateManagement()">新增產品</button>
+    </div>
+
+    <div class="CreateProduct_table">
+      <el-table
+        :data="CreateProduct"
+        stripe border height="45vh" empty-text="未新增產品">
+        <el-table-column
+          prop="id"
+          label="編號">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="名稱">
+        </el-table-column>
+        <el-table-column
+          prop="type"
+          label="類別">
+        </el-table-column>
+        <el-table-column
+          prop="unit"
+          label="單位">
+        </el-table-column>
+        <el-table-column
+          prop="unit_price"
+          label="單價">
+        </el-table-column>
+        <el-table-column
+          prop="growth_period"
+          label="生長期(天)">
+        </el-table-column>
+        <el-table-column
+          prop="expire"
+          label="保存期(天)">
+        </el-table-column>
+        <el-table-column
+          prop="desc"
+          label="說明">
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
@@ -62,14 +98,15 @@ export default {
         unit_price: null,
         growth_period: null,
         expire: null,
-        default_save_amount: null,
         desc: null,
       },
+
+      CreateProduct: [],
 
       createproducts: {  //為了寫進SQL的語法
         product_id: null,
         product_category_id: null,
-        published_status_id: "S01",
+        published_status_id: "L01",
         product_name: null,
         product_unit: null,
         product_unit_price: null,
@@ -77,7 +114,7 @@ export default {
         product_desc: null,
         product_growth_period: null,
         product_expire: null,
-        product_default_save_amount: null,
+        product_default_save_amount: 0,
         product_actual_save_amount: 0,
         product_online_unit: null,
         product_online_unit_price: 0,
@@ -86,8 +123,8 @@ export default {
       },
 
       types: [  //種類的物件
-        { text: '蔬菜', value: 'C0001' },
-        { text: '水果', value: 'C0004' }
+        { text: '葉菜類', value: 'PC001' },
+        { text: '根莖類', value: 'PC002' }
       ],
 
       units: [  //單位的物件
@@ -136,6 +173,9 @@ export default {
     },
 
     CreateManagement() {
+      this.CreateProduct.push({id: this.products.id, name: this.products.name, type: this.products.category_id,
+      unit: this.products.unit, unit_price: this.products.unit_price, growth_period: this.products.growth_period, expire: this.products.expire, desc: this.products.desc,})
+
       this.createproducts.product_id = this.products.id,
       this.createproducts.product_category_id = this.products.category_id,
       this.createproducts.product_name = this.products.name,
@@ -144,12 +184,24 @@ export default {
       this.createproducts.product_desc = this.products.desc,
       this.createproducts.product_growth_period = this.products.growth_period,
       this.createproducts.product_expire = this.products.expire,
-      this.createproducts.product_default_save_amount = this.products.default_save_amount,
       this.createproducts.product_online_unit = this.products.unit,
       Productdataservice.create(this.createproducts);
+      this.InitailInput()
+      this.GetBiggestID()
       this.GetBiggestID()
     },
     //我是新的method喔，抓最新的ID
+
+    InitailInput() {
+      this.products.id = null
+      this.products.name = null
+      this.products.category_id = null
+      this.products.unit = null
+      this.products.unit_price = null
+      this.products.growth_period = null
+      this.products.expire = null
+      this.products.desc = null
+    },
   },
 
   mounted() {

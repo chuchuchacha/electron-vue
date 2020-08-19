@@ -19,6 +19,14 @@ font {
 }
 
 
+.adjustselect {
+  position: absolute;
+  right: 12.5vw;
+  width: 12vw;
+  height: 10vh;
+  font-size: 30px;
+  overflow: visible;
+}
 .pbo1 {
   position: relative;
   width: 100%;
@@ -69,14 +77,6 @@ font {
 }
 .pbo2 font:nth-child(3) {
   left: 13vw;
-}
-.adjustselect {
-  position: absolute;
-  left: 0;
-  width: 18.5vw;
-  height: 10vh;
-  font-size: 30px;
-  overflow: visible;
 }
 .insertbut {
   position: absolute;

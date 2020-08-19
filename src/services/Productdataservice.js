@@ -23,7 +23,6 @@ class Productdataservice {
   }
 
   update(id, data) {
-    console.log(id,data)
     return http.put(`/products/${id}`, data);
   }
 

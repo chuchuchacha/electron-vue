@@ -5,15 +5,16 @@
       <div class="pbo1">
         <font>產品:</font>
         <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
-        <font>調整:</font>
-        <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
-      </div>
-
-      <div class="pbo2">
+        <font></font>
         <el-select v-model="AdjustSelect" placeholder="增加/減少" class="adjustselect">
           <el-option v-for="AdjustSelect in Select_Adjust" :key="AdjustSelect.value" :label="AdjustSelect.text"
           :value="AdjustSelect.value"></el-option>
         </el-select>
+        <font>數量:</font>
+        <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input3"></el-input>
+      </div>
+
+      <div class="pbo2">
         <el-button class="insertbut" @click="InsertTable()">輸入</el-button>
       </div>
     
@@ -34,10 +35,6 @@
         <el-table-column
           prop="amount"
           label="數量">
-        </el-table-column>
-        <el-table-column
-          prop="time"
-          label="時間">
         </el-table-column>
       </el-table>
     </div>
@@ -175,6 +172,7 @@ export default {
         this.GetBiggestID()
         this.$root.$emit('refresh');
       }
+      this.AdjustSelect = null
       this.AdjustData = []
       this.SQLadjust_p_products = []
       this.SQLchangeproduct = []

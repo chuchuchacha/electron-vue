@@ -1,0 +1,106 @@
+.ProductViewTable {
+  position: absolute;
+  top: 13vh;
+  height: 10vh;
+  width: 100vw;
+  background-color: blanchedalmond;
+}
+
+.FunctionRow {
+  position: absolute;
+  bottom: 0;
+  height: 77vh;
+  width: 100vw;
+}
+
+.el-table {
+  font-size: 20px;
+}
+
+.el-input {
+  width: 15vw;
+}
+
+
+.fieldOne {
+  font-size: 1.5rem;
+  color: black;
+  position: absolute;
+  height: 8vh;
+  left: 2vw;
+  top: 15vh;
+  width: 96vw;
+}
+.fieldOne .el-input {
+  width: 15vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+.fieldOne .el-select {
+  width: 12vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+
+.fieldTwo {
+  font-size: 1.5rem;
+  color: black;
+  position: absolute;
+  left: 2vw;
+  top: 25vh;
+  width: 96vw;
+  height: 8vh;
+}
+.fieldTwo .el-input {
+  width: 10vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+
+.fieldThree {
+font-size: 1.5rem;
+color: black;
+position: absolute;
+left: 2vw;
+top: 35vh;
+width: 96vw;
+height: 16vh;
+}
+
+.fieldThree font {
+position: absolute;
+top: 1vh;
+}
+
+.fieldThree .el-textarea {
+position: absolute;
+left: 6vw;
+width: 48vw;
+height: 12vh;
+font-size: 20px;
+margin: 1vw;
+}
+
+.fieldThree button {
+position: absolute;
+margin: 1vw;
+left: 56vw;
+font-size: 30px;
+height: 10vh;
+width: 21vw;
+background-color: coral;
+color: darkblue;
+cursor: pointer;
+}
+
+.CreateProduct_table {
+	position: absolute;
+  bottom: 5vh;
+	height: 45vh;
+	left: 2%;
+	width: 96%;
+}
+
+.el-table {
+	font-size: 20px;
+}

@@ -1,21 +1,26 @@
 <template>
-  <component v-bind:is="Component" @ChangeFunction="ChangeFunction"></component>
+  <component v-bind:is="Component" @ChangeFunction="ChangeFunction" :AdjustProduct="AdjustProduct"></component>
 </template>
 
 <script>
 import Productdataservice from "@/services/Productdataservice.js"
 import Createproduct from '@/components/management/product/createproduct.vue'
 import Mainproduct from '@/components/management/product/mainproduct.vue'
+import ProductView from '@/components/management/product/ProductView.vue'
+import AdjustProduct from '@/components/management/product/AdjustProduct.vue'
 
 export default {
   components: {
     'Createproduct': Createproduct,
     'Mainproduct': Mainproduct,
+    'ProductView': ProductView,
+    'AdjustProduct': AdjustProduct,
   },
 
   data() {
     return {
       Component: 'Mainproduct',
+      AdjustProduct: null,
       LastIDNumber: null,
       IDMakeUp: null,
 
@@ -70,8 +75,9 @@ export default {
   },
 
   methods: {
-    ChangeFunction(ProductFunction) {
+    ChangeFunction(ProductFunction, AdjustP) {
       this.Component = ProductFunction
+      this.AdjustProduct = AdjustP
     },
     //Table點選後將資料傳上來
     pushdatas(val) {

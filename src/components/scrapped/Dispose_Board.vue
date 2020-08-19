@@ -5,7 +5,7 @@
       <div class="pbo1">
         <font>產品:</font>
         <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
-        <font>報廢:</font>
+        <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
       </div>
 
@@ -26,10 +26,6 @@
         <el-table-column
           prop="amount"
           label="數量">
-        </el-table-column>
-        <el-table-column
-          prop="time"
-          label="時間">
         </el-table-column>
       </el-table>
     </div>
@@ -127,7 +123,7 @@ export default {
       this.DisposeData.push({product: this.Input_product, amount: this.Input_amount})
       //將資料寫進SQLdispose_p_products陣列 == raw的數量
       this.SQLdispose_p_products.push({dispose_id: this.LastIDNumber,product_id: this.ProductData_ID,dispose_participate_product_amount: this.Input_amount,})
-      this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
+      this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
       //Input清空，除了總計
       this.InitalInput();
     },

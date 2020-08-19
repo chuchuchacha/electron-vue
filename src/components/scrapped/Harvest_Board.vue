@@ -5,7 +5,7 @@
       <div class="pbo1">
         <font>產品:</font>
         <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
-        <font>採收:</font>
+        <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
       </div>
 
@@ -26,10 +26,6 @@
         <el-table-column
           prop="amount"
           label="數量">
-        </el-table-column>
-        <el-table-column
-          prop="time"
-          label="時間">
         </el-table-column>
       </el-table>
     </div>
