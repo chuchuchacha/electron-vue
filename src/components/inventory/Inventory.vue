@@ -19,10 +19,10 @@
 
 <script>
 import tableprod from '@/components/table/Table_inventory.vue'
-import PurchaseBoard from '@/components/scrapped/Purchase_Board.vue'
-import HarvestBoard from '@/components/scrapped/Harvest_Board.vue'
-import AdjustBoard from '@/components/scrapped/Adjust_Board.vue'
-import DisposeBoard from '@/components/scrapped/Dispose_Board.vue'
+import PurchaseBoard from '@/components/inventory/Purchase_Board.vue'
+import HarvestBoard from '@/components/inventory/Harvest_Board.vue'
+import AdjustBoard from '@/components/inventory/Adjust_Board.vue'
+import DisposeBoard from '@/components/inventory/Dispose_Board.vue'
 
 export default {
   components: {
@@ -72,7 +72,17 @@ export default {
           break;
       }
     },
-  }
+    // 新的不要刪掉
+    GoBack() {
+      this.$emit('BackToMain')
+    },
+  },
+
+  mounted() {
+    this.$root.$on('GoBack', () => {
+        this.GoBack();
+    });
+  },
 }
 </script>
 

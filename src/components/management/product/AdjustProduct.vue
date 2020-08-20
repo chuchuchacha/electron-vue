@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adjustproduct">
     <div class="fieldOne">
       <font>編號:</font>
       <el-input v-model="products.product_id" readonly="readonly"></el-input>
@@ -43,7 +43,7 @@
     <div class="CreateProduct_table">
       <el-table
         :data="CreateProduct"
-        stripe border height="45vh" empty-text="未修改產品">
+        stripe border height="48vh" empty-text="未修改產品">
         <el-table-column
           prop="product_id"
           label="編號">
@@ -120,6 +120,7 @@ export default {
   methods: {
     AdjustManagement() {
       Productdataservice.update(this.products.product_id, this.products)
+      this.$emit('ChangeFunction', 'ProductView');
     },
 
     GetAdjustProduct() {

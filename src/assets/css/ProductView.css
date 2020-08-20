@@ -3,28 +3,72 @@
   top: 13vh;
   height: 10vh;
   width: 100vw;
-  background-color: blanchedalmond;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke;
 }
 
+.ProductViewTable font:nth-child(1) {
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
+}
+
+.ProductViewTable .el-select {
+  position: absolute;
+  top: 2vh;
+  width: 10vw;
+  left: 8vw;
+}
+
+.ProductViewTable font:nth-child(3) {
+  position: absolute;
+  top: 3vh;
+  right: 26vw;
+}
+
+.ProductViewTable .el-input {
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  width: 15vw;
+}
+
+.ProductViewTable .el-button {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  background-color: coral;
+  color: black;
+}
+
+/* view */
 .FunctionRow {
   position: absolute;
   bottom: 0;
   height: 77vh;
   width: 100vw;
+  background-color: whitesmoke;
 }
 
 .el-table {
+  position: absolute;
+  top: 0;
+  left: 2%;
+  width: 96%;
   font-size: 20px;
+  font-weight: bold;
 }
 
-.el-input {
-  width: 15vw;
-}
 
+/* adjust product */
+.adjustproduct {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
 
 .fieldOne {
-  font-size: 1.5rem;
-  color: black;
   position: absolute;
   height: 8vh;
   left: 2vw;
@@ -43,8 +87,6 @@
 }
 
 .fieldTwo {
-  font-size: 1.5rem;
-  color: black;
   position: absolute;
   left: 2vw;
   top: 25vh;
@@ -58,8 +100,6 @@
 }
 
 .fieldThree {
-font-size: 1.5rem;
-color: black;
 position: absolute;
 left: 2vw;
 top: 35vh;
@@ -73,21 +113,19 @@ top: 1vh;
 }
 
 .fieldThree .el-textarea {
-position: absolute;
-left: 6vw;
-width: 48vw;
-height: 12vh;
-font-size: 20px;
-margin: 1vw;
+  position: absolute;
+  left: 6vw;
+  width: 56vw;
+  height: 12vh;
+  font-size: 20px;
 }
 
 .fieldThree button {
 position: absolute;
-margin: 1vw;
-left: 56vw;
+left: 63vw;
 font-size: 30px;
-height: 10vh;
-width: 21vw;
+height: 9.4vh;
+width: 18vw;
 background-color: coral;
 color: darkblue;
 cursor: pointer;
@@ -95,12 +133,98 @@ cursor: pointer;
 
 .CreateProduct_table {
 	position: absolute;
-  bottom: 5vh;
-	height: 45vh;
-	left: 2%;
+  bottom: 2vh;
+	height: 48vh;
+	left: 0;
 	width: 96%;
 }
 
 .el-table {
+  position: absolute;
+  width: 96vw;
+  left: 2vw;
 	font-size: 20px;
+}
+
+/* 產品類別 */
+.Categoryproduct {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
+  height: 25vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+.Categoryproduct font:nth-child(1) {
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
+}
+.Categoryproduct .el-input:nth-child(2) {
+  position: absolute;
+  top: 2vh;
+  left: 12vw;
+  width: 10vw;
+}
+.Categoryproduct font:nth-child(3) {
+  position: absolute;
+  top: 3vh;
+  left: 24vw;
+}
+.Categoryproduct .el-input:nth-child(4) {
+  position: absolute;
+  top: 2vh;
+  left: 34vw;
+  width: 15vw;
+}
+.Categoryproduct font:nth-child(5) {
+  position: absolute;
+  top: 13vh;
+  left: 2vw;
+}
+.Categoryproduct .el-textarea:nth-child(6) {
+  position: absolute;
+  top: 13vh;
+  left: 12vw;
+  width: 37vw;
+}
+.Categoryproduct .el-button:nth-child(7) {
+  position: absolute;
+  top: 13vh;
+  left: 51vw;
+  width: 12vw;
+  height: 7vh;
+  font-size: 20px;
+  font-weight: bold;
+}
+.Categoryproduct .el-button:nth-child(8) {
+  position: absolute;
+  top: 13vh;
+  left: 63vw;
+  width: 12vw;
+  height: 7vh;
+  font-size: 20px;
+  font-weight: bold;
+}
+.Categoryproduct .el-button:nth-child(9) {
+  position: absolute;
+  top: 13vh;
+  left: 76vw;
+  width: 12vw;
+  height: 7vh;
+  font-size: 20px;
+  font-weight: bold;
+}
+.CategoryTable {
+  position: absolute;
+  bottom: 0vh;
+  height: 62vh;
+  left: 0;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+.CategoryTable .el-table {
+  left: 2vw;
+  width: 96vw;
 }

@@ -1,19 +1,24 @@
 <template>
   <div>
     <div class="ProductViewTable">
+
+      <font>種類：</font>
       <el-select v-model="Product_types" placeholder="種類">
         <el-option v-for="typeselect in types" :key="typeselect.value" :label="typeselect.text"
           :value="typeselect.value">
         </el-option>
       </el-select>
+
       <font>現在選擇產品: </font>
       <el-input v-model="ChoosenIdName"></el-input>
       <el-button @click="ChangeFunction()">修改</el-button>
+
     </div>
+
     <div class="FunctionRow">
       <el-table
         :data="AllProduct.filter(data => !Product_types || data.product_category_id.includes(Product_types))"
-        @current-change="ChooseRow" highlight-current-row stripe border height="77vh" empty-text="沒有產品">
+        @current-change="ChooseRow" highlight-current-row stripe border height="75vh" empty-text="沒有產品">
         <el-table-column
           sortable
           :sort-orders="['ascending', 'descending']"

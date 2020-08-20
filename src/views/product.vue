@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import products from '@/components/management/product/product.vue'
+import products from '@/components/management/product/Product.vue'
 
 export default {
   name: 'scrapp1',

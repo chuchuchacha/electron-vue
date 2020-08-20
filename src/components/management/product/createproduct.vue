@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adjustproduct">
     <div class="fieldOne">
       <font>編號:</font>
       <el-input v-model="products.id" readonly="readonly"></el-input>
@@ -210,4 +210,4 @@ export default {
 };
 </script>
 
-<style scoped src="@/assets/css/main.css"></style>
+<style scoped src="@/assets/css/ProductView.css"></style>

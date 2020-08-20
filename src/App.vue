@@ -2,16 +2,31 @@
     <div class="main_blue">
       <div class="top_title">
         <h1 class="title">{{this.TitleName}}</h1>
-        <router-link to="/"><button class="top_backbutton" @click="TitleText()">返回</button></router-link>
+        <button class="top_backbutton" @click="Initial()">返回</button>
       </div>
-      <router-view @ChangeTitle="InitialData"/>
+      <component v-bind:is="Component" @ChangeTitle="InitialData" @BackToMain="BackToMain"></component>
     </div>
 </template>
 
 <script>
+import Product from '@/components/management/product/Product.vue'
+import Member from '@/components/management/member/Member.vue'
+import Mainpage from '@/components/Mainpage.vue'
+import Supplier from '@/components/management/supplier/Supplier.vue'
+import Inventory from '@/components/inventory/Inventory.vue'
+
 export default {
+  components: {
+    'Product': Product,
+    'Mainpage': Mainpage,
+    'Member': Member,
+    'Supplier': Supplier,
+    'Inventory': Inventory,
+  },
+
   data() {
     return {
+      Component: 'Mainpage',
       TitleName: '首頁'
     }   
   },
@@ -19,10 +34,31 @@ export default {
   methods: {
     InitialData(TitleText) {
       this.TitleName = TitleText;
+      switch(TitleText) {
+        case '產品管理':
+          this.Component = 'Product';
+          break;
+        case '會員管理':
+          this.Component = 'Member';
+          break;
+        case '供應商管理':
+          this.Component = 'Supplier';
+          break;
+        case '庫存管理':
+          this.Component = 'Inventory';
+          break;
+      }
     },
-
-    TitleText() {
-      this.TitleName = '首頁'
+    Initial() {
+      if(this.Component != 'Mainpage') {
+        this.$root.$emit('GoBack')
+      }
+      else {
+        this.Component = 'Mainpage'
+      }
+    },
+    BackToMain() {
+      this.Component = 'Mainpage'
     }
   },
 }

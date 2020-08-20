@@ -116,7 +116,22 @@ export default {
       this.suppliers.saddress = null
       this.suppliers.sdisc = null
     },
-  }
+    // 新的不要刪掉
+    GoBack() {
+      if(this.Component != 'Mainsupplier') {
+        this.Component = 'Mainsupplier'
+      }
+      else if(this.Component == 'Mainsupplier') {
+        this.$emit('BackToMain')
+      }
+    },
+  },
+
+  mounted() {
+    this.$root.$on('GoBack', () => {
+        this.GoBack();
+    });
+  },
 };
 </script>
 

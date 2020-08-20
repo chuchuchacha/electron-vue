@@ -1,0 +1,100 @@
+.el-input {
+  font-size: 15px !important;
+}
+
+.el-textarea__inner {
+  resize: none !important;
+  height: 12vh !important;
+}
+
+/* 主要顯示 */
+.createmember {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+.fieldOne {
+  position: absolute;
+  height: 8vh;
+  left: 2vw;
+  top: 15vh;
+  width: 96vw;
+}
+.fieldOne .el-input {
+  width: 15vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+.fieldOne .el-select {
+  width: 12vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+
+.fieldTwo {
+  position: absolute;
+  left: 2vw;
+  top: 25vh;
+  width: 96vw;
+  height: 8vh;
+}
+.fieldTwo .el-input {
+  width: 15vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+.fieldTwo .el-input:nth-child(6) {
+  width: 40vw;
+  margin: 1vw;
+}
+
+.fieldThree {
+position: absolute;
+left: 2vw;
+top: 35vh;
+width: 96vw;
+height: 16vh;
+}
+
+.fieldThree .el-input {
+  width: 22vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+
+.fieldThree .el-textarea {
+  position: absolute;
+  resize: none !important;
+  height: 12vh !important;
+  top: 1.3vh;
+  left: 35vw;
+  width: 35vw;
+  font-size: 20px;
+}
+
+.fieldThree button {
+position: absolute;
+right: 6.2vw;
+font-size: 30px;
+height: 9.4vh;
+top: 1.3vh;
+width: 18vw;
+background-color: coral;
+color: darkblue;
+cursor: pointer;
+}
+
+.createmember_table {
+	position: absolute;
+  bottom: 2vh;
+	height: 48vh;
+	left: 0;
+	width: 96%;
+}
+
+.el-table {
+  position: absolute;
+  width: 96vw;
+  left: 2vw;
+	font-size: 20px;
+}

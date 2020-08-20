@@ -2,7 +2,7 @@
   <div class="pageselect">
       <button @click="ChangeTitleName()" id="Createproduct">新增產品</button>
       <button @click="ChangeTitleName()" id="ProductView">檢視產品</button>
-      <button @click="ChangeTitleName()" id="產品類別">產品類別</button>
+      <button @click="ChangeTitleName()" id="Categoryproduct">類別管理</button>
     </div>
 </template>
 
