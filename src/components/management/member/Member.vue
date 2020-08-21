@@ -5,11 +5,15 @@
 <script>
 import Createmember from '@/components/management/member/Createmember.vue'
 import Mainmember from '@/components/management/member/Mainmember.vue'
+import MemberView from '@/components/management/member/MemberView.vue'
+import AdjustMember from '@/components/management/member/AdjustMember.vue'
 
 export default {
   components: {
     'Createmember': Createmember,
     'Mainmember': Mainmember,
+    'MemberView': MemberView,
+    'AdjustMember': AdjustMember,
   },
 
   data() {
@@ -24,7 +28,10 @@ export default {
     },
 
     GoBack() {
-      if(this.Component != 'Mainmember') {
+      if(this.Component == 'AdjustMember') {
+        this.Component = 'MemberView'
+      }
+      else if(this.Component != 'Mainmember') {
         this.Component = 'Mainmember'
       }
       else if(this.Component == 'Mainmember') {

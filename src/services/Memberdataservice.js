@@ -5,6 +5,10 @@ class Memberdataservice {
     //return http.get("/tutorials");
     return http.get("/members");
   }
+  
+  getMaxID() {
+    return http.get("/members/BigID/BigID")
+  }
 
   get(id) {
     return http.get(`/members/${id}`);

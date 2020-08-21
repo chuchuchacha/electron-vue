@@ -1,12 +1,6 @@
 .el-input {
   font-size: 15px !important;
 }
-
-.el-textarea__inner {
-  resize: none !important;
-  height: 12vh !important;
-}
-
 /* 主要顯示 */
 .createmember {
   color: black;
@@ -64,12 +58,11 @@ height: 16vh;
 
 .fieldThree .el-textarea {
   position: absolute;
-  resize: none !important;
-  height: 12vh !important;
   top: 1.3vh;
   left: 35vw;
   width: 35vw;
   font-size: 20px;
+  height: 12vh !important;
 }
 
 .fieldThree button {
@@ -97,4 +90,40 @@ cursor: pointer;
   width: 96vw;
   left: 2vw;
 	font-size: 20px;
+}
+
+/* 檢視會員 */
+.adjustmember {
+  position: absolute;
+  top: 13vh;
+  height: 10vh;
+  width: 100vw;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+.adjustmember font:nth-child(1) {
+  position: absolute;
+  top: 3vh;
+  right: 26vw;
+}
+.adjustmember .el-input:nth-child(2) {
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  width: 15vw;
+}
+.adjustmember .el-button:nth-child(3) {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  background-color: coral;
+  color: black;
+}
+.tablemember {
+  position: absolute;
+  top: 23vh;
+  height: 77vh;
+  width: 100vw;
+  background-color: whitesmoke;
 }
