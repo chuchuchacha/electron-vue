@@ -1,0 +1,192 @@
+.el-input {
+  font-size: 15px !important;
+}
+/* 主要顯示 */
+.createsupplier {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+.fieldOne {
+  position: absolute;
+  height: 8vh;
+  left: 2vw;
+  top: 15vh;
+  width: 96vw;
+}
+.fieldOne .el-input {
+  width: 15vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+.fieldOne .el-input:nth-child(6) {
+  width: 40vw;
+}
+
+.fieldTwo {
+  position: absolute;
+  left: 2vw;
+  top: 25vh;
+  width: 96vw;
+  height: 15vh;
+}
+.fieldTwo font:nth-child(1) {
+  position: absolute;
+  top: 4vh;
+}
+.fieldTwo .el-input {
+  position: absolute;
+  top: 2vh;
+  left: 5vw;
+  width: 21vw;
+  font-size: 20px;
+  margin: 1vw;
+}
+.fieldTwo font:nth-child(3) {
+  position: absolute;
+  top: 4vh;
+  left: 28vw;
+}
+.fieldTwo .el-textarea {
+  position: absolute;
+  left: 33vw;
+  top: 2vh;
+  width: 35vw;
+  margin: 1vw;
+  font-size: 20px;
+}
+
+.fieldTwo button {
+  position: absolute;
+  right: 6.2vw;
+  font-size: 30px;
+  height: 9.4vh;
+  top: 3.5vh;
+  width: 18vw;
+  background-color: coral;
+  color: darkblue;
+  cursor: pointer;
+  }
+
+.createsupplier_table {
+	position: absolute;
+  top: 40vh;
+	height: 58vh;
+	left: 2%;
+  width: 96%;
+}
+
+.el-table {
+  position: absolute;
+  width: 100%;
+  left: 0;
+	font-size: 20px;
+}
+
+/* 檢視供應商 */
+
+.FunctionRow {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
+  height: 10vh;
+  background-color: whitesmoke;
+}
+
+.FunctionRow font:nth-child(1){
+  position: absolute;
+  top: 3vh;
+  right: 34vw;
+}
+.FunctionRow .el-input:nth-child(2){
+  position: absolute;
+  top: 2vh;
+  right: 18vw;
+  width: 15vw;
+}
+.FunctionRow .el-button:nth-child(3){
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  background-color: coral;
+  color: black;
+}
+.FunctionRow .el-button:nth-child(4){
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  background-color: firebrick;
+  color: aquamarine;
+}
+
+.supplierviewtable {
+  position: absolute;
+  bottom: 0;
+  height: 77vh;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+
+.supplierviewtable .el-table {
+  position: absolute;
+  width: 96%;
+  left: 2vw;
+  bottom: 2vh;
+}
+
+/* 修改供應商 */
+
+.adjusttable {
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+/* 供應商產品 */
+
+.SPSupplier {
+  position: absolute;
+  top: 13vh;
+  height: 87vh;
+  left: 0;
+  width: 50vw;
+  background-color: whitesmoke;
+}
+
+.SPSupplier font {
+  position: absolute;
+  top: 4vh;
+  left: 2vw;
+  font-size: 20px;
+}
+
+.SPSupplier .el-input {
+  position: absolute;
+  top: 3vh;
+  left: 10vw;
+  width: 15vw;
+}
+
+.SPSupplier .el-button {
+  position: absolute;
+  top: 3vh;
+  right: 2vw;
+  width: 10vw;
+}
+
+.SPSupplier .el-table {
+  position: absolute;
+  top: 10vh;
+  left: 2vw;
+  width: 46vw;
+  height: 75vh;
+}
+
+.SPProduct {
+  position: absolute;
+  top: 13vh;
+  height: 87vh;
+  right: 0;
+  width: 50vw;
+  background-color: violet;
+}

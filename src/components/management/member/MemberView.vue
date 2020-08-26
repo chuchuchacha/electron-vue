@@ -60,6 +60,11 @@ export default {
       AllMember:[],
       ChoosenRow: null,
       ChoosenIdName: null,
+
+      Gender: [
+        {text: '男', value: 1},
+        {text: '女', value: 2},
+      ],
     }
   },
 
@@ -67,7 +72,15 @@ export default {
     GetAllMember() {
       Memberdataservice.getAll()
         .then(response => {
-          this.AllProduct = response.data
+          this.AllMember = response.data
+          for(let i = 0; i < response.data.length; i++) {
+            for(let j = 0; j < this.Gender.length; j++) {
+              if(response.data[i].member_gender == this.Gender[j].value) {
+                this.AllMember[i].member_gender = this.Gender[j].text
+              }
+            }
+          }
+          console.log(this.AllMember)
         })
         .catch(e => {
           console.log(e);
@@ -80,8 +93,14 @@ export default {
     },
     
     ChangeMember() {
-      console.log('0')
-      this.$emit('ChangeFunction', 'AdjustMember');
+      if(this.ChoosenRow) {
+        for(let j = 0; j < this.Gender.length; j++) {
+          if(this.ChoosenRow.member_gender == this.Gender[j].text) {
+            this.ChoosenRow.member_gender = this.Gender[j].value
+            this.$emit('ChangeFunction', 'AdjustMember', this.ChoosenRow);
+          }
+        }
+      }
     },
   },
 

@@ -1,8 +1,8 @@
 <template>
   <div class="pageselect">
       <button @click="ChangeTitleName()" id="Createsupplier">新增供應商</button>
-      <button @click="ChangeTitleName()" id="修改供應商">檢視供應商</button>
-      <button @click="ChangeTitleName()" id="供應商類別">供應商類別</button>
+      <button @click="ChangeTitleName()" id="SupplierView">檢視供應商</button>
+      <button @click="ChangeTitleName()" id="SupplierProduct">供應商產品</button>
     </div>
 </template>
 

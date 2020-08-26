@@ -2,11 +2,11 @@
   <div>
     <div class="Categoryproduct">
       <font>類別編號:</font>
-      <el-input v-model="id" readonly="readonly"></el-input>
+      <el-input v-model="CreateCategory.product_category_id" readonly="readonly"></el-input>
       <font>類別名稱:</font>
-      <el-input v-model="name"></el-input>
+      <el-input v-model="CreateCategory.product_category_name"></el-input>
       <font>類別說明:</font>
-      <el-input type="textarea" v-model="desc"></el-input>
+      <el-input type="textarea" v-model="CreateCategory.product_category_desc"></el-input>
       <el-button @click="Createcategory()">輸入</el-button>
       <el-button @click="CreateChose()">新增類別</el-button>
       <el-button @click="BacktoProductview()">修改產品</el-button>
@@ -56,14 +56,12 @@ export default {
         product_category_id: null,
         product_category_name: null,
         product_category_desc: null,
-        product_category_img: '',
+        product_category_img: null,
         product_category_sort: 0,
         product_category_parent: null
       },
 
-      id:null,
-      name:null,
-      desc:null,
+      CreateBoolean: null,
     }
   },
 
@@ -73,22 +71,36 @@ export default {
     },
 
     ChooseRow(val) {
-      val.product_category_id = this.id
-      val.product_category_name = this.name
-      val.product_category_desc = this.desc
+      if(val) {
+        this.CreateCategory.product_category_id = val.product_category_id
+        this.CreateCategory.product_category_name = val.product_category_name
+        this.CreateCategory.product_category_desc = val.product_category_desc
+        this.CreateBoolean = false
+      } 
     },
 
     CreateChose() {
-      this.id = this.LastIDNumber
-      this.name = null
-      this.desc = null
+      this.CreateCategory.product_category_id = this.LastIDNumber
+      this.CreateCategory.product_category_name = null
+      this.CreateCategory.product_category_desc = null
+      this.CreateBoolean = true
     },
 
     Createcategory() {
-      this.CreateCategory.product_category_id = this.id
-      this.CreateCategory.product_category_name = this.name
-      this.CreateCategory.product_category_desc = this.desc
-      ProductCategorydata.create(this.CreateCategory);
+      if(this.CreateBoolean == true) {
+        ProductCategorydata.create(this.CreateCategory)
+          .then()
+            this.GetAllProductCategory()
+            this.GetAllProductCategory()
+            this.CreateBoolean = null;
+      }
+      if(this.CreateBoolean == false) {
+        ProductCategorydata.update(this.CreateCategory.product_category_id , this.CreateCategory)
+          .then()
+            this.GetAllProductCategory()
+            this.GetAllProductCategory()
+            this.CreateBoolean = null;
+      } 
     },
 
     IDMakeUP() {
@@ -110,7 +122,7 @@ export default {
       ProductCategorydata.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.product_category_id.split('PC')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.split('PC')[1]) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -122,7 +134,7 @@ export default {
         });
     },
 
-    GetAllProduct() {
+    GetAllProductCategory() {
       ProductCategorydata.getAll()
         .then(response => {
           this.AllCategory = response.data
@@ -135,7 +147,7 @@ export default {
 
   mounted() {
     this.GetBiggestID()
-    this.GetAllProduct();
+    this.GetAllProductCategory();
   },
 }
 </script>

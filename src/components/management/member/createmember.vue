@@ -6,7 +6,7 @@
         <el-input v-model="CreateMember.member_id" readonly="readonly"></el-input>
 
         <font>會員卡編號:</font>
-        <el-input v-model="CreateMember.member_card_id"></el-input>
+        <el-input v-model="CreateMember.member_card_id" readonly="readonly"></el-input>
 
         <font>姓名:</font>
         <el-input v-model="CreateMember.member_name"></el-input>
@@ -21,7 +21,7 @@
 
       <div class="fieldTwo">
         <font>生日:</font>
-        <el-input v-model="CreateMember.member_birthday"></el-input>
+        <el-input v-model="CreateMember.member_birthday" placeholder="year-month-day"></el-input>
 
         <font>電話:</font>
         <el-input v-model="CreateMember.member_phone"></el-input>
@@ -140,10 +140,14 @@ export default {
     },
 
     GetBiggestID() {
-      Memberdataservice.getMaxID()
+      Memberdataservice.getBigID()
         .then(response => {
+          Memberdataservice.get(response.data)
+            .then(response => {
+              this.CreateMember.member_card_id = String(Number(response.data.member_card_id) + 1)
+            })
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.product_id.split('M')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.split('M')[1]) + 1);
           }
           else{
             this.LastIDNumber = '1'

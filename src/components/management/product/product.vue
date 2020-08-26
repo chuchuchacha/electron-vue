@@ -32,7 +32,10 @@ export default {
     },
 
     GoBack() {
-      if(this.Component != 'Mainproduct') {
+      if(this.Component == 'AdjustProduct') {
+        this.Component = 'ProductView'
+      }
+      else if(this.Component != 'Mainproduct') {
         this.Component = 'Mainproduct'
       }
       else if(this.Component == 'Mainproduct') {

@@ -1,5 +1,5 @@
 <template>
-  <component v-bind:is="Component" @ChangeFunction="ChangeFunction"></component>
+  <component v-bind:is="Component" @ChangeFunction="ChangeFunction" :AdjustMember="AdjustMember"></component>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ import Createmember from '@/components/management/member/Createmember.vue'
 import Mainmember from '@/components/management/member/Mainmember.vue'
 import MemberView from '@/components/management/member/MemberView.vue'
 import AdjustMember from '@/components/management/member/AdjustMember.vue'
+import CategoryMember from '@/components/management/member/CategoryMember.vue'
 
 export default {
   components: {
@@ -14,17 +15,20 @@ export default {
     'Mainmember': Mainmember,
     'MemberView': MemberView,
     'AdjustMember': AdjustMember,
+    'CategoryMember': CategoryMember,
   },
 
   data() {
     return {
       Component: 'Mainmember',
+      AdjustMember: null,
     };
   },
 
   methods: {
-    ChangeFunction(ProductFunction) {
+    ChangeFunction(ProductFunction, AdjustM) {
       this.Component = ProductFunction
+      this.AdjustMember = AdjustM
     },
 
     GoBack() {

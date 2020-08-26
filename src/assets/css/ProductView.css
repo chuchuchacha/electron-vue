@@ -24,22 +24,30 @@
 .ProductViewTable font:nth-child(3) {
   position: absolute;
   top: 3vh;
-  right: 26vw;
+  right: 34vw;
 }
 
 .ProductViewTable .el-input {
   position: absolute;
   top: 2vh;
-  right: 10vw;
+  right: 18vw;
   width: 15vw;
 }
 
-.ProductViewTable .el-button {
+.ProductViewTable .el-button:nth-child(5) {
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  background-color: coral;
+  color: black;
+}
+
+.ProductViewTable .el-button:nth-child(6) {
   position: absolute;
   top: 2vh;
   right: 2vw;
-  background-color: coral;
-  color: black;
+  background-color: firebrick;
+  color: aquamarine;
 }
 
 /* view */

@@ -1,25 +1,21 @@
 import http from "../http-common";
 
 class Memberdataservice {
+  create(data) {
+    return http.post("/members", data);
+  }
+
   getAll() {
     //return http.get("/tutorials");
-    return http.get("/members");
+    return http.get("/members/");
   }
-  
-  getMaxID() {
-    return http.get("/members/BigID/BigID")
+
+  getBigID() {
+    return http.get("/members/max/")
   }
 
   get(id) {
     return http.get(`/members/${id}`);
-  }
-
-  gettype(type) {
-    return http.get(`/members/${type}`);
-  }
-
-  create(data) {
-    return http.post("/members", data);
   }
 
   update(id, data) {
@@ -28,14 +24,6 @@ class Memberdataservice {
 
   delete(id) {
     return http.delete(`/members/${id}`);
-  }
-
-  deleteAll() {
-    return http.delete(`/members`);
-  }
-
-  findByTitle(member_id) {
-    return http.get(`/members?member_id=${member_id}`);
   }
 }
 

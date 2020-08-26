@@ -127,3 +127,86 @@ cursor: pointer;
   width: 100vw;
   background-color: whitesmoke;
 }
+
+/* 會員類別 */
+.Categorymember {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
+  height: 25vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+.Categorymember font:nth-child(1) {
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
+}
+.Categorymember .el-input:nth-child(2) {
+  position: absolute;
+  top: 2vh;
+  left: 12vw;
+  width: 10vw;
+}
+.Categorymember font:nth-child(3) {
+  position: absolute;
+  top: 3vh;
+  left: 24vw;
+}
+.Categorymember .el-input:nth-child(4) {
+  position: absolute;
+  top: 2vh;
+  left: 34vw;
+  width: 15vw;
+}
+.Categorymember font:nth-child(5) {
+  position: absolute;
+  top: 13vh;
+  left: 2vw;
+}
+.Categorymember .el-textarea:nth-child(6) {
+  position: absolute;
+  top: 13vh;
+  left: 12vw;
+  width: 37vw;
+}
+.Categorymember .el-button:nth-child(7) {
+  position: absolute;
+  top: 13vh;
+  left: 51vw;
+  width: 12vw;
+  height: 7vh;
+  font-size: 20px;
+  font-weight: bold;
+}
+.Categorymember .el-button:nth-child(8) {
+  position: absolute;
+  top: 13vh;
+  left: 63vw;
+  width: 12vw;
+  height: 7vh;
+  font-size: 20px;
+  font-weight: bold;
+}
+.Categorymember .el-button:nth-child(9) {
+  position: absolute;
+  top: 13vh;
+  left: 76vw;
+  width: 12vw;
+  height: 7vh;
+  font-size: 20px;
+  font-weight: bold;
+}
+.CategoryTable {
+  position: absolute;
+  bottom: 0vh;
+  height: 62vh;
+  left: 0;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+.CategoryTable .el-table {
+  left: 2vw;
+  width: 96vw;
+}

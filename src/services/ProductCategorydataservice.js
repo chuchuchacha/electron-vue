@@ -1,42 +1,30 @@
 import http from "../http-common";
 
 class Productdataservice {
-  getAll() {
-    //return http.get("/tutorials");
-    return http.get("/product_category");
+
+  create(data) {
+    return http.post("/product_categories/", data);
   }
 
-  getBigID() {
-    return http.get("/product_category/BigID/BigID")
+  getAll() {
+    //return http.get("/tutorials");
+    return http.get("/product_categories/");
   }
 
   get(id) {
-    return http.get(`/product_category/${id}`);
-  }
-
-  gettype(type) {
-    return http.get(`/product_category/${type}`);
-  }
-
-  create(data) {
-    return http.post("/product_category", data);
+    return http.get(`/product_categories/${id}`);
   }
 
   update(id, data) {
-    console.log(id,data)
-    return http.put(`/product_category/${id}`, data);
+    return http.put(`/product_categories/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/product_category/${id}`);
+    return http.delete(`/product_categories/${id}`);
   }
 
-  deleteAll() {
-    return http.delete(`/product_category`);
-  }
-
-  findByTitle(product_category_id) {
-    return http.get(`/product_category?product_category_id=${product_category_id}`);
+  getBigID() {
+    return http.get("/product_categories/max/")
   }
 }
 

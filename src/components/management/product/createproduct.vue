@@ -2,20 +2,20 @@
   <div class="adjustproduct">
     <div class="fieldOne">
       <font>編號:</font>
-      <el-input v-model="products.id" readonly="readonly"></el-input>
+      <el-input v-model="CreateProduct.product_id" readonly="readonly"></el-input>
 
       <font>名稱:</font>
-      <el-input v-model="products.name"></el-input>
+      <el-input v-model="CreateProduct.product_name"></el-input>
 
       <font>類別:</font>
-      <el-select v-model="products.category_id" placeholder="種類">
+      <el-select v-model="CreateProduct.product_category_id" placeholder="種類">
           <el-option v-for="typeselect in types" :key="typeselect.value" :label="typeselect.text"
           :value="typeselect.value">
           </el-option>
       </el-select>
 
       <font>單位:</font>
-      <el-select v-model="products.unit" placeholder="單位">
+      <el-select v-model="CreateProduct.product_unit" placeholder="單位">
           <el-option v-for="unit in units" :key="unit.value" :label="unit.text"
           :value="unit.value">
           </el-option>
@@ -24,56 +24,56 @@
 
     <div class="fieldTwo">
       <font>單價:</font>
-      <el-input v-model="products.unit_price"></el-input>
+      <el-input v-model="CreateProduct.product_unit_price"></el-input>
 
       <font>生長期(天):</font>
-      <el-input v-model="products.growth_period"></el-input>
+      <el-input v-model="CreateProduct.product_growth_period"></el-input>
 
       <font>保存期(天):</font>
-      <el-input v-model="products.expire"></el-input>
+      <el-input v-model="CreateProduct.product_expire"></el-input>
     </div>
 
     <div class="fieldThree">
       <font>說明:</font>
-      <el-input v-model="products.desc" type="textarea"></el-input>
+      <el-input v-model="CreateProduct.product_desc" type="textarea"></el-input>
 
       <button @click="CreateManagement()">新增產品</button>
     </div>
 
     <div class="CreateProduct_table">
       <el-table
-        :data="CreateProduct"
+        :data="AllProduct"
         stripe border height="45vh" empty-text="未新增產品">
         <el-table-column
-          prop="id"
+          prop="product_id"
           label="編號">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="product_name"
           label="名稱">
         </el-table-column>
         <el-table-column
-          prop="type"
+          prop="product_category_id"
           label="類別">
         </el-table-column>
         <el-table-column
-          prop="unit"
+          prop="product_unit"
           label="單位">
         </el-table-column>
         <el-table-column
-          prop="unit_price"
+          prop="product_unit_price"
           label="單價">
         </el-table-column>
         <el-table-column
-          prop="growth_period"
+          prop="product_growth_period"
           label="生長期(天)">
         </el-table-column>
         <el-table-column
-          prop="expire"
+          prop="product_expire"
           label="保存期(天)">
         </el-table-column>
         <el-table-column
-          prop="desc"
+          prop="product_desc"
           label="說明">
         </el-table-column>
       </el-table>
@@ -83,6 +83,7 @@
 
 <script>
 import Productdataservice from "@/services/Productdataservice.js"
+import ProductCategory from "@/services/ProductCategorydataservice.js"
 
 export default {
   data() {
@@ -90,20 +91,9 @@ export default {
       LastIDNumber: null,
       IDMakeUp: null,
 
-      products: {
-        id: null,
-        name: null,
-        category_id: null,
-        unit: null,
-        unit_price: null,
-        growth_period: null,
-        expire: null,
-        desc: null,
-      },
+      AllProduct: [],
 
-      CreateProduct: [],
-
-      createproducts: {  //為了寫進SQL的語法
+      CreateProduct: {  //為了寫進SQL的語法
         product_id: null,
         product_category_id: null,
         published_status_id: "L01",
@@ -122,10 +112,7 @@ export default {
         product_online_max_inventory: 0
       },
 
-      types: [  //種類的物件
-        { text: '葉菜類', value: 'PC001' },
-        { text: '根莖類', value: 'PC002' }
-      ],
+      types: [],
 
       units: [  //單位的物件
         { text: '包', value: '包' },
@@ -153,14 +140,14 @@ export default {
           break;
       }
       this.LastIDNumber = this.IDMakeUp + this.LastIDNumber
-      this.products.id = this.LastIDNumber
+      this.CreateProduct.product_id = this.LastIDNumber
     },
 
     GetBiggestID() {
       Productdataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.product_id.split('PD')[1]) + 1);
+            this.LastIDNumber = String(Number(response.data.split('PD')[1]) + 1 );
           }
           else{
             this.LastIDNumber = '1'
@@ -173,38 +160,45 @@ export default {
     },
 
     CreateManagement() {
-      this.CreateProduct.push({id: this.products.id, name: this.products.name, type: this.products.category_id,
-      unit: this.products.unit, unit_price: this.products.unit_price, growth_period: this.products.growth_period, expire: this.products.expire, desc: this.products.desc,})
-
-      this.createproducts.product_id = this.products.id,
-      this.createproducts.product_category_id = this.products.category_id,
-      this.createproducts.product_name = this.products.name,
-      this.createproducts.product_unit = this.products.unit,
-      this.createproducts.product_unit_price = this.products.unit_price,
-      this.createproducts.product_desc = this.products.desc,
-      this.createproducts.product_growth_period = this.products.growth_period,
-      this.createproducts.product_expire = this.products.expire,
-      this.createproducts.product_online_unit = this.products.unit,
-      Productdataservice.create(this.createproducts);
-      this.InitailInput()
-      this.GetBiggestID()
-      this.GetBiggestID()
+      this.AllProduct.push({product_id: this.CreateProduct.product_id, product_name: this.CreateProduct.product_name, product_category_id: this.CreateProduct.product_category_id,
+      product_unit: this.CreateProduct.product_unit, product_unit_price: this.CreateProduct.product_unit_price, product_growth_period: this.CreateProduct.product_growth_period,
+      product_expire: this.CreateProduct.product_expire, product_desc: this.CreateProduct.product_desc})
+      
+      Productdataservice.create(this.CreateProduct)
+        .then(response => {
+          if(response.data) {
+            this.InitailInput()
+            this.GetBiggestID()
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
     //我是新的method喔，抓最新的ID
 
     InitailInput() {
-      this.products.id = null
-      this.products.name = null
-      this.products.category_id = null
-      this.products.unit = null
-      this.products.unit_price = null
-      this.products.growth_period = null
-      this.products.expire = null
-      this.products.desc = null
+      this.CreateProduct.product_id = null
+      this.CreateProduct.product_name = null
+      this.CreateProduct.product_category_id = null
+      this.CreateProduct.product_unit = null
+      this.CreateProduct.product_unit_price = null
+      this.CreateProduct.product_growth_period = null
+      this.CreateProduct.product_expire = null
+      this.CreateProduct.product_desc = null
     },
   },
 
   mounted() {
+    ProductCategory.getAll()
+      .then(response => {
+        for(let i = 0; i<response.data.length ; i++) {
+          this.types.push({text: response.data[i].product_category_name , value: response.data[i].product_category_id})
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      })
     this.GetBiggestID()
   }
 };

@@ -65,6 +65,11 @@ export default {
 </script>
 
 <style>
+* .el-textarea__inner {
+  height: 10vh;
+  font-size: 20px;
+}
+
 body {
   margin: 0 !important;
   padding: 0 !important;
