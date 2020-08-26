@@ -65,6 +65,7 @@ export default {
     GetAllSupplier() {
       Supplierdataservice.getAll()
         .then(response => {
+          console.log(response.data)
           this.AllSupplier = response.data
         })
         .catch(e => {

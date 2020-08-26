@@ -210,3 +210,49 @@ cursor: pointer;
   left: 2vw;
   width: 96vw;
 }
+
+/* AdjustCategory */
+.Categorybar {
+  position: absolute;
+  top: 13vh;
+  height: 12vh;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+
+.Categorybar font {
+  position: absolute;
+  top: 4vh;
+  left: 2vw;
+  font-size: 20px;
+}
+
+.Categorybar .el-select {
+  position: absolute;
+  top: 3vh;
+  left: 12vw;
+  width: 15vw;
+}
+
+.Categorybar .el-button {
+  position: absolute;
+  top: 3vh;
+  right: 2vw;
+  width: 10vw;
+}
+
+.MemberTable {
+  position: absolute;
+  bottom: 0vh;
+  width: 100vw;
+  height: 75vh;
+  background-color: whitesmoke;
+}
+
+.MemberTable .el-table {
+  position: absolute;
+  left: 2%;
+  width: 96%;
+  bottom: 2vh;
+  font-weight: bold;
+}

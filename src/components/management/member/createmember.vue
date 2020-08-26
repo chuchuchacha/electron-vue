@@ -96,8 +96,8 @@ export default {
       IDMakeUp: null,
 
       genders: [
-        {text:"男", value:"男"},
-        {text:"女", value:"女"},
+        {text:"男", value:1},
+        {text:"女", value:2},
       ],
 
       AllMember: [],
@@ -161,6 +161,20 @@ export default {
 
     CreateManagement() {
       Memberdataservice.create(this.CreateMember)
+        .then(response => {
+          console.log(response.data)
+          let tablegender = this.CreateMember.member_gender
+          for(let j = 0; j < this.genders.length; j++) {
+            if(tablegender == this.genders[j].value) {
+              tablegender = this.genders[j].text
+            }
+          }
+          this.AllMember.push({member_id: this.CreateMember.member_id, member_card_id: this.CreateMember.member_card_id,
+          member_name: this.CreateMember.member_name, member_gender: tablegender,
+          member_birthday: this.CreateMember.member_birthday, member_phone: this.CreateMember.member_phone,
+          member_email: this.CreateMember.member_email, member_address: this.CreateMember.member_address,
+          member_remark: this.CreateMember.member_remark});
+        })
     },
   },
 

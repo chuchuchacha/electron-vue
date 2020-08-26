@@ -8,6 +8,7 @@ import Mainmember from '@/components/management/member/Mainmember.vue'
 import MemberView from '@/components/management/member/MemberView.vue'
 import AdjustMember from '@/components/management/member/AdjustMember.vue'
 import CategoryMember from '@/components/management/member/CategoryMember.vue'
+import AdjustCategory from '@/components/management/member/AdjustCategory.vue'
 
 export default {
   components: {
@@ -16,6 +17,7 @@ export default {
     'MemberView': MemberView,
     'AdjustMember': AdjustMember,
     'CategoryMember': CategoryMember,
+    'AdjustCategory': AdjustCategory,
   },
 
   data() {
@@ -34,6 +36,9 @@ export default {
     GoBack() {
       if(this.Component == 'AdjustMember') {
         this.Component = 'MemberView'
+      }
+      else if(this.Component == 'AdjustCategory') {
+        this.Component = 'CategoryMember'
       }
       else if(this.Component != 'Mainmember') {
         this.Component = 'Mainmember'
