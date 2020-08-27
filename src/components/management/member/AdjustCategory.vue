@@ -2,7 +2,7 @@
   <div>
     <div class="Categorybar">
       <font>會員類別:</font>
-      <el-select v-model="CategoryTarget" placeholder="會員類別">
+      <el-select v-model="CategoryTarget" placeholder="會員類別" @change="CategoryChange">
         <el-option v-for="Category in Categories" :key="Category.value"
         :label="Category.text" :value="Category.value">
         </el-option>
@@ -13,7 +13,7 @@
 
     <div class="MemberTable">
       <el-table
-        :data="AllMember" @selection-change="MemberSelect"
+        :data="AllMember" @selection-change="MemberSelect" ref="memberrow"
         stripe border height="73vh" empty-text="請先新增會員">
         <el-table-column
           type="selection"
@@ -61,13 +61,32 @@ export default {
       },
 
       TempTarget: [],
+
+      Defaultmember: [],
     }
   },
 
   methods: {
+    CategoryChange(val) {
+      MemberCategoryservice.get(val)
+        .then(response => {
+          this.Defaultmember = []
+          for(let i = 0; i < response.data.members.length; i++) {
+            for(let j = 0; j < this.AllMember.length; j++) {
+              if(response.data.members[i].member_id == this.AllMember[j].member_id) {
+                this.Defaultmember.push({j})
+              }
+            }
+          }
+          this.$refs.memberrow.clearSelection();
+          for(let o = 0; o < this.Defaultmember.length; o++) {
+            this.$refs.memberrow.toggleRowSelection(this.AllMember[this.Defaultmember[o].j],true);
+          }
+        })
+    },
+
     MemberSelect(val) {
       this.TempTarget = val
-      console.log(this.TempTarget)
     },
 
     UpdateCategory() {

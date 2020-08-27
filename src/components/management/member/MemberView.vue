@@ -80,7 +80,6 @@ export default {
               }
             }
           }
-          console.log(this.AllMember)
         })
         .catch(e => {
           console.log(e);
