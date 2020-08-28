@@ -4,7 +4,7 @@
       
       <div class="pbo1">
         <font>產品:</font>
-        <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
+        <el-input v-model="TargetProduct" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
         <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
         <font>單價:</font>
@@ -71,6 +71,12 @@ import Purchase_p_productdataservice from "@/services/Purchase_p_productdataserv
 import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
+  props: {
+    TargetProduct: {
+      type: String
+    }
+  },
+
   data() {
     return {
       Input_product: null,  //輸入框的v-model
@@ -240,4 +246,4 @@ export default {
 
 </script>
 
-<style scoped  src="@/assets/css/scrap_pur.css"></style>
+<style scoped src="@/assets/css/Inventory.css"></style>

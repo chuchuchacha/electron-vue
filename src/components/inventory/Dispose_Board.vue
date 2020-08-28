@@ -189,4 +189,4 @@ export default {
 
 </script>
 
-<style scoped  src="@/assets/css/scrap_pur.css"></style>
+<style scoped src="@/assets/css/Inventory.css"></style>

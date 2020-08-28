@@ -144,49 +144,47 @@
 
 /* 供應商產品 */
 
-.SPSupplier {
+.Supplierbar {
   position: absolute;
   top: 13vh;
-  height: 87vh;
-  left: 0;
-  width: 50vw;
+  height: 12vh;
+  width: 100vw;
   background-color: whitesmoke;
 }
 
-.SPSupplier font {
+.Supplierbar font {
   position: absolute;
   top: 4vh;
   left: 2vw;
   font-size: 20px;
 }
 
-.SPSupplier .el-input {
+.Supplierbar .el-select {
   position: absolute;
   top: 3vh;
-  left: 10vw;
+  left: 12vw;
   width: 15vw;
 }
 
-.SPSupplier .el-button {
+.Supplierbar button {
   position: absolute;
   top: 3vh;
   right: 2vw;
   width: 10vw;
 }
 
-.SPSupplier .el-table {
+.ProductTable {
   position: absolute;
-  top: 10vh;
-  left: 2vw;
-  width: 46vw;
+  bottom: 0vh;
+  width: 100vw;
   height: 75vh;
+  background-color: whitesmoke;
 }
 
-.SPProduct {
+.ProductTable .el-table {
   position: absolute;
-  top: 13vh;
-  height: 87vh;
-  right: 0;
-  width: 50vw;
-  background-color: violet;
+  left: 2%;
+  width: 96%;
+  bottom: 2vh;
+  font-weight: bold;
 }

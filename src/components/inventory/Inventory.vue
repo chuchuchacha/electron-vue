@@ -7,26 +7,43 @@
       <button class="func_scr" @click="FunctionClick()" ref="ScrappedClick" id="報廢">報廢</button>
     </div>
 
-    <component v-bind:is="Component" :FuncText="FuncText"></component>
+    <component v-bind:is="Component" :FuncText="FuncText" :TargetProduct="TargetProduct"></component>
 
     <div class="show_form">
-      <!-- <tableprod :FuncSelects="FuncText" :ProductTypes="ProductType" :AdjustMinuss="AdjustMinus" @InitialData="InitialData"></tableprod> -->
-      <tableprod></tableprod>
+      <el-table
+        :data="AllProduct" @current-change="ChooseRow" highlight-current-row
+        stripe border height="83vh" empty-text="沒有產品">
+        <el-table-column
+          prop="product_id"
+          label="編號">
+        </el-table-column>
+        <el-table-column
+          prop="product_name"
+          label="名稱">
+        </el-table-column>
+        <el-table-column
+          prop="product_unit"
+          label="單位">
+        </el-table-column>
+        <el-table-column
+          prop="product_inventory"
+          label="庫存">
+        </el-table-column>
+      </el-table>
     </div>
 
   </div>
 </template>
 
 <script>
-import tableprod from '@/components/table/Table_inventory.vue'
 import PurchaseBoard from '@/components/inventory/Purchase_Board.vue'
 import HarvestBoard from '@/components/inventory/Harvest_Board.vue'
 import AdjustBoard from '@/components/inventory/Adjust_Board.vue'
 import DisposeBoard from '@/components/inventory/Dispose_Board.vue'
+import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
   components: {
-    'tableprod': tableprod,
     'PurchaseBoard': PurchaseBoard,
     'HarvestBoard': HarvestBoard,
     'AdjustBoard': AdjustBoard,
@@ -37,10 +54,29 @@ export default {
     return {
       Component: 'PurchaseBoard',
       FuncText: '進貨',
+
+      AllProduct: [],
+      TargetProduct: null,
     };
   },
   
   methods: {
+    ChooseRow(val) {
+      this.TargetProduct = val.product_id
+    },
+
+    GetAllProduct() {
+      Productdataservice.getAll()
+        .then(response => {
+          this.AllProduct = response.data
+          //將產品類別id轉成text
+          this.ChangeCategoryView(this.AllProduct.length)
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    },
+
     //initial 功能選擇扭的顏色、文字
     InitalFunc() {
       this.$refs.PurchaseClick.style.backgroundColor = "#dcdcdc"
@@ -82,8 +118,9 @@ export default {
     this.$root.$on('GoBack', () => {
         this.GoBack();
     });
+    this.GetAllProduct()
   },
 }
 </script>
 
-<style scoped src="@/assets/css/scrapped.css"></style>
+<style scoped src="@/assets/css/Inventory.css"></style>

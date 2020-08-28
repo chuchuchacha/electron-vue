@@ -28,8 +28,11 @@
           label="說明">
         </el-table-column>
         <el-table-column
-          prop="member"
+          prop="members"
           label="會員">
+          <template slot-scope="{row,}">
+            <span v-for="(member,index) in row.members" :key="index">{{member.member_name}},</span>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -50,7 +53,8 @@ export default {
       CreateCategory: {
         member_category_id: null,
         member_category_name: null,
-        member_category_desc: null
+        member_category_desc: null,
+        members: []
       },
 
       CreateBoolean: null,
@@ -71,9 +75,11 @@ export default {
           })
       }
       if(this.CreateBoolean == false) {
+        console.log(this.CreateCategory)
         MemberCategoryservice.update(this.CreateCategory.member_category_id, this.CreateCategory)
           .then(response => {
             console.log(response.data)
+            this.GetAllCategories()
             this.GetAllCategories()
           })
       }
@@ -129,9 +135,13 @@ export default {
 
     ChooseRow(val) {
       if(val) {
+        this.CreateCategory.members = []
         this.CreateCategory.member_category_id = val.member_category_id
         this.CreateCategory.member_category_name = val.member_category_name
         this.CreateCategory.member_category_desc = val.member_category_desc
+        for(let i = 0; i < val.members.length; i++) {
+          this.CreateCategory.members.push({member_id: val.members[i].member_id})
+        }
         this.CreateBoolean = false
       } 
     }
