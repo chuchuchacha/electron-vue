@@ -40,7 +40,6 @@
 
 <script>
 import Disposedataservice from "@/services/Disposedataservice.js"
-import Dispose_p_productdataservice from "@/services/Dispose_p_productdataservice.js"
 import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
@@ -60,7 +59,8 @@ export default {
       SQLdispose: { //資料庫的dispose
         dispose_id: null,
         user_id: 'ADM001',
-        dispose_date: null,
+        dispose_dt: null,
+        product:[]
       },
 
       SQLdispose_p_products: [],
@@ -76,7 +76,6 @@ export default {
   methods: {
     
     DeletTable() {
-      Dispose_p_productdataservice.deleteAll()
       Disposedataservice.deleteAll()
     },
 
@@ -105,7 +104,7 @@ export default {
       Disposedataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.dispose_id.substr(12)) + 1);
+            this.LastIDNumber = String(Number(response.data.substr(12)) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -122,7 +121,7 @@ export default {
       //將資料推到table裡
       this.DisposeData.push({product: this.Input_product, amount: this.Input_amount})
       //將資料寫進SQLdispose_p_products陣列 == raw的數量
-      this.SQLdispose_p_products.push({dispose_id: this.LastIDNumber,product_id: this.ProductData_ID,dispose_participate_product_amount: this.Input_amount,})
+      this.SQLdispose.product.push({dispose_id: this.LastIDNumber,product_id: this.ProductData_ID,dispose_participate_product_amount: this.Input_amount,})
       this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
       //Input清空，除了總計
       this.InitalInput();
@@ -135,26 +134,24 @@ export default {
         this.SQLdispose.dispose_id = this.LastIDNumber
         //取得SQL的日期
         this.getDate();
-        this.SQLdispose.dispose_date = this.Datenow
+        this.SQLdispose.dispose_dt = this.Datenow
         //送出SQLdispose
         Disposedataservice.create(this.SQLdispose)
-        //console.log(this.SQLdispose)
-        //送出每個SQLdispose_p_products
-        for(let i = 0;i < this.SQLdispose_p_products.length;i++) {
-          Dispose_p_productdataservice.create(this.SQLdispose_p_products[i])
-          Productdataservice.update(this.SQLdispose_p_products[i].product_id, this.SQLchangeproduct[i])
-          //console.log(this.SQLdispose_p_products[i])
-        }
-        
-        //將table清空
-        this.DisposeData = null
-        //將進貨編號重啟
-        this.GetBiggestID()
-        this.$root.$emit('refresh');
+          .then(response => {
+            console.log(response.data)
+            for(let i = 0;i < this.SQLdispose.product.length;i++) {
+              Productdataservice.update(this.SQLdispose.product[i].product_id, this.SQLchangeproduct[i])
+                .then(response => {
+                  console.log(response.data)
+                  this.$root.$emit('refresh');
+                  this.GetBiggestID()
+                  this.DisposeData = []
+                  this.SQLdispose.product = []
+                  this.SQLchangeproduct = []
+                })
+            }
+          })
       }
-      this.DisposeData = []
-      this.SQLdispose_p_products = []
-      this.SQLchangeproduct = []
     },
 
     //取得最新日期

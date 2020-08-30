@@ -56,14 +56,14 @@ export default {
       FuncText: '進貨',
 
       AllProduct: [],
-      TargetProduct: null,
     };
   },
   
   methods: {
     ChooseRow(val) {
-      this.TargetProduct = val.product_id
-      this.$root.$emit('currentproduct', val)
+      if(val) {
+        this.$root.$emit('currentproduct', val)
+      }
     },
 
     GetAllProduct() {

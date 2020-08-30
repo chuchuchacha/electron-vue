@@ -49,7 +49,6 @@
 
 <script>
 import Adjustdataservice from "@/services/Adjustdataservice.js"
-import Adjust_p_productdataservice from "@/services/Adjust_p_productdataservice.js"
 import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
@@ -76,10 +75,9 @@ export default {
       SQLadjust: { //資料庫的adjust
         adjust_id: null,
         user_id: 'ADM001',
-        adjust_date: null,
+        adjust_dt: null,
+        product:[]
       },
-
-      SQLadjust_p_products: [],
 
       SQLchangeproduct: [],
 
@@ -92,7 +90,6 @@ export default {
   methods: {
     
     DeletTable() {
-      Adjust_p_productdataservice.deleteAll()
       Adjustdataservice.deleteAll()
     },
 
@@ -121,7 +118,7 @@ export default {
       Adjustdataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.adjust_id.substr(12)) + 1);
+            this.LastIDNumber = String(Number(response.data.substr(12)) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -138,7 +135,7 @@ export default {
       //將資料推到table裡
       this.AdjustData.push({product: this.Input_product, adjust: this.AdjustSelect, amount: this.Input_amount})
       //將資料寫進SQLadjust_p_products陣列 == raw的數量
-      this.SQLadjust_p_products.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,adjust_participate_product_amount: this.Input_amount,})
+      this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,adjust_participate_product_amount: this.Input_amount,})
       if(this.AdjustSelect == '增加') {
         this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
       }
@@ -157,25 +154,22 @@ export default {
         this.SQLadjust.adjust_id = this.LastIDNumber
         //取得SQL的日期
         this.getDate();
-        this.SQLadjust.adjust_date = this.Datenow
+        this.SQLadjust.adjust_dt = this.Datenow
         //送出SQLadjust
         Adjustdataservice.create(this.SQLadjust)
-        //送出每個SQLadjust_p_products
-        for(let i = 0;i < this.SQLadjust_p_products.length;i++) {
-          Adjust_p_productdataservice.create(this.SQLadjust_p_products[i])
-          Productdataservice.update(this.SQLadjust_p_products[i].product_id, this.SQLchangeproduct[i])
-        }
-        
-        //將table清空
-        this.AdjustData = null
-        //將進貨編號重啟
-        this.GetBiggestID()
-        this.$root.$emit('refresh');
+          .then(response => {
+            console.log(response.data)
+            for(let i = 0;i < this.SQLadjust.product.length;i++) {
+              Productdataservice.update(this.SQLadjust.product[i].product_id, this.SQLchangeproduct[i])
+              this.$root.$emit('refresh');
+              this.GetBiggestID()
+              this.AdjustData = []
+              this.SQLadjust.product = []
+              this.SQLchangeproduct = []
+              this.AdjustSelect = null
+            }
+          })
       }
-      this.AdjustSelect = null
-      this.AdjustData = []
-      this.SQLadjust_p_products = []
-      this.SQLchangeproduct = []
     },
 
     //取得最新日期

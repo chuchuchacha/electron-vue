@@ -4,7 +4,7 @@
       
       <div class="pbo1">
         <font>產品:</font>
-        <el-input v-model="TargetProduct" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
+        <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
         <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
         <font>單價:</font>
@@ -67,16 +67,9 @@
 
 <script>
 import Purchasedataservice from "@/services/Purchasedataservice.js"
-import Purchase_p_productdataservice from "@/services/Purchase_p_productdataservice.js"
 import Productdataservice from "@/services/Productdataservice.js"
 
 export default {
-  props: {
-    TargetProduct: {
-      type: String
-    }
-  },
-
   data() {
     return {
       Input_product: null,  //輸入框的v-model
@@ -103,10 +96,11 @@ export default {
       SQLpurchase: { //資料庫的purchase
         purchase_id: null,
         user_id: 'ADM001',
-        purchase_date: null,
+        purchase_dt: null,
         purchase_subtotal: null,
         purchase_discount: null,
-        purchase_total: null
+        purchase_total: null,
+        product: []
       },
 
       SQLpurchase_p_products: [],
@@ -123,7 +117,6 @@ export default {
   methods: {
     
     DeletTable() {
-      Purchase_p_productdataservice.deleteAll()
       Purchasedataservice.deleteAll()
       this.$root.$emit('refresh');
     },
@@ -153,7 +146,7 @@ export default {
       Purchasedataservice.getBigID()
         .then(response => {
           if(response.data) {
-            this.LastIDNumber = String(Number(response.data.purchase_id.substr(12)) + 1);
+            this.LastIDNumber = String(Number(response.data.substr(12)) + 1);
           }
           else{
             this.LastIDNumber = '1'
@@ -170,7 +163,7 @@ export default {
       //將資料推到table裡
       this.PurchaseData.push({product: this.Input_product, unit: this.Input_units, amount: this.Input_amount, price: this.Input_price, discount: this.Input_discount})
       //將資料寫進SQLpurchase_p_products陣列 == raw的數量
-      this.SQLpurchase_p_products.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,purchase_participate_product_unit: this.Input_units,purchase_participate_product_amount: this.Input_amount,purchase_participate_product_unit_price: this.Input_price})
+      this.SQLpurchase.product.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,purchase_participate_product_unit: this.Input_units,purchase_participate_product_amount: this.Input_amount,purchase_participate_product_unit_price: this.Input_price})
       this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
       //將資料寫進SQLpurchase.purchase_subtotal物件 只有1個
       this.SQLpurchase.purchase_subtotal = this.SQLpurchase.purchase_subtotal + this.Input_price * this.Input_amount
@@ -189,26 +182,25 @@ export default {
         this.SQLpurchase.purchase_id = this.LastIDNumber
         //取得SQL的日期
         this.getDate();
-        this.SQLpurchase.purchase_date = this.Datenow
+        this.SQLpurchase.purchase_dt = this.Datenow
         //送出SQLpurchase
         Purchasedataservice.create(this.SQLpurchase)
-        //送出每個SQLpurchase_p_products
-        for(let i = 0;i < this.SQLpurchase_p_products.length;i++) {
-          Purchase_p_productdataservice.create(this.SQLpurchase_p_products[i])
-          Productdataservice.update(this.SQLpurchase_p_products[i].product_id, this.SQLchangeproduct[i])
-        }
-        
-        //將table清空
-        this.PurchaseData = null
-        //將Input總計清空
-        this.Input_total = null
-        //將進貨編號重啟
-        this.GetBiggestID()
-        this.$root.$emit('refresh');
+          .then(response => {
+            console.log(response.data)
+            for(let i = 0;i < this.SQLpurchase.product.length;i++) {
+              Productdataservice.update(this.SQLpurchase.product[i].product_id, this.SQLchangeproduct[i])
+                .then(response => {
+                  console.log(response.data)
+                  this.$root.$emit('refresh');
+                  this.GetBiggestID()
+                  this.PurchaseData = []
+                  this.SQLpurchase.product = []
+                  this.SQLchangeproduct = []
+                  this.Input_total = null
+                })
+            }
+          })
       }
-      this.PurchaseData = []
-      this.SQLpurchase_p_products = []
-      this.SQLchangeproduct = []
     },
 
     //取得最新日期
