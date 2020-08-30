@@ -7,7 +7,7 @@
       <button class="func_scr" @click="FunctionClick()" ref="ScrappedClick" id="報廢">報廢</button>
     </div>
 
-    <component v-bind:is="Component" :FuncText="FuncText" :TargetProduct="TargetProduct"></component>
+    <component v-bind:is="Component" :FuncText="FuncText"></component>
 
     <div class="show_form">
       <el-table
@@ -63,14 +63,13 @@ export default {
   methods: {
     ChooseRow(val) {
       this.TargetProduct = val.product_id
+      this.$root.$emit('currentproduct', val)
     },
 
     GetAllProduct() {
       Productdataservice.getAll()
         .then(response => {
           this.AllProduct = response.data
-          //將產品類別id轉成text
-          this.ChangeCategoryView(this.AllProduct.length)
         })
         .catch(e => {
           console.log(e);
@@ -116,7 +115,10 @@ export default {
 
   mounted() {
     this.$root.$on('GoBack', () => {
-        this.GoBack();
+      this.GoBack();
+    });
+    this.$root.$on('refresh', () => {
+      this.GetAllProduct();
     });
     this.GetAllProduct()
   },
