@@ -37,7 +37,7 @@
         <font>備註:</font>
         <el-input type="textarea" resize="none" v-model="AdjustMember.member_remark"></el-input>
 
-        <button @click="UpdateMember()">新增會員</button>
+        <button @click="UpdateMember()">修改會員</button>
       </div>
     </div>
 

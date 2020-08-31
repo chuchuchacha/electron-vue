@@ -14,6 +14,7 @@ import Member from '@/components/management/member/Member.vue'
 import Mainpage from '@/components/Mainpage.vue'
 import Supplier from '@/components/management/supplier/Supplier.vue'
 import Inventory from '@/components/inventory/Inventory.vue'
+import Planting from '@/components/planting/Planting.vue'
 
 export default {
   components: {
@@ -22,6 +23,7 @@ export default {
     'Member': Member,
     'Supplier': Supplier,
     'Inventory': Inventory,
+    'Planting': Planting,
   },
 
   data() {
@@ -46,6 +48,9 @@ export default {
           break;
         case '庫存管理':
           this.Component = 'Inventory';
+          break;
+        case '種植管理':
+          this.Component = 'Planting';
           break;
       }
     },

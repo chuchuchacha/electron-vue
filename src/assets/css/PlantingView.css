@@ -1,0 +1,166 @@
+.CreatePlanting {
+  position: absolute;
+  top: 13vh;
+  width: 50vw;
+  left: 0;
+  height: 87vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+
+.CreatePlanting font:nth-child(1) {
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
+}
+.CreatePlanting .el-input:nth-child(2) {
+  position: absolute;
+  top: 2vh;
+  left: 12vw;
+  width: 12vw;
+}
+.CreatePlanting font:nth-child(3) {
+  position: absolute;
+  top: 3vh;
+  left: 25vw;
+}
+.CreatePlanting .el-input:nth-child(4) {
+  position: absolute;
+  top: 2vh;
+  left: 31vw;
+  width: 16vw;
+}
+/* 種植時間 */
+.CreatePlanting font:nth-child(5) {
+  position: absolute;
+  top: 11vh;
+  left: 2vw;
+}
+.CreatePlanting .el-select:nth-child(6) {
+  position: absolute;
+  top: 10vh;
+  left: 12vw;
+  width: 9vw;
+}
+.CreatePlanting font:nth-child(7) {
+  position: absolute;
+  top: 11vh;
+  left: 22vw;
+}
+.CreatePlanting .el-select:nth-child(8) {
+  position: absolute;
+  top: 10vh;
+  left: 25vw;
+  width: 7vw;
+}
+.CreatePlanting font:nth-child(9) {
+  position: absolute;
+  top: 11vh;
+  left: 33vw;
+}
+.CreatePlanting .el-select:nth-child(10) {
+  position: absolute;
+  top: 10vh;
+  left: 36vw;
+  width: 7vw;
+}
+.CreatePlanting font:nth-child(11) {
+  position: absolute;
+  top: 11vh;
+  left: 44vw;
+}
+
+.CreatePlanting font:nth-child(12) {
+  position: absolute;
+  top: 19vh;
+  left: 2vw;
+}
+.CreatePlanting .el-input:nth-child(13) {
+  position: absolute;
+  top: 18vh;
+  left: 8vw;
+  width: 13vw;
+}
+.CreatePlanting font:nth-child(14) {
+  position: absolute;
+  top: 19vh;
+  left: 22vw;
+}
+.CreatePlanting .el-button:nth-child(15) {
+  position: absolute;
+  top: 18vh;
+  height: 5.5vh;
+  width: 20vw;
+  right: 3vw;
+  background-color: turquoise;
+  color: black;
+}
+.CreatePlanting .el-table {
+  position: absolute;
+  top: 28vh;
+  left: 2vw;
+  width: 46vw;
+  font-size: 20px;
+}
+.CreatePlanting .el-button:nth-child(17) {
+  position: absolute;
+  bottom: 2vh;
+  right: 2vw;
+  height: 10vh;
+  width: 15vw;
+  font-size: 20px;
+  background-color: turquoise;
+  color: black;
+}
+
+.ProductTable {
+  position: absolute;
+  top: 13vh;
+  width: 50vw;
+  right: 0;
+  height: 87vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+
+.ProductTable font:nth-child(1) {
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
+}
+.ProductTable .el-select:nth-child(2) {
+  position: absolute;
+  top: 2vh;
+  left: 8vw;
+  width: 11vw;
+}
+.ProductTable font:nth-child(3) {
+  position: absolute;
+  top: 3vh;
+  left: 20vw;
+}
+.ProductTable .el-input:nth-child(4) {
+  position: absolute;
+  top: 2vh;
+  left: 26vw;
+  width: 12vw;
+}
+.ProductTable .el-button:nth-child(5) {
+  position: absolute;
+  top: 2vh;
+  left: 39vw;
+  width: 9vw;
+  background-color: turquoise;
+  color: black;
+}
+
+.ProductTable .el-table {
+  position: absolute;
+  bottom: 2vh;
+  left: 2vw;
+  width: 46vw;
+  height: 75vh;
+  font-size: 20px;
+}

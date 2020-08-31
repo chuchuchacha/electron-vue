@@ -116,11 +116,13 @@ export default {
           break;
       }
       this.LastIDNumber = this.IDMakeUp + this.LastIDNumber
+      console.log(this.LastIDNumber)
     },
     
     GetBiggestID() {
       ProductCategorydata.getBigID()
         .then(response => {
+          console.log(response.data)
           if(response.data) {
             this.LastIDNumber = String(Number(response.data.split('PC')[1]) + 1);
           }

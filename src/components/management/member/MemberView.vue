@@ -4,6 +4,7 @@
       <font>現在選擇會員: </font>
       <el-input v-model="ChoosenIdName"></el-input>
       <el-button @click="ChangeMember()">修改</el-button>
+      <el-button @click="DeleteMember()">刪除</el-button>
     </div>
 
     <div class="tablemember">
@@ -69,6 +70,13 @@ export default {
   },
 
   methods: {
+    DeleteProduct() {
+      if(this.ChoosenRow) {
+        Memberdataservice.delete(this.ChoosenRow.member_id)
+        this.GetAllMember()
+      }  
+    },
+
     GetAllMember() {
       Memberdataservice.getAll()
         .then(response => {
