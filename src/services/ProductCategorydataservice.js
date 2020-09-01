@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class Productdataservice {
+class ProductCategorydataservice {
 
   create(data) {
     return http.post("/product_categories/", data);
@@ -28,4 +28,4 @@ class Productdataservice {
   }
 }
 
-export default new Productdataservice();
+export default new ProductCategorydataservice();

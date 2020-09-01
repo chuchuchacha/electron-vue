@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class Harvestdataservice {
+class Disposedataservice {
   getAll() {
     //return http.get("/tutorials");
     return http.get("/Disposes");
@@ -28,4 +28,4 @@ class Harvestdataservice {
   }
 }
 
-export default new Harvestdataservice();
+export default new Disposedataservice();
