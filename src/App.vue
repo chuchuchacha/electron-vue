@@ -15,6 +15,7 @@ import Mainpage from '@/components/Mainpage.vue'
 import Supplier from '@/components/management/supplier/Supplier.vue'
 import Inventory from '@/components/inventory/Inventory.vue'
 import Planting from '@/components/planting/Planting.vue'
+import Statement from '@/components/statement/Statement.vue'
 
 export default {
   components: {
@@ -24,6 +25,7 @@ export default {
     'Supplier': Supplier,
     'Inventory': Inventory,
     'Planting': Planting,
+    'Statement': Statement,
   },
 
   data() {
@@ -51,6 +53,9 @@ export default {
           break;
         case '種植管理':
           this.Component = 'Planting';
+          break;
+        case '報表管理':
+          this.Component = 'Statement';
           break;
       }
     },

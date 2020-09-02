@@ -8,7 +8,7 @@
       <router-link to="/transactionview"><button @click="ChangeTitleName()" id="結帳">結帳</button></router-link>
       <router-link to="/practiceview"><button @click="ChangeTitleName()" id="測試">測試</button></router-link>
       <router-link to="/statementview"><button @click="ChangeTitleName()" id="種植管理">種植管理</button></router-link>
-      <router-link to="/statementview"><button @click="ChangeTitleName()" id="報表">報表</button></router-link>
+      <router-link to="/statementview"><button @click="ChangeTitleName()" id="報表管理">報表</button></router-link>
     </div>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
   methods: {
     ChangeTitleName() {
       this.TitleText = event.target.id
-      console.log(this.TitleText)
       this.$emit('ChangeTitle', this.TitleText);
     }
   },

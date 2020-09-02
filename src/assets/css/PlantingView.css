@@ -1,3 +1,6 @@
+.el-button {
+  font-size: 20px;
+}
 .CreatePlanting {
   position: absolute;
   top: 13vh;
@@ -17,77 +20,65 @@
 .CreatePlanting .el-input:nth-child(2) {
   position: absolute;
   top: 2vh;
-  left: 12vw;
-  width: 12vw;
+  left: 8vw;
+  width: 17vw;
 }
 .CreatePlanting font:nth-child(3) {
   position: absolute;
   top: 3vh;
-  left: 25vw;
+  left: 26vw;
 }
 .CreatePlanting .el-input:nth-child(4) {
   position: absolute;
   top: 2vh;
-  left: 31vw;
-  width: 16vw;
+  left: 32vw;
+  width: 11vw;
+}
+.CreatePlanting font:nth-child(5) {
+  position: absolute;
+  top: 3vh;
+  left: 44vw;
 }
 /* 種植時間 */
-.CreatePlanting font:nth-child(5) {
+.CreatePlanting font:nth-child(6) {
   position: absolute;
   top: 11vh;
   left: 2vw;
 }
-.CreatePlanting .el-select:nth-child(6) {
+.CreatePlanting .el-select:nth-child(7) {
   position: absolute;
   top: 10vh;
   left: 12vw;
   width: 9vw;
 }
-.CreatePlanting font:nth-child(7) {
+.CreatePlanting font:nth-child(8) {
   position: absolute;
   top: 11vh;
   left: 22vw;
 }
-.CreatePlanting .el-select:nth-child(8) {
+.CreatePlanting .el-select:nth-child(9) {
   position: absolute;
   top: 10vh;
   left: 25vw;
   width: 7vw;
 }
-.CreatePlanting font:nth-child(9) {
+.CreatePlanting font:nth-child(10) {
   position: absolute;
   top: 11vh;
   left: 33vw;
 }
-.CreatePlanting .el-select:nth-child(10) {
+.CreatePlanting .el-select:nth-child(11) {
   position: absolute;
   top: 10vh;
   left: 36vw;
   width: 7vw;
 }
-.CreatePlanting font:nth-child(11) {
+.CreatePlanting font:nth-child(12) {
   position: absolute;
   top: 11vh;
   left: 44vw;
 }
-
-.CreatePlanting font:nth-child(12) {
-  position: absolute;
-  top: 19vh;
-  left: 2vw;
-}
-.CreatePlanting .el-input:nth-child(13) {
-  position: absolute;
-  top: 18vh;
-  left: 8vw;
-  width: 13vw;
-}
-.CreatePlanting font:nth-child(14) {
-  position: absolute;
-  top: 19vh;
-  left: 22vw;
-}
-.CreatePlanting .el-button:nth-child(15) {
+.CreatePlanting .el-button:nth-child(13) {
   position: absolute;
   top: 18vh;
   height: 5.5vh;
@@ -103,7 +94,7 @@
   width: 46vw;
   font-size: 20px;
 }
-.CreatePlanting .el-button:nth-child(17) {
+.CreatePlanting .el-button:nth-child(15) {
   position: absolute;
   bottom: 2vh;
   right: 2vw;
@@ -163,4 +154,15 @@
   width: 46vw;
   height: 75vh;
   font-size: 20px;
+}
+
+
+
+
+
+
+.DeleteButton {
+  background-color: crimson;
+  color: aliceblue;
+  width: 5vw;
 }
