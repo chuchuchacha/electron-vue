@@ -15,7 +15,6 @@ class Adjustdataservice {
   }
 
   create(data) {
-    console.log(data)
     return http.post("/Adjusts", data);
   }
 

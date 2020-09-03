@@ -75,6 +75,11 @@ export default {
 </script>
 
 <style>
+.el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td {
+  color: #fff;
+  background-color: darkgray!important;
+}
+
 * .el-textarea__inner {
   height: 10vh;
   font-size: 20px;

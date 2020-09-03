@@ -163,7 +163,7 @@ export default {
       //將資料推到table裡
       this.PurchaseData.push({product: this.Input_product, unit: this.Input_units, amount: this.Input_amount, price: this.Input_price, discount: this.Input_discount})
       //將資料寫進SQLpurchase_p_products陣列 == raw的數量
-      this.SQLpurchase.product.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,purchase_participate_product_unit: this.Input_units,purchase_participate_product_amount: this.Input_amount,purchase_participate_product_unit_price: this.Input_price})
+      this.SQLpurchase.product.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,purchase_participate_product_unit: this.Input_units,amount: this.Input_amount,purchase_participate_product_unit_price: this.Input_price})
       this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
       //將資料寫進SQLpurchase.purchase_subtotal物件 只有1個
       this.SQLpurchase.purchase_subtotal = this.SQLpurchase.purchase_subtotal + this.Input_price * this.Input_amount

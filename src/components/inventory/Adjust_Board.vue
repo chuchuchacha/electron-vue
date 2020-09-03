@@ -134,12 +134,15 @@ export default {
     InsertTable() {
       //將資料推到table裡
       this.AdjustData.push({product: this.Input_product, adjust: this.AdjustSelect, amount: this.Input_amount})
-      //將資料寫進SQLadjust_p_products陣列 == raw的數量
-      this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,adjust_participate_product_amount: this.Input_amount,})
+
       if(this.AdjustSelect == '增加') {
+        //將資料寫進SQLadjust_p_products陣列 == raw的數量
+        this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,choice: this.AdjustSelect,amount: this.Input_amount,})
         this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
       }
       if(this.AdjustSelect == '減少') {
+        //將資料寫進SQLadjust_p_products陣列 == raw的數量
+        this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,choice: this.AdjustSelect,amount: this.Input_amount,})
         this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
       }
       

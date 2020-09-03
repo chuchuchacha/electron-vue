@@ -1,77 +1,137 @@
-div {
-  font-size: 30px;
-}
-
-button{
-  font-size: 30px;
-  outline:none;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 0;
-}
-
-.statement {
+.FunctionRowInventory {
   position: absolute;
-  top: 15vh;
-  width: 32vw;
-  height: 12vh;
-  left: 1vw;
-  background-color: beige;
+  top: 13vh;
+  width: 100vw;
+  height: 10vh;
+  background-color: whitesmoke;
 }
-
-.button_grid {
+.FunctionRowInventory font:nth-child(1){
   position: absolute;
-  display: grid;
-  grid-template-rows: repeat(auto-fit, 10vh);
-  grid-template-columns: repeat(auto-fit, 7vw);
-  grid-column-gap: 1vw;
-  grid-row-gap: 1vh;
-  width: 31vw;
-  height: 10vh;
-  left: 0.5vw;
-  top: 1vh;
+  top: 3vh;
+  left: 2vw;
+}
+.FunctionRowInventory .el-select:nth-child(2){
+  position: absolute;
+  top: 2vh;
+  width: 10vw;
+  left: 10vw;
+}
+.FunctionRowInventory font:nth-child(3){
+  position: absolute;
+  top: 3vh;
+  right: 41vw;
+}
+.FunctionRowInventory .el-input:nth-child(4){
+  position: absolute;
+  top: 2vh;
+  right: 18vw;
+  width: 22vw;
+}
+.FunctionRowInventory .el-button:nth-child(5){
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  background-color: coral;
+  color: black;
+}
+.FunctionRowInventory .el-button:nth-child(6){
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  background-color: firebrick;
+  color: aquamarine;
 }
 
-.button_grid button {
-  top: 1vh;
+.FunctionRow_Purchase {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
   height: 10vh;
-  width: 7vw;
+  background-color: whitesmoke;
+}
+.FunctionRow_Purchase font:nth-child(1){
+  position: absolute;
+  top: 3vh;
+  right: 41vw;
+}
+.FunctionRow_Purchase .el-input:nth-child(2){
+  position: absolute;
+  top: 2vh;
+  right: 18vw;
+  width: 22vw;
+}
+.FunctionRow_Purchase .el-button:nth-child(3){
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  background-color: coral;
+  color: black;
+}
+.FunctionRow_Purchase .el-button:nth-child(4){
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  background-color: firebrick;
+  color: aquamarine;
+}
+
+.FunctionRow {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
+  height: 10vh;
+  background-color: whitesmoke;
+}
+.FunctionRow font:nth-child(1){
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
+}
+.FunctionRow .el-select:nth-child(2){
+  position: absolute;
+  top: 2vh;
+  width: 10vw;
+  left: 10vw;
+}
+.FunctionRow font:nth-child(3){
+  position: absolute;
+  top: 3vh;
+  right: 41vw;
+}
+.FunctionRow .el-input:nth-child(4){
+  position: absolute;
+  top: 2vh;
+  right: 18vw;
+  width: 22vw;
+}
+.FunctionRow .el-button:nth-child(5){
+  position: absolute;
+  top: 2vh;
+  right: 10vw;
+  background-color: coral;
+  color: black;
+}
+.FunctionRow .el-button:nth-child(6){
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  background-color: firebrick;
+  color: aquamarine;
+}
+
+.plantviewtable {
+  position: absolute;
+  bottom: 0;
+  height: 77vh;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+
+.plantviewtable .el-table{
+  position: absolute;
+  width: 96%;
+  left: 2vw;
+  bottom: 2vh;
   font-size: 20px;
-  background-color: khaki;
-}
-
-.chart {
-  position: absolute;
-  top: 15vh;
-  right: 1vw;
-  width: 64vw;
-  height: 80vh;
-  background-color: lightpink;
-}
-
-.statement_detail {
-  position: absolute;
-  top: 29vh;
-  left: 1vw;
-  width: 32vw;
-  height: 66vh;
-}
-
-.date_button {
-  position: absolute;
-  display: grid;
-  grid-template-rows: repeat(auto-fit, 10vh);
-  grid-template-columns: repeat(auto-fit, 11vw);
-  grid-column-gap: 1vw;
-  grid-row-gap: 1vh;
-  top: 5vh;
-  left: 4.5vw;
-  width: 23vw;
-  height: 10vh;
-}
-
-.date_button button {
-  background-color: cornflowerblue;
-  font-size: 25px;
-  cursor: pointer;
+  font-weight: bold;
 }
