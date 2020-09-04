@@ -7,6 +7,12 @@
         <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
         <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
+        <font>種植紀錄:</font>
+        <el-select placeholder="種植紀錄" v-model="Select_Plant">
+          <el-option v-for="plant in plants" :key="plant.value"
+          :label="plant.text" :value="plant.value">
+          </el-option>
+        </el-select>
       </div>
 
       <div class="pbo2">
@@ -41,12 +47,15 @@
 <script>
 import Harvestdataservice from "@/services/Harvestdataservice.js"
 import Productdataservice from "@/services/Productdataservice.js"
+import Plantdataservice from "@/services/Plantdataservice.js"
 
 export default {
   data() {
     return {
       Input_product: null,  //輸入框的v-model
       Input_amount: null,
+      Select_Plant: null,
+      plants: [],
 
       LastIDNumber: null,
       IDMakeUp: null,
@@ -174,6 +183,15 @@ export default {
       this.Input_product = null
       this.Input_amount = null
     },
+
+    GetAllPlants() {
+      Plantdataservice.getAll()
+        .then(response => {
+          for(let i = 0; i < response.data.length; i++) {
+            this.plants.push({text: response.data[i].plant_id, value: response.data[i].plant_id})
+          }
+        })
+    },
   },
 
   mounted() {
@@ -182,6 +200,7 @@ export default {
     });
     this.getDate()
     this.GetBiggestID()
+    this.GetAllPlants()
   }
 }
 
