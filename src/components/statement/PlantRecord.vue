@@ -9,7 +9,7 @@
       </el-select>
 
       <font>種植紀錄:</font>
-      <el-input v-model="ChoosenName"></el-input>
+      <el-input v-model="ChoosenName" readonly="readonly"></el-input>
       <el-button @click="ChangeFunction()">修改</el-button>
       <el-button @click="DeleteSupplier()">刪除</el-button>
     </div>
@@ -28,21 +28,11 @@
         </el-table-column>
         <el-table-column
           align='center'
-          prop="product_id"
-          width="120px"
-          label="產品編號">
-        </el-table-column>
-        <el-table-column
-          align='center'
-          prop="product_name"
-          width="200px"
-          label="產品名稱">
-        </el-table-column>
-        <el-table-column
-          align='center'
-          prop="plant_participate_product_amount"
-          width="120px"
-          label="種植數量(盤)">
+          prop="product"
+          label="種植產品">
+          <template slot-scope="{row,}">
+            <span v-for="(product,index) in row.products" :key="index">{{product.product_name}},</span>
+          </template>
         </el-table-column>
         <el-table-column
           align='center'
@@ -77,22 +67,21 @@ export default {
   },
 
   methods: {
+    ChangeFunction() {
+      if(this.ChoosenName) {
+        this.$emit('ChangeFunction', 'AdjustPlant', this.ChoosenName);
+      }
+    },
+
     GetAllPlanting() {
       Plantdataservice.getAll()
         .then(response => {
-          console.log(response.data)
-          for(let i = 0; i < response.data.length; i++) {
-            for(let j = 0; j < response.data[i].products.length; j++) {
-              this.AllPlanting.push({plant_id: response.data[i].plant_id, plant_dt: response.data[i].plant_dt,
-              product_id: response.data[i].products[j].product_id, product_name: response.data[i].products[j].product_name,
-              plant_participate_product_amount: response.data[i].products[j].plant_participate_product.plant_participate_product_amount})
-            }
-          }
+          this.AllPlanting = response.data
         })
     },
 
     ChooseRow(val) {
-      this.ChoosenName = val.plant_id + ':' + val.product_id
+      this.ChoosenName = val.plant_id
     },
 
     GoBack() {

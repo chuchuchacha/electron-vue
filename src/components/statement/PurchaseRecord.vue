@@ -54,6 +54,12 @@ export default {
   },
 
   methods: {
+    ChangeFunction() {
+      if(this.ChoosenName) {
+        this.$emit('ChangeFunction', 'AdjustPurchase', this.ChoosenName);
+      }
+    },
+
     ChooseRow(val) {
       this.ChoosenName = val.purchase_id
     },

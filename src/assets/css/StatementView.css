@@ -135,3 +135,254 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+/* AdjustPlant */
+.AdjustPlant {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
+  left: 0;
+  height: 20vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke
+}
+.AdjustPlant * {
+  position: absolute;
+  margin: 0;
+  border: 0;
+}
+.AdjustPlant font:nth-child(1) {
+  top: 3vh;
+  left: 2vw;
+}
+.AdjustPlant .el-input:nth-child(2) {
+  top: 2vh;
+  left: 12vw;
+  width: 25vw;
+}
+.AdjustPlant font:nth-child(3) {
+  top: 3vh;
+  left: 39vw;
+}
+.AdjustPlant .el-select:nth-child(4) {
+  top: 2vh;
+  left: 49vw;
+  width: 9vw;
+}
+.AdjustPlant font:nth-child(5) {
+  top: 3vh;
+  left: 59vw;
+}
+.AdjustPlant .el-select:nth-child(6) {
+  top: 2vh;
+  left: 62vw;
+  width: 7vw;
+}
+.AdjustPlant font:nth-child(7) {
+  top: 3vh;
+  left: 70vw;
+}
+.AdjustPlant .el-select:nth-child(8) {
+  top: 2vh;
+  left: 73vw;
+  width: 7vw;
+}
+.AdjustPlant font:nth-child(9) {
+  top: 3vh;
+  left: 81vw;
+}
+.AdjustPlant font:nth-child(10) {
+  top: 13vh;
+  left: 2vw;
+}
+.AdjustPlant .el-select:nth-child(11) {
+  top: 12vh;
+  left: 12vw;
+  width: 20vw;
+}
+.AdjustPlant font:nth-child(12) {
+  top: 13vh;
+  left: 35vw;
+}
+.AdjustPlant .el-input:nth-child(13) {
+  top: 12vh;
+  width: 20vw;
+  left: 45vw;
+}
+.AdjustPlant font:nth-child(14) {
+  top: 13vh;
+  left: 66vw;
+}
+.AdjustPlant .el-button:nth-child(15) {
+  top: 12vh;
+  width: 13vw;
+  height: 5.5vh;
+  left: 70vw;
+  background-color: tomato;
+  color: black;
+  font-size: 20px;
+}
+
+.AdjustPlant_Table {
+  position: absolute;
+  top: 33vh;
+  width: 100vw;
+  left: 0;
+  height: 67vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: thistle;
+}
+.AdjustPlant_Table .el-table {
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+  width: 96%;
+  font-size: 20px;
+}
+
+/* AdjustPurchase */
+.AdjustPurchase {
+  position: absolute;
+  top: 13vh;
+  width: 100vw;
+  left: 0;
+  height: 33vh;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: whitesmoke
+}
+.AdjustPurchase * {
+  position: absolute;
+  margin: 0;
+  border: 0;
+}
+.AdjustPurchase font:nth-child(1) {
+  top: 3vh;
+  left: 2vw;
+}
+.AdjustPurchase .el-input:nth-child(2) {
+  top: 2vh;
+  left: 12vw;
+  width: 25vw;
+}
+.AdjustPurchase font:nth-child(3) {
+  top: 3vh;
+  left: 39vw;
+}
+.AdjustPurchase .el-select:nth-child(4) {
+  top: 2vh;
+  left: 49vw;
+  width: 9vw;
+}
+.AdjustPurchase font:nth-child(5) {
+  top: 3vh;
+  left: 59vw;
+}
+.AdjustPurchase .el-select:nth-child(6) {
+  top: 2vh;
+  left: 62vw;
+  width: 7vw;
+}
+.AdjustPurchase font:nth-child(7) {
+  top: 3vh;
+  left: 70vw;
+}
+.AdjustPurchase .el-select:nth-child(8) {
+  top: 2vh;
+  left: 73vw;
+  width: 7vw;
+}
+.AdjustPurchase font:nth-child(9) {
+  top: 3vh;
+  left: 81vw;
+}
+.AdjustPurchase font:nth-child(10) {
+  top: 11vh;
+  left: 2vw;
+}
+.AdjustPurchase .el-input:nth-child(11) {
+  top: 10vh;
+  left: 12vw;
+  width: 15vw;
+}
+.AdjustPurchase font:nth-child(12) {
+  top: 11vh;
+  left: 29vw;
+}
+.AdjustPurchase .el-input:nth-child(13) {
+  top: 10vh;
+  left: 39vw;
+  width: 15vw;
+}
+.AdjustPurchase font:nth-child(14) {
+  top: 11vh;
+  left: 56vw;
+}
+.AdjustPurchase .el-input:nth-child(15) {
+  top: 10vh;
+  left: 66vw;
+  width: 15vw;
+}
+.AdjustPurchase font:nth-child(16) {
+  top: 19vh;
+  left: 2vw;
+}
+.AdjustPurchase .el-select:nth-child(17) {
+  top: 18vh;
+  left: 12vw;
+  width: 20vw;
+}
+.AdjustPurchase font:nth-child(18) {
+  top: 19vh;
+  left: 34vw;
+}
+.AdjustPurchase .el-input:nth-child(19) {
+  top: 18vh;
+  left: 44vw;
+  width: 10vw;
+}
+.AdjustPurchase font:nth-child(20) {
+  top: 19vh;
+  left: 56vw;
+}
+.AdjustPurchase .el-select:nth-child(21) {
+  top: 18vh;
+  left: 66vw;
+  width: 15vw;
+}
+.AdjustPurchase font:nth-child(22) {
+  top: 27vh;
+  left: 2vw;
+}
+.AdjustPurchase .el-input:nth-child(23) {
+  top: 26vh;
+  left: 12vw;
+  width: 10vw;
+}
+.AdjustPurchase .el-button:nth-child(24) {
+  top: 26vh;
+  width: 13vw;
+  height: 5.5vh;
+  left: 68vw;
+  background-color: tomato;
+  color: black;
+  font-size: 20px;
+}
+
+.AdjustPurchase_Table {
+  position: absolute;
+  top: 46vh;
+  height: 54vh;
+  width: 100vw;
+  left: 0;
+  background-color: whitesmoke;
+}
+.AdjustPurchase_Table .el-table {
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+  width: 96%;
+  font-size: 20px;
+}

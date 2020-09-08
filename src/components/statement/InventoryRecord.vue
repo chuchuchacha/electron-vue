@@ -115,7 +115,10 @@ export default {
     },
 
     ChooseRow(val) {
-      this.ChoosenName = val.inventory_id + ':' + val.product_id
+      if(val) {
+        this.ChoosenName = val.inventory_id + ':' + val.product_id
+      }
+      
     },
 
     GetAllInventory() {
