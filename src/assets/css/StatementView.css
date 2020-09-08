@@ -232,11 +232,18 @@
   height: 67vh;
   font-size: 20px;
   font-weight: bold;
-  background-color: thistle;
+  background-color: whitesmoke;
 }
-.AdjustPlant_Table .el-table {
+.AdjustPlant_Table .el-table:nth-child(1) {
   position: absolute;
   top: 2vh;
+  left: 2vh;
+  width: 96%;
+  font-size: 20px;
+}
+.AdjustPlant_Table .el-table:nth-child(2) {
+  position: absolute;
+  top: 15vh;
   left: 2vh;
   width: 96%;
   font-size: 20px;
@@ -379,10 +386,19 @@
   left: 0;
   background-color: whitesmoke;
 }
-.AdjustPurchase_Table .el-table {
+.AdjustPurchase_Table .el-table:nth-child(1) {
   position: absolute;
   top: 2vh;
   left: 2vw;
   width: 96%;
   font-size: 20px;
+  font-weight: bold;
+}
+.AdjustPurchase_Table .el-table:nth-child(2) {
+  position: absolute;
+  top: 14.8vh;
+  left: 2vw;
+  width: 96%;
+  font-size: 20px;
+  font-weight: bold;
 }

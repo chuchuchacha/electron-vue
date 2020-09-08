@@ -4,18 +4,18 @@
       
       <div class="pbo1">
         <font>產品:</font>
-        <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
+        <el-input v-model="Input_product" placeholder="請選產品" class="pbo1_input1" readonly="readonly"></el-input>
         <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
+      </div>
+
+      <div class="pbo2">
         <font>種植紀錄:</font>
         <el-select placeholder="種植紀錄" v-model="Select_Plant">
           <el-option v-for="plant in plants" :key="plant.value"
           :label="plant.text" :value="plant.value">
           </el-option>
         </el-select>
-      </div>
-
-      <div class="pbo2">
         <el-button class="insertbut" @click="InsertTable()">輸入</el-button>
       </div>
     
@@ -37,7 +37,6 @@
     </div>
 
     <div class="purchase_bottom">
-      <el-button class="pb_back">返回</el-button>
       <el-button class="pb_delet" @click="DeletTable()">刪除</el-button>
       <el-button class="pb_confirm" @click="ConfirmInventory()">確認</el-button>
     </div>
@@ -153,7 +152,14 @@ export default {
             for(let i = 0;i < this.SQLharvest.product.length;i++) {
               Productdataservice.update(this.SQLharvest.product[i].product_id, this.SQLchangeproduct[i])
                 .then(response => {
-                  console.log(response.data)
+                  this.$notify({
+                    title: '提示',
+                    message: response.data.message,
+                    duration: 3000,
+                    type: 'success',
+                    position: 'bottom-right',
+                    showClose: false
+                  });
                   this.$root.$emit('refresh');
                   this.GetBiggestID()
                   this.HarvestData = []
@@ -173,7 +179,7 @@ export default {
 
     //InventoryTable點擊後的動作 1.取得product_id
     getcurrentID(ProName, ProID, ProInventory) {  //從InventoryTable取得選取的Product_ID
-      this.Input_product = ProID + ':' + ProName;
+      this.Input_product = ProName;
       this.ProductData_ID = ProID
       this.ProInventory = ProInventory
     },

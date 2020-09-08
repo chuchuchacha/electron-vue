@@ -91,7 +91,7 @@ body {
 }
 .main_blue {
   position: relative;
-  background-color: gainsboro;
+  background-color: whitesmoke;
   height: 100vh;
   width: 100vw;
   margin: 0;

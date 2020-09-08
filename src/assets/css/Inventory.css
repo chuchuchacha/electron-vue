@@ -1,3 +1,4 @@
+
 .measure_board {
   position: absolute;
   top: 29vh;
@@ -71,11 +72,11 @@ select {
 }
 .main_blue {
   position: relative;
-  background-color: gainsboro;
   height: 100vh;
   width: 100vw;
   margin: 0;
   border: 0;
+  background-color: whitesmoke;
 }
 .top_title {
   position: absolute;
@@ -113,6 +114,7 @@ select {
   height: 12vh;
   width: 44vw;
   font-size: 15px;
+  background-color: whitesmoke;
 }
 
 .func_selec button {
@@ -142,25 +144,15 @@ select {
   right: 2vw;
   height: 83vh;
   width: 50vw;
-  background-color: tomato;
+  background-color: whitesmoke;
 }
-.el-table {
+.show_form .el-table {
   position: absolute;
-  top: 0;
+  top: 8vh;
   left: 0;
   width: 100%;
   font-size: 20px;
 }
-
-
-
-/* button{
-  font-size: 30px;
-  outline:none;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 0;
-} */
 
 .title {
   position: absolute;
@@ -190,11 +182,13 @@ select {
   height: 69vh;
   width: 44vw;
   font-size: 21px;
+  background-color: whitesmoke;
 }
 font {
   top: 1vh;
   position: absolute;
 }
+
 /*頭*/
 .purchase_board {
   position: absolute;
@@ -206,7 +200,8 @@ font {
 
 .adjustselect {
   position: absolute;
-  right: 12.5vw;
+  top: 0.5vh;
+  right: 16vw;
   width: 12vw;
   height: 10vh;
   font-size: 30px;
@@ -216,36 +211,42 @@ font {
   position: relative;
   width: 100%;
   height: 33%;
+  background-color: whitesmoke;
 }
 .pbo1_input1 {
   position: absolute;
   left: 5.5vw;
-  width: 13vw;
+  width: 9vw;
 }
 .pbo1_input2 {
   position: absolute;
   width: 6vw;
-  right: 12.5vw;
+  right: 16vw;
 }
 .pbo1_input3 {
   position: absolute;
-  width: 6vw;
-  right: 0;
+  top: 0.5vh;
+  width: 8vw;
+  right: 1vw;
 }
 .pbo1 font:nth-child(1) {
+  top: 1.5vh;
   left: 0;
 }
 .pbo1 font:nth-child(3) {
-  right: 19vw;
+  top: 1.5vh;
+  right: 23vw;
 }
 .pbo1 font:nth-child(5) {
-  right: 6.5vw;
+  top: 1.5vh;
+  right: 10vw;
 }
 
 .pbo2 {
   position: relative;
   width: 100%;
   height: 33%;
+  background-color: whitesmoke;
 }
 .pbo2_input1 {
   position: absolute;
@@ -254,21 +255,33 @@ font {
 }
 .pbo2_input2 {
   position: absolute;
-  width: 6vw;
-  left: 18.5vw;
+  width: 7.5vw;
+  left: 19.5vw;
+}
+.pbo2_input3 {
+  position: absolute;
+  width: 9vw;
+  left: 34vw;
 }
 .pbo2 font:nth-child(1) {
   left: 0;
 }
 .pbo2 font:nth-child(3) {
-  left: 13vw;
+  left: 14vw;
+}
+.pbo2 font:nth-child(5) {
+  left: 28vw;
+}
+.pbo2 .el-select {
+  left: 10vw;
 }
 .insertbut {
   position: absolute;
-  right: 0;
-  width: 18.5vw;
-  height: 13vh;
-  font-size: 30px;
+  right: 1vw;
+  top: 0;
+  width: 10vw;
+  height: 6vh;
+  font-size: 20px;
   background-color: lightskyblue;
   overflow: visible;
 }
@@ -278,14 +291,18 @@ font {
   position: relative;
   width: 100%;
   height: 33%;
+  background-color: whitesmoke;
 }
 .pbo3_input1 {
   position: absolute;
-  width: 19vw;
-  left: 5.5vw;
+  width: 10vw;
+  left: 10vw;
 }
 .pbo3 font:nth-child(1) {
   left: 0;
+}
+.pbo3 font:nth-child(3) {
+  left: 21vw;
 }
 /*table*/
 .purchase_table {

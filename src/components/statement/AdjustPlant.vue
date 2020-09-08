@@ -41,8 +41,8 @@
 
     <div class="AdjustPlant_Table">
       <el-table
-        :data="AfterAdjust"
-        stripe border height="63vh" empty-text="請修改種植紀錄">
+        :data="AfterAdjust_TOP"
+        stripe border height="13vh" empty-text="請修改種植紀錄">
         <el-table-column
           align='center'
           prop="plant_id"
@@ -53,6 +53,10 @@
           prop="plant_dt"
           label="時間">
         </el-table-column>
+      </el-table>
+      <el-table
+        :data="AfterAdjust_BOT"
+        stripe border height="50vh" empty-text="請修改種植紀錄">
         <el-table-column
           align='center'
           prop="product_id"
@@ -61,7 +65,7 @@
         <el-table-column
           align='center'
           prop="amount"
-          label="種植數量">
+          label="種植數量(盤)">
         </el-table-column>
       </el-table>
     </div>
@@ -88,7 +92,8 @@ export default {
         product: []
       },
 
-      AfterAdjust: [],
+      AfterAdjust_TOP: [],
+      AfterAdjust_BOT: [],
 
       Plant_dt: {
         year: null,
@@ -135,10 +140,20 @@ export default {
       }
       Plantdataservice.update(this.OnePlant.plant_id, this.OnePlant)
         .then(response => {
-          console.log(response.data)
+          //右上角產生訊息
+          this.$notify({
+            title: '提示',
+            message: response.data.message,
+            duration: 3000,
+            type: 'success',
+            position: 'bottom-right',
+            showClose: false
+          });
+          this.AfterAdjust_TOP = []
+          this.AfterAdjust_BOT = []
+          this.AfterAdjust_TOP.push({plant_id: this.OnePlant.plant_id, plant_dt: this.OnePlant.plant_dt})
           for(let j = 0; j < this.OnePlant.product.length; j++) {
-            this.AfterAdjust.push({plant_id: this.OnePlant.plant_id, plant_dt: this.OnePlant.plant_dt, 
-            product_id: this.OnePlant.product[j].product_id, amount: this.OnePlant.product[j].amount})
+            this.AfterAdjust_BOT.push({product_id: this.OnePlant.product[j].product_id, amount: this.OnePlant.product[j].amount})
           }
         })
     },

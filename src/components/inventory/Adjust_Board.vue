@@ -4,7 +4,7 @@
       
       <div class="pbo1">
         <font>產品:</font>
-        <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
+        <el-input v-model="Input_product" placeholder="請選產品" class="pbo1_input1" readonly="readonly"></el-input>
         <font></font>
         <el-select v-model="AdjustSelect" placeholder="增加/減少" class="adjustselect">
           <el-option v-for="AdjustSelect in Select_Adjust" :key="AdjustSelect.value" :label="AdjustSelect.text"
@@ -40,7 +40,6 @@
     </div>
 
     <div class="purchase_bottom">
-      <el-button class="pb_back">返回</el-button>
       <el-button class="pb_delet" @click="DeletTable()">刪除</el-button>
       <el-button class="pb_confirm" @click="ConfirmInventory()">確認</el-button>
     </div>
@@ -164,12 +163,22 @@ export default {
             console.log(response.data)
             for(let i = 0;i < this.SQLadjust.product.length;i++) {
               Productdataservice.update(this.SQLadjust.product[i].product_id, this.SQLchangeproduct[i])
-              this.$root.$emit('refresh');
-              this.GetBiggestID()
-              this.AdjustData = []
-              this.SQLadjust.product = []
-              this.SQLchangeproduct = []
-              this.AdjustSelect = null
+                .then(response => {
+                  this.$notify({
+                    title: '提示',
+                    message: response.data.message,
+                    duration: 3000,
+                    type: 'success',
+                    position: 'bottom-right',
+                    showClose: false
+                  });
+                  this.$root.$emit('refresh');
+                  this.GetBiggestID()
+                  this.AdjustData = []
+                  this.SQLadjust.product = []
+                  this.SQLchangeproduct = []
+                  this.AdjustSelect = null
+                })
             }
           })
       }
@@ -183,7 +192,7 @@ export default {
 
     //InventoryTable點擊後的動作 1.取得product_id
     getcurrentID(ProName, ProID, ProInventory) {  //從InventoryTable取得選取的Product_ID
-      this.Input_product = ProID + ':' + ProName;
+      this.Input_product = ProName;
       this.ProductData_ID = ProID
       this.ProInventory = ProInventory
     },

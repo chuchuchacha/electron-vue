@@ -4,28 +4,31 @@
       
       <div class="pbo1">
         <font>產品:</font>
-        <el-input v-model="Input_product" placeholder="請點選右邊產品" class="pbo1_input1" readonly="readonly"></el-input>
+        <el-input v-model="Input_product" placeholder="請選產品" class="pbo1_input1" readonly="readonly"></el-input>
         <font>數量:</font>
         <el-input v-model.number="Input_amount" placeholder='' class="pbo1_input2"></el-input>
-        <font>單價:</font>
-        <el-input v-model.number="Input_price" placeholder='' class="pbo1_input3"></el-input>
-      </div>
-
-      <div class="pbo2">
         <font>單位:</font>
-        <el-select v-model="Input_units" placeholder="單位" class="pbo2_input1">
+        <el-select v-model="Input_units" placeholder="單位" class="pbo1_input3">
           <el-option v-for="Input_units in Input_Units" :key="Input_units.value" :label="Input_units.text"
           :value="Input_units.value">
           </el-option>
         </el-select>
+      </div>
+
+      <div class="pbo2">
+        <font>單價:</font>
+        <el-input v-model.number="Input_price" placeholder='' class="pbo2_input1"></el-input>
         <font>折扣:</font>
         <el-input v-model.number="Input_discount" placeholder='' class="pbo2_input2"></el-input>
-        <el-button class="insertbut" @click="InsertTable()">輸入</el-button>
+        <font>總計:</font>
+        <el-input v-model.number="Input_total" placeholder="" class="pbo2_input3" readonly="readonly"></el-input>
       </div>
 
       <div class="pbo3">
-        <font>總計:</font>
-        <el-input v-model.number="Input_total" placeholder="" class="pbo3_input1" readonly="readonly"></el-input>
+        <font>入庫數量:</font>
+        <el-input v-model.number="Inventory_Units" placeholder='' class="pbo3_input1"></el-input>
+        <font>{{Font_units}}</font>
+        <el-button class="insertbut" @click="InsertTable()">輸入</el-button>
       </div>
     
     </div>
@@ -58,7 +61,6 @@
     </div>
 
     <div class="purchase_bottom">
-      <el-button class="pb_back">返回</el-button>
       <el-button class="pb_delet" @click="DeletTable()">刪除</el-button>
       <el-button class="pb_confirm" @click="ConfirmInventory()">確認</el-button>
     </div>
@@ -78,6 +80,8 @@ export default {
       Input_price: null,
       Input_discount: null,
       Input_total: null,
+      Inventory_Units: null,
+      Font_units: '(庫存單位)',
 
       LastIDNumber: null,
       IDMakeUp: null,
@@ -160,19 +164,32 @@ export default {
     
     //點擊輸入的按鈕
     InsertTable() {
-      //將資料推到table裡
-      this.PurchaseData.push({product: this.Input_product, unit: this.Input_units, amount: this.Input_amount, price: this.Input_price, discount: this.Input_discount})
-      //將資料寫進SQLpurchase_p_products陣列 == raw的數量
-      this.SQLpurchase.product.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,purchase_participate_product_unit: this.Input_units,amount: this.Input_amount,purchase_participate_product_unit_price: this.Input_price})
-      this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
-      //將資料寫進SQLpurchase.purchase_subtotal物件 只有1個
-      this.SQLpurchase.purchase_subtotal = this.SQLpurchase.purchase_subtotal + this.Input_price * this.Input_amount
-      this.SQLpurchase.purchase_discount = this.SQLpurchase.purchase_discount + this.Input_discount
-      this.SQLpurchase.purchase_total = this.SQLpurchase.purchase_subtotal - this.SQLpurchase.purchase_discount
-      //將資料寫進Input的總計
-      this.Input_total = this.SQLpurchase.purchase_total
-      //Input清空，除了總計
-      this.InitalInput();
+      if(!this.Inventory_Units) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入入庫數量',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else {
+        //將資料推到table裡
+        this.PurchaseData.push({product: this.Input_product, unit: this.Input_units, amount: this.Input_amount, price: this.Input_price, discount: this.Input_discount})
+        //將資料寫進SQLpurchase_p_products陣列 == raw的數量
+        this.SQLpurchase.product.push({purchase_id: this.LastIDNumber,product_id: this.ProductData_ID,unit: this.Input_units,amount: this.Input_amount,price: this.Input_price})
+        this.SQLchangeproduct.push({product_inventory: (this.Inventory_Units+this.ProInventory)})
+        //將資料寫進SQLpurchase.purchase_subtotal物件 只有1個
+        this.SQLpurchase.purchase_subtotal = this.SQLpurchase.purchase_subtotal + this.Input_price * this.Input_amount
+        this.SQLpurchase.purchase_discount = this.SQLpurchase.purchase_discount + this.Input_discount
+        this.SQLpurchase.purchase_total = this.SQLpurchase.purchase_subtotal - this.SQLpurchase.purchase_discount
+        //將資料寫進Input的總計
+        this.Input_total = this.SQLpurchase.purchase_total
+        //Input清空，除了總計
+        this.InitalInput();
+      }
+      
     },
 
     //點擊確認送出進貨資料
@@ -183,6 +200,7 @@ export default {
         //取得SQL的日期
         this.getDate();
         this.SQLpurchase.purchase_dt = this.Datenow
+        console.log(this.SQLpurchase)
         //送出SQLpurchase
         Purchasedataservice.create(this.SQLpurchase)
           .then(response => {
@@ -210,10 +228,11 @@ export default {
     },
 
     //InventoryTable點擊後的動作 1.取得product_id
-    getcurrentID(ProName, ProID, ProInventory) {  //從InventoryTable取得選取的Product_ID
-      this.Input_product = ProID + ':' + ProName;
+    getcurrentID(ProName, ProID, ProInventory, ProUnit) {  //從InventoryTable取得選取的Product_ID
+      this.Input_product = ProName;
       this.ProductData_ID = ProID
       this.ProInventory = ProInventory
+      this.Font_units = ProUnit
     },
 
     //重製Input除了總計
@@ -223,12 +242,13 @@ export default {
       this.Input_units = null
       this.Input_price = null
       this.Input_discount = null
+      this.Inventory_Units = null
     },
   },
 
   mounted() {
     this.$root.$on('currentproduct', (CurrentProduct) => {
-      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id, CurrentProduct.product_inventory);
+      this.getcurrentID(CurrentProduct.product_name, CurrentProduct.product_id, CurrentProduct.product_inventory, CurrentProduct.product_unit);
     });
     this.getDate()
     this.GetBiggestID()
