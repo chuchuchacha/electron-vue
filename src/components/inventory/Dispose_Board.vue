@@ -15,10 +15,10 @@
     
     </div>
 
-    <div class="purchase_table">
+    <div class="purchase_table adjustANDdispose">
       <el-table
         :data="DisposeData"
-        stripe:true border:true height="36vh" empty-text="請輸入資料">
+        stripe:true border:true height="43vh" empty-text="請輸入資料">
         <el-table-column
           prop="product"
           label="產品">
@@ -31,6 +31,7 @@
     </div>
 
     <div class="purchase_bottom">
+      <el-button class="pb_back" @click="GoToRecord()">歷史紀錄</el-button>
       <el-button class="pb_delet" @click="DeletTable()">刪除</el-button>
       <el-button class="pb_confirm" @click="ConfirmInventory()">確認</el-button>
     </div>
@@ -73,6 +74,9 @@ export default {
 
 
   methods: {
+    GoToRecord() {
+      this.$emit('GoToRecord', 'Dispose')
+    },
     
     DeletTable() {
       Disposedataservice.deleteAll()

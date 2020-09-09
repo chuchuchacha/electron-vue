@@ -16,6 +16,7 @@ import Supplier from '@/components/management/supplier/Supplier.vue'
 import Inventory from '@/components/inventory/Inventory.vue'
 import Planting from '@/components/planting/Planting.vue'
 import Statement from '@/components/statement/Statement.vue'
+import PurchaseRecord from '@/components/statement/PurchaseRecord.vue'
 
 export default {
   components: {
@@ -26,6 +27,7 @@ export default {
     'Inventory': Inventory,
     'Planting': Planting,
     'Statement': Statement,
+    'PurchaseRecord': PurchaseRecord,
   },
 
   data() {
@@ -67,8 +69,22 @@ export default {
         this.Component = 'Mainpage'
       }
     },
-    BackToMain() {
-      this.Component = 'Mainpage'
+    BackToMain(val) {
+      if(!val) {
+        this.Component = 'Mainpage'
+      }
+      if(val == 'Harvest') {
+        this.Component = 'Statement'
+      }
+      if(val == 'Adjust') {
+        this.Component = 'Statement'
+      }
+      if(val == 'Dispose') {
+        this.Component = 'Statement'
+      }
+      if(val == 'Purchase') {
+        this.Component = 'Statement'
+      }
     }
   },
 }

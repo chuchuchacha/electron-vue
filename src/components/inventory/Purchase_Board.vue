@@ -61,6 +61,7 @@
     </div>
 
     <div class="purchase_bottom">
+      <el-button class="pb_back" @click="GoToRecord()">歷史紀錄</el-button>
       <el-button class="pb_delet" @click="DeletTable()">刪除</el-button>
       <el-button class="pb_confirm" @click="ConfirmInventory()">確認</el-button>
     </div>
@@ -119,7 +120,10 @@ export default {
 
 
   methods: {
-    
+    GoToRecord() {
+      this.$emit('GoToRecord', 'Purchase')
+    },
+
     DeletTable() {
       Purchasedataservice.deleteAll()
       this.$root.$emit('refresh');

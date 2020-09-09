@@ -7,9 +7,15 @@
       <button class="func_scr" @click="FunctionClick()" ref="ScrappedClick" id="報廢">報廢</button>
     </div>
 
-    <component v-bind:is="Component" :FuncText="FuncText"></component>
+    <component v-bind:is="Component" :FuncText="FuncText" @GoToRecord="GoToRecord"></component>
 
     <div class="show_form">
+      <font>種類:</font>
+      <el-select placeholder="種類" v-model="Input_category" @change="ChangeType">
+        <el-option v-for="category in categories" :key="category.value" :label="category.text"
+          :value="category.value">
+        </el-option>
+      </el-select>
       <el-table
         :data="AllProduct" @current-change="ChooseRow" highlight-current-row
         stripe border height="75vh" empty-text="沒有產品">
@@ -42,6 +48,7 @@ import AdjustBoard from '@/components/inventory/Adjust_Board.vue'
 import DisposeBoard from '@/components/inventory/Dispose_Board.vue'
 import Productdataservice from "@/services/Productdataservice.js"
 import Supplierdataservice from "@/services/Supplierdataservice.js"
+import ProductCategory from "@/services/ProductCategorydataservice.js"
 
 export default {
   components: {
@@ -58,6 +65,11 @@ export default {
 
       AllProduct: [],
 
+      categories: [
+        {text: '全部', value:'all'}
+      ],
+      Input_category:null,
+
       temp:[],
       SupplierProduct:[],
       PlantProduct: [],
@@ -65,6 +77,30 @@ export default {
   },
   
   methods: {
+    ChangeType() {
+      if(this.Component.__file == 'src/components/inventory/Adjust_Board.vue' || this.Component.__file == 'src/components/inventory/Dispose_Board.vue') {
+        this.AllProduct = []
+        if(this.Input_category != 'all') {
+          Productdataservice.gettype(this.Input_category)
+          .then(response => {
+            this.AllProduct = response.data
+          })
+          .catch(e => {
+            console.log(e);
+          })
+        }
+        if(this.Input_category == 'all') {
+          this.GetAllProduct()
+        }
+      }
+      if(this.Component.__file == 'src/components/inventory/Harvest_Board.vue') {
+        console.log(this.PlantProduct)
+      }
+      if(this.Component.__file == 'src/components/inventory/Purchase_Board.vue') {
+        console.log(this.PlantProduct)
+      }
+    },
+    
     ChooseRow(val) {
       if(val) {
         this.$root.$emit('currentproduct', val)
@@ -190,9 +226,22 @@ export default {
     GoBack() {
       this.$emit('BackToMain')
     },
+    
+    GoToRecord(val) {
+      this.$emit('BackToMain', val)
+    }
   },
 
   mounted() {
+    ProductCategory.getAll()
+      .then(response => {
+        for(let i = 0; i<response.data.length ; i++) {
+          this.categories.push({text: response.data[i].product_category_name , value: response.data[i].product_category_id})
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      })
     this.$root.$on('GoBack', () => {
       this.GoBack();
     });

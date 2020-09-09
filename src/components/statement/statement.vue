@@ -52,7 +52,7 @@ export default {
 
   mounted() {
     this.$root.$on('GoBack', () => {
-        this.GoBack();
+      this.GoBack();
     });
   },
 };
