@@ -8,43 +8,53 @@
     </div>
 
     <div class="tablemember">
-      <el-table
-        :data="AllMember"
-        @current-change="ChooseRow" highlight-current-row stripe border height="75vh" empty-text="沒有會員">
+      <el-table :data="AllMember" @current-change="ChooseRow" highlight-current-row :row-style="{height: '8vw'}"
+        stripe border height="75vh" empty-text="沒有會員" width="200vw">
         <el-table-column
+          sortable
+          :sort-orders="['ascending', 'descending']"
+          :resizable="false"
+          align='center'
+          width="90px"
           prop="member_id"
           label="編號">
         </el-table-column>
         <el-table-column
-          prop="member_card_id"
-          label="會員卡">
-        </el-table-column>
-        <el-table-column
+          :resizable="false"
+          width="105px"
           prop="member_name"
           label="姓名">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="80px"
           prop="member_gender"
           label="性別">
         </el-table-column>
         <el-table-column
+          :resizable="false"
           prop="member_birthday"
+          width="130px"
           label="生日">
         </el-table-column>
         <el-table-column
           prop="member_phone"
+          width="130px"
           label="電話">
         </el-table-column>
         <el-table-column
           prop="member_email"
+          width="280px"
           label="信箱">
         </el-table-column>
         <el-table-column
           prop="member_address"
+          width="320px"
           label="地址">
         </el-table-column>
         <el-table-column
           prop="member_remark"
+          width="320px"
           label="備註">
         </el-table-column>
       </el-table>

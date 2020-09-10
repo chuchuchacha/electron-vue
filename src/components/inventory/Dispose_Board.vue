@@ -121,13 +121,35 @@ export default {
     
     //點擊輸入的按鈕
     InsertTable() {
-      //將資料推到table裡
-      this.DisposeData.push({product: this.Input_product, amount: this.Input_amount})
-      //將資料寫進SQLdispose_p_products陣列 == raw的數量
-      this.SQLdispose.product.push({dispose_id: this.LastIDNumber,product_id: this.ProductData_ID,amount: this.Input_amount,})
-      this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
-      //Input清空，除了總計
-      this.InitalInput();
+      if(!this.Input_product) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入產品',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_amount) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入報廢數量',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else {
+        //將資料推到table裡
+        this.DisposeData.push({product: this.Input_product, amount: this.Input_amount})
+        //將資料寫進SQLdispose_p_products陣列 == raw的數量
+        this.SQLdispose.product.push({dispose_id: this.LastIDNumber,product_id: this.ProductData_ID,amount: this.Input_amount,})
+        this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
+        //Input清空，除了總計
+        this.InitalInput();
+      }
     },
 
     //點擊確認送出進貨資料

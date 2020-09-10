@@ -135,22 +135,53 @@ export default {
     
     //點擊輸入的按鈕
     InsertTable() {
-      //將資料推到table裡
-      this.AdjustData.push({product: this.Input_product, adjust: this.AdjustSelect, amount: this.Input_amount})
+      if(!this.Input_product) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入產品',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.AdjustSelect) {
+        this.$notify({
+            title: '警告',
+            message: '請選擇"增加/減少"數量',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_amount) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入採收數量',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else {
+        //將資料推到table裡
+        this.AdjustData.push({product: this.Input_product, adjust: this.AdjustSelect, amount: this.Input_amount})
 
-      if(this.AdjustSelect == '增加') {
-        //將資料寫進SQLadjust_p_products陣列 == raw的數量
-        this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,choice: this.AdjustSelect,amount: this.Input_amount,})
-        this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
+        if(this.AdjustSelect == '增加') {
+          //將資料寫進SQLadjust_p_products陣列 == raw的數量
+          this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,choice: this.AdjustSelect,amount: this.Input_amount,})
+          this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
+        }
+        if(this.AdjustSelect == '減少') {
+          //將資料寫進SQLadjust_p_products陣列 == raw的數量
+          this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,choice: this.AdjustSelect,amount: this.Input_amount,})
+          this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
+        }
+        //Input清空，除了總計
+        this.InitalInput();
       }
-      if(this.AdjustSelect == '減少') {
-        //將資料寫進SQLadjust_p_products陣列 == raw的數量
-        this.SQLadjust.product.push({adjust_id: this.LastIDNumber,product_id: this.ProductData_ID,choice: this.AdjustSelect,amount: this.Input_amount,})
-        this.SQLchangeproduct.push({product_inventory: (this.ProInventory-this.Input_amount)})
-      }
-      
-      //Input清空，除了總計
-      this.InitalInput();
     },
 
     //點擊確認送出進貨資料

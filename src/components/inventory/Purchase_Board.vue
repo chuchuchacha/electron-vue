@@ -125,8 +125,7 @@ export default {
     },
 
     DeletTable() {
-      Purchasedataservice.deleteAll()
-      this.$root.$emit('refresh');
+      
     },
 
     //將最大ID+1的前面補齊
@@ -168,7 +167,57 @@ export default {
     
     //點擊輸入的按鈕
     InsertTable() {
-      if(!this.Inventory_Units) {
+      if(!this.Input_product) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入產品',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_amount) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入進貨數量',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_units) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入進貨單位',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_price) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入進貨單價',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_discount) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入進貨折扣',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Inventory_Units) {
         this.$notify({
             title: '警告',
             message: '請輸入入庫數量',

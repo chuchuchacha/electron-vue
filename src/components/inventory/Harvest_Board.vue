@@ -132,14 +132,36 @@ export default {
     
     //點擊輸入的按鈕
     InsertTable() {
-      //將資料推到table裡
-      this.HarvestData.push({product: this.Input_product, amount: this.Input_amount})
-      //將資料寫進SQLharvest_p_products陣列 == raw的數量
-      this.SQLharvest.product.push({product_id: this.ProductData_ID,amount: this.Input_amount})
-      //更新產品庫存
-      this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
-      //Input清空
-      this.InitalInput();
+      if(!this.Input_product) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入產品',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else if(!this.Input_amount) {
+        this.$notify({
+            title: '警告',
+            message: '請輸入採收數量',
+            duration: 3000,
+            type: 'warning',
+            position: 'top-left',
+            showClose: false
+          });
+      }
+      else {
+        //將資料推到table裡
+        this.HarvestData.push({product: this.Input_product, amount: this.Input_amount})
+        //將資料寫進SQLharvest_p_products陣列 == raw的數量
+        this.SQLharvest.product.push({product_id: this.ProductData_ID,amount: this.Input_amount})
+        //更新產品庫存
+        this.SQLchangeproduct.push({product_inventory: (this.Input_amount+this.ProInventory)})
+        //Input清空
+        this.InitalInput();
+      }
     },
 
     //點擊確認送出進貨資料

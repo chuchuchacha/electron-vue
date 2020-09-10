@@ -95,6 +95,10 @@ export default {
   color: #fff;
   background-color: darkgray!important;
 }
+.el-table__body-wrapper {
+  overflow-y: overlay!important;
+  overflow-x: auto!important;
+}
 
 * .el-textarea__inner {
   height: 10vh;
