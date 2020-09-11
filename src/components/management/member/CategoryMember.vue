@@ -8,26 +8,47 @@
       <font>類別說明:</font>
       <el-input type="textarea" v-model="CreateCategory.member_category_desc"></el-input>
       <el-button @click="Createcategory()">輸入</el-button>
-      <el-button @click="CreateChose()">新增類別</el-button>
+      <el-switch
+        v-model="SwitchValue"
+        @change='ListenSwitch'
+        active-color="#1ebbd7"
+        inactive-color="#8991ad"
+        active-value="1"
+        inactive-value="0"
+        active-text="新增類別"
+        inactive-text="修改類別">
+      </el-switch>
       <el-button @click="Backtomemberview()">修改會員</el-button>
     </div>
     <div class="CategoryTable">
       <el-table
-        :data="AllCategory" @current-change="ChooseRow" highlight-current-row 
+        :data="AllCategory" @current-change="ChooseRow" highlight-current-row :row-style="{height: '10vh'}"
         stripe border height="60vh" empty-text="未新增類別">
         <el-table-column
+          :resizable="false"
+          width="90px"
+          align='center'
           prop="member_category_id"
           label="編號">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="170px"
+          align='center'
           prop="member_category_name"
           label="名稱">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="330px"
+          align='center'
           prop="member_category_desc"
           label="說明">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="392px"
+          align='center'
           prop="members"
           label="會員">
           <template slot-scope="{row,}">
@@ -48,6 +69,7 @@ export default {
       LastIDNumber: null,
       IDMakeUp: null,
 
+      SwitchValue:true,
       AllCategory: [],
 
       CreateCategory: {
@@ -62,6 +84,21 @@ export default {
   },
 
   methods: {
+    ListenSwitch() {
+      if(this.SwitchValue == '0') {
+        this.CreateCategory.member_category_id = null
+        this.CreateCategory.member_category_name = null
+        this.CreateCategory.member_category_desc = null
+        this.CreateBoolean = false
+      }
+      if(this.SwitchValue == '1') {
+        this.CreateCategory.member_category_id = this.LastIDNumber
+        this.CreateCategory.member_category_name = null
+        this.CreateCategory.member_category_desc = null
+        this.CreateBoolean = true
+      }
+    },
+
     Backtomemberview() {
       this.$emit('ChangeFunction', 'AdjustCategory');
     },
@@ -83,13 +120,6 @@ export default {
             this.GetAllCategories()
           })
       }
-    },
-
-    CreateChose() {
-      this.CreateCategory.member_category_id = this.LastIDNumber
-      this.CreateCategory.member_category_name = null
-      this.CreateCategory.member_category_desc = null
-      this.CreateBoolean = true
     },
 
     IDMakeUP() {
@@ -135,6 +165,7 @@ export default {
 
     ChooseRow(val) {
       if(val) {
+        this.SwitchValue = '0'
         this.CreateCategory.members = []
         this.CreateCategory.member_category_id = val.member_category_id
         this.CreateCategory.member_category_name = val.member_category_name

@@ -65,16 +65,16 @@ height: 16vh;
   height: 12vh !important;
 }
 
-.fieldThree button {
-position: absolute;
-right: 6.2vw;
-font-size: 30px;
-height: 9.4vh;
-top: 1.3vh;
-width: 18vw;
-background-color: coral;
-color: darkblue;
-cursor: pointer;
+.fieldThree .el-button {
+  position: absolute;
+  right: 6.2vw;
+  font-size: 30px;
+  height: 9.4vh;
+  top: 1.3vh;
+  width: 18vw;
+  background-color: coral;
+  color: black;
+  cursor: pointer;
 }
 
 .createmember_table {
@@ -105,27 +105,38 @@ cursor: pointer;
 .adjustmember font:nth-child(1) {
   position: absolute;
   top: 3vh;
-  right: 34vw;
+  left: 2vw;
 }
 .adjustmember .el-input:nth-child(2) {
+  position: absolute;
+  top: 2vh;
+  left: 8vw;
+  width: 18vw;
+}
+.adjustmember font:nth-child(3) {
+  position: absolute;
+  top: 3vh;
+  right: 34vw;
+}
+.adjustmember .el-input:nth-child(4) {
   position: absolute;
   top: 2vh;
   right: 18vw;
   width: 15vw;
 }
-.adjustmember .el-button:nth-child(3) {
+.adjustmember .el-button:nth-child(5) {
   position: absolute;
-  top: 2vh;
+  top: 1.9vh;
   right: 10vw;
   background-color: coral;
   color: black;
 }
-.adjustmember .el-button:nth-child(4) {
+.adjustmember .el-button:nth-child(6) {
   position: absolute;
-  top: 2vh;
+  top: 1.9vh;
   right: 2vw;
-  background-color: firebrick;
-  color: aquamarine;
+  background-color: aquamarine;
+  color: firebrick;
 }
 
 .tablemember {
@@ -134,6 +145,8 @@ cursor: pointer;
   height: 77vh;
   width: 100vw;
   background-color: whitesmoke;
+  overflow-y: overlay!important;
+  overflow-x: auto!important;
 }
 
 /* 會員類別 */
@@ -178,6 +191,7 @@ cursor: pointer;
   top: 13vh;
   left: 12vw;
   width: 37vw;
+  font-size: 20px;
 }
 .Categorymember .el-button:nth-child(7) {
   position: absolute;
@@ -188,19 +202,19 @@ cursor: pointer;
   font-size: 20px;
   font-weight: bold;
 }
-.Categorymember .el-button:nth-child(8) {
+.Categorymember .el-switch:nth-child(8) {
   position: absolute;
-  top: 13vh;
-  left: 63vw;
-  width: 12vw;
+  top: 1vh;
+  right: 29vw;
+  width: 20vw;
   height: 7vh;
-  font-size: 20px;
   font-weight: bold;
 }
+
 .Categorymember .el-button:nth-child(9) {
   position: absolute;
   top: 13vh;
-  left: 76vw;
+  left: 65vw;
   width: 12vw;
   height: 7vh;
   font-size: 20px;

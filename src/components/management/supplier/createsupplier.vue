@@ -114,10 +114,17 @@ export default {
     CreateManagement() {
       Supplierdataservice.create(this.createsuppliers)
         .then(response => {
-          if(response.message) {
-            this.InitialInput()
-            this.GetBiggestID()
-          }
+          console.log(response.data)
+          this.$notify({
+          title: '提示',
+          message: '已新增：'+ this.createsuppliers.supplier_name,
+          duration: 3000,
+          type: 'success',
+          position: 'bottom-right',
+          showClose: false
+          });
+          this.InitialInput()
+          this.GetBiggestID()
         })
         .catch(e => {
           console.log(e);

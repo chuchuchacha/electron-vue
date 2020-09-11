@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="adjustmember">
+      <font>搜尋:</font>
+      <el-input v-model="search" placeholder="輸入要搜尋的內容"></el-input>
       <font>現在選擇會員: </font>
       <el-input v-model="ChoosenIdName"></el-input>
       <el-button @click="ChangeMember()">修改</el-button>
@@ -8,14 +10,15 @@
     </div>
 
     <div class="tablemember">
-      <el-table :data="AllMember" @current-change="ChooseRow" highlight-current-row :row-style="{height: '8vw'}"
-        stripe border height="75vh" empty-text="沒有會員" width="200vw">
+      <el-table :data="AllMember.filter(data => !search || data.member_name.includes(search) || data.member_id.toLowerCase().includes(search.toLowerCase())|| 
+        String(data.member_phone).includes(String(search)) || String(data.member_address).includes(String(search)) || data.member_gender.toLowerCase().includes(search.toLowerCase()))"
+        @current-change="ChooseRow" highlight-current-row :row-style="{height: '10vh'}" stripe border height="75vh" empty-text="沒有會員">
         <el-table-column
           sortable
           :sort-orders="['ascending', 'descending']"
           :resizable="false"
-          align='center'
           width="90px"
+          align='center'
           prop="member_id"
           label="編號">
         </el-table-column>
@@ -33,28 +36,20 @@
         </el-table-column>
         <el-table-column
           :resizable="false"
-          prop="member_birthday"
-          width="130px"
-          label="生日">
-        </el-table-column>
-        <el-table-column
           prop="member_phone"
           width="130px"
           label="電話">
         </el-table-column>
         <el-table-column
-          prop="member_email"
-          width="280px"
-          label="信箱">
-        </el-table-column>
-        <el-table-column
+          :resizable="false"
           prop="member_address"
           width="320px"
           label="地址">
         </el-table-column>
         <el-table-column
+          :resizable="false"
           prop="member_remark"
-          width="320px"
+          width="257px"
           label="備註">
         </el-table-column>
       </el-table>
@@ -71,6 +66,8 @@ export default {
       AllMember:[],
       ChoosenRow: null,
       ChoosenIdName: null,
+
+      search:null,
 
       Gender: [
         {text: '男', value: 1},
@@ -105,8 +102,10 @@ export default {
     },
 
     ChooseRow(val) {
-      this.ChoosenRow = val
-      this.ChoosenIdName = val.member_id + ':' + val.member_name
+      if(val) {
+        this.ChoosenRow = val
+        this.ChoosenIdName = val.member_id + ':' + val.member_name
+      }
     },
     
     ChangeMember() {

@@ -24,7 +24,7 @@
         <el-input v-model="CreateMember.member_birthday" placeholder="year-month-day"></el-input>
 
         <font>電話:</font>
-        <el-input v-model="CreateMember.member_phone"></el-input>
+        <el-input v-model="CreateMember.member_phone" placeholder="0912345678"></el-input>
 
         <font>地址:</font>
         <el-input v-model="CreateMember.member_address"></el-input>
@@ -32,52 +32,79 @@
 
       <div class="fieldThree">
         <font>信箱:</font>
-        <el-input v-model="CreateMember.member_email"></el-input>
+        <el-input v-model="CreateMember.member_email" placeholder="abcdef123@gmail.com"></el-input>
 
         <font>備註:</font>
         <el-input type="textarea" resize="none" v-model="CreateMember.member_remark"></el-input>
 
-        <button @click="CreateManagement()">新增會員</button>
+        <el-button @click="CreateManagement()">新增會員</el-button>
       </div>
     </div>
 
     <div class="createmember_table">
       <el-table
-        :data="AllMember"
+        :data="AllMember" :row-style="{height: '10vh'}"
         stripe border height="45vh" empty-text="未新增會員">
         <el-table-column
+          :resizable="false"
+          width="90px"
+          align='center'
           prop="member_id"
           label="編號">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="122px"
+          align='center'
           prop="member_card_id"
           label="會員卡">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="105px"
+          align='center'
           prop="member_name"
           label="姓名">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="80px"
+          align='center'
           prop="member_gender"
           label="性別">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="130px"
+          align='center'
           prop="member_birthday"
           label="生日">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="130px"
+          align='center'
           prop="member_phone"
           label="電話">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="300px"
+          align='center'
           prop="member_email"
           label="信箱">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="320px"
+          align='center'
           prop="member_address"
           label="地址">
         </el-table-column>
         <el-table-column
+          :resizable="false"
+          width="320px"
+          align='center'
           prop="member_remark"
           label="備註">
         </el-table-column>
@@ -160,21 +187,58 @@ export default {
     },
 
     CreateManagement() {
-      Memberdataservice.create(this.CreateMember)
+      if(!this.CreateMember.member_name) {
+        this.$notify({
+          title: '警告',
+          message: '請輸入會員姓名',
+          duration: 3000,
+          type: 'warning',
+          position: 'top-left',
+          showClose: false
+        });
+      }
+      else {
+        Memberdataservice.create(this.CreateMember)
         .then(response => {
-          console.log(response.data)
+          this.$notify({
+            title: '提示',
+            message: response.data,
+            duration: 3000,
+            type: 'success',
+            position: 'bottom-right',
+            showClose: false
+          });
           let tablegender = this.CreateMember.member_gender
           for(let j = 0; j < this.genders.length; j++) {
             if(tablegender == this.genders[j].value) {
               tablegender = this.genders[j].text
             }
           }
+          //this.AllMember.push(this.CreateMember);
+          let AllMemberLength = this.AllMember.length
           this.AllMember.push({member_id: this.CreateMember.member_id, member_card_id: this.CreateMember.member_card_id,
           member_name: this.CreateMember.member_name, member_gender: tablegender,
           member_birthday: this.CreateMember.member_birthday, member_phone: this.CreateMember.member_phone,
           member_email: this.CreateMember.member_email, member_address: this.CreateMember.member_address,
           member_remark: this.CreateMember.member_remark});
+          if(this.AllMember.length > AllMemberLength) {
+            this.InitialInput()
+            this.GetBiggestID()
+          }
         })
+      }
+    },
+
+    InitialInput() {
+      this.CreateMember.member_id = null
+      this.CreateMember.member_card_id = null
+      this.CreateMember.member_name = null
+      this.CreateMember.member_gender = null
+      this.CreateMember.member_birthday = null
+      this.CreateMember.member_phone = null
+      this.CreateMember.member_email = null
+      this.CreateMember.member_address = null
+      this.CreateMember.member_remark = null
     },
   },
 

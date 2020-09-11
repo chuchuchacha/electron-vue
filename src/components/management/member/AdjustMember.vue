@@ -37,14 +37,14 @@
         <font>備註:</font>
         <el-input type="textarea" resize="none" v-model="AdjustMember.member_remark"></el-input>
 
-        <button @click="UpdateMember()">修改會員</button>
+        <el-button @click="UpdateMember()">修改會員</el-button>
       </div>
     </div>
 
     <div class="createmember_table">
       <el-table
         :data="AllMember"
-        stripe border height="45vh" empty-text="未新增會員">
+        stripe border height="45vh" empty-text="修改紀錄">
         <el-table-column
           prop="member_id"
           label="編號">
